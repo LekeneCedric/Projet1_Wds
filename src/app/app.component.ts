@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { DataServiceService } from './services/data-service.service';
 
 @Component({
   selector: 'app-root',
@@ -8,14 +9,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppComponent implements OnInit {
   title = 'projet1_wds';
-  constructor(private http:HttpClient){
+  constructor(private http:HttpClient,
+    private dataService: DataServiceService){
 
   }
   ngOnInit(): void {
-      this.http.get<any>("http://backend.pharmcogroup.net/api/habitations").subscribe(
-        res =>{
-          console.log(res);
-        }
-      )
+      this.dataService.getOutputenvironnement()
+      .subscribe(data=> console.log(data))
   }
 }

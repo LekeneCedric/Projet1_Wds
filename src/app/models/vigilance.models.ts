@@ -1,5 +1,4 @@
 export default interface IVigilance{
-
     id?: number,
     titre: string,
     but: string,
