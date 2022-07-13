@@ -11,7 +11,9 @@ export class AppComponent implements OnInit {
   constructor(private http:HttpClient){
 
   }
-  ngOnInit(): void {
+  
+  ngOnInit(){
+      
       this.http.get<any>("http://backend.pharmcogroup.net/api/habitations").subscribe(
         res =>{
           console.log(res);
