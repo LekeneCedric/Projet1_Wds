@@ -1,6 +1,6 @@
 export default interface ITypequestion{
 
-    id: number,
+    id?: number,
     intitule: string,
     label: string,
     created_at: Date,

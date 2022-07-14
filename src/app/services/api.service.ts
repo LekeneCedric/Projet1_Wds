@@ -6,6 +6,9 @@ import {environment} from '../../environments/environment';
 import ICategorie from '../models/categorie.models';
 import IEquipement from '../models/equipement.models';
 import IProposition from '../models/proposition.models';
+import ITypeEquipement from '../models/typeequipement.models';
+import IQuestion from '../models/question.models';
+import ITypequestion from '../models/typequestion.models';
 @Injectable({
   providedIn: 'root'
 })
@@ -17,6 +20,9 @@ export class ApiService {
   getHabitations():Observable<IHabitation[]>{
     return this.http.get<IHabitation[]>(`${environment.host}/habitations`);
   }
+  getHabitation(item:IHabitation):Observable<IHabitation>{
+   return this.http.get<IHabitation>(`${environment.host}/habitations/${item.id}`);
+  }
   postHabitation(item:IHabitation):Observable<IHabitation>{
     return this.http.post<IHabitation>(`${environment.host}/habitations`,item);
   }
@@ -27,6 +33,24 @@ export class ApiService {
      return this.http.delete<IHabitation>(`${environment.host}/habitations/${item.id}`);
   }
 
+  // HTTP REQUEST FOR TYPEQUESTION
+  getTypeQuestions():Observable<ITypequestion[]>{
+    return this.http.get<ITypequestion[]>(`${environment.host}/types`);
+  }
+  getTypeQuestion(item: ITypequestion):Observable<ITypequestion>{
+    return this.http.get<ITypequestion>(`${environment.host}/types/${item.id}`);
+  }
+  postTypeQuestion(item: ITypequestion):Observable<ITypequestion>{
+    return this.http.post<ITypequestion>(`${environment.host}/types`,item);
+  }
+  updateTypeQuestion(item: ITypequestion):Observable<ITypequestion>{
+    return this.http.put<ITypequestion>(`${environment.host}/types/${item.id}`,item);
+  }
+  deleteTypeQuestion(item: ITypequestion):Observable<any>{
+    return this.http.delete<ITypequestion>(`${environment.host}/types/${item.id}`);
+  }
+
+  
   // HTTP REQUEST FOR CATEGORIE
   
   getCategories():Observable<ICategorie[]>{
@@ -42,20 +66,23 @@ export class ApiService {
     return this.http.delete<ICategorie>(`${environment.host}/categories/${item.id}`);
   }
 
-  // HTTP REQUEST FOR EQUIPEMENT
+  // HTTP REQUEST FOR EQUIPEMENT AND TYPE
 
   getEquipements():Observable<IEquipement[]>{
-    return this.http.get<IEquipement[]>(`${environment.host}/questionselt/equipements`);
+    return this.http.get<IEquipement[]>(`${environment.host}/questionselt/equipement`);
   }
-  postEquipement(item:IEquipement):Observable<IEquipement>{
-   return this.http.post<IEquipement>(`${environment.host}/categories`, item);
+  getTypeEquipement():Observable<ITypeEquipement[]>{
+    return this.http.get<ITypeEquipement[]>(`${environment.host}/questionselt/equipement/search`);
   }
-  updateEquipement(item:IEquipement):Observable<IEquipement>{
-    return this.http.put<IEquipement>(`${environment.host}/categories/${item.id}`, item);
-  }
-  deleteEquipement(item:IEquipement):Observable<IEquipement>{
-    return this.http.delete<IEquipement>(`${environment.host}/categories/${item.id}`);
-  }
+  // postEquipement(item:IEquipement):Observable<IEquipement>{
+  //  return this.http.post<IEquipement>(`${environment.host}/categories`, item);
+  // }
+  // updateEquipement(item:IEquipement):Observable<IEquipement>{
+  //   return this.http.put<IEquipement>(`${environment.host}/categories/${item.id}`, item);
+  // }
+  // deleteEquipement(item:IEquipement):Observable<IEquipement>{
+  //   return this.http.delete<IEquipement>(`${environment.host}/categories/${item.id}`);
+  // }
 
   // HTTP REQUEST FOR PROPOSITION
 
@@ -76,4 +103,11 @@ export class ApiService {
   deleteProposition(item:IProposition):Observable<IProposition>{
     return this.http.delete<IProposition>(`${environment.host}/propositions/${item.id}`);
   }
+
+// HTTP REQUEST FOR QUESTIONS
+
+ getQuestions():Observable<IQuestion[]>{
+  return this.http.get<IQuestion[]>(`${environment.host}/questions`);
+ }
+
 }

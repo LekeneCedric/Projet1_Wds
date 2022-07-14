@@ -1,5 +1,5 @@
 export default interface IProposition{
-        id: number,
+        id?: number,
         idcategorie: number,
         idquestion: number,
         choix: string,
