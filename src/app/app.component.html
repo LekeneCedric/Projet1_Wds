@@ -65,13 +65,28 @@
         <nav>
             <ul class="nav luna-nav">
                 <li class="nav-category">
-                    Main
+                    DashBoard
                 </li>
-                <li class="active">
-                    <a href="index-2.html">Dashboard</a>
+                <li>
+                    <a routerLink="vigilance">Point De Vigilance</a>
+                </li>
+                <li>
+                    <a routerLink="formations">formation</a>
+                </li>
+                <li>
+                    <a routerLink="entreprises_formation">Entreprise</a>
+                </li>
+                <li>
+                    <a routerLink="outputs" >Output</a>
+                </li>
+                <li>
+                    <a routerLink="output_equipement">Output Des Equipements</a>
+                </li>
+                <li>
+                    <a routerLink="output_environnement">Output Environnement</a>
                 </li>
 
-                <li>
+                <!-- <li>
                     <a href="#monitoring" data-toggle="collapse" aria-expanded="false">
                         Monitoring<span class="sub-nav-icon"> <i class="stroke-arrow"></i> </span>
                     </a>
@@ -141,12 +156,12 @@
                         Basic <span class="sub-nav-icon"> <i class="stroke-arrow"></i> </span>
                     </a>
                     <ul id="extras" class="nav nav-second collapse">
-                        <li><a href="profile.html">Profile</a></li>
-                        <li><a href="contacts.html">Contacts</a></li>
-                        <li><a href="projects.html">Projects</a></li>
-                        <li><a href="support.html">Support</a></li>
-                        <li><a href="nestableList.html">List</a></li>
-                        <li><a href="timeline.html">Timeline</a></li>
+                        <li><a routerLink="vigilance">Point De Vigilance</a></li>
+                        <li><a href="contacts.html">Formation</a></li>
+                        <li><a href="projects.html">Entreprise</a></li>
+                        <li><a href="support.html">Output</a></li>
+                        <li><a href="nestableList.html">Output Des Equipements</a></li>
+                        <li><a href="timeline.html">Output Environnement</a></li>
                     </ul>
                 </li>
                 <li>
@@ -159,31 +174,31 @@
                         <li><a href="forgotPassword.html">Forgot password</a></li>
                         <li><a href="error.html">Error page</a></li>
                     </ul>
-                </li>
-                <li>
+                </li> -->
+                <!-- <li>
                     <a href="versions.html">
                         <span class="badge pull-right">2</span>
                         Versions
                     </a>
-                </li>
+                </li> 
                 <li class="nav-info">
                     <i class="pe pe-7s-shield text-accent"></i>
 
                     <div class="m-t-xs">
                         <span class="c-white">LUNA</span> admin theme with Dark UI style for monitoring and administration web applications.
                     </div>
-                </li>
-            </ul>
+                </li>-->
+            </ul> 
         </nav>
     </aside>
     <!-- End navigation-->
 
 
     <!-- Main content-->
-    <section class="content">
-        <div class="container-fluid">
+    <!-- <section class="content">
+        <div class="container-fluid"> -->
 
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-lg-12">
                     <div class="view-header">
                         <div class="pull-right text-right" style="line-height: 14px">
@@ -400,10 +415,10 @@
                     </div>
                 </div>
 
-            </div>
-
-        </div>
-    </section>
+            </div> -->
+            <router-outlet></router-outlet>
+        <!-- </div>
+    </section> -->
     <!-- End main content-->
 
 </div>

@@ -1,4 +1,3 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { DataServiceService } from './services/data-service.service';
 
@@ -9,7 +8,7 @@ import { DataServiceService } from './services/data-service.service';
 })
 export class AppComponent implements OnInit {
   title = 'projet1_wds';
-  constructor(private http:HttpClient,
+  constructor(
     private dataService: DataServiceService){
 
   }
