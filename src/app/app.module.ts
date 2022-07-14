@@ -4,15 +4,16 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {HttpClientModule} from '@angular/common/http';
+import { VigilanceComponent } from './components/vigilance/vigilance.component';
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    VigilanceComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule,
-    
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
