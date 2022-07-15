@@ -22,22 +22,6 @@ export class ApiService {
 
   constructor(private http:HttpClient) { }
 
-  // HTTP REQUEST FOR HABITATIONS 
-  getHabitations():Observable<IHabitation[]>{
-    return this.http.get<IHabitation[]>(`${environment.host}/habitations`);
-  }
-  getHabitation(item:IHabitation):Observable<IHabitation>{
-   return this.http.get<IHabitation>(`${environment.host}/habitations/${item.id}`);
-  }
-  postHabitation(item:IHabitation):Observable<IHabitation>{
-    return this.http.post<IHabitation>(`${environment.host}/habitations`,item);
-  }
-  updateHabitation(item:IHabitation):Observable<IHabitation>{
-    return this.http.put<IHabitation>(`${environment.host}/habitations/${item.id}`,item);
-  }
-  deleteHabitation(item:IHabitation):Observable<IHabitation>{
-     return this.http.delete<IHabitation>(`${environment.host}/habitations/${item.id}`);
-  }
 
   // HTTP REQUEST FOR TYPEQUESTION
   getTypeQuestions():Observable<ITypequestion[]>{
