@@ -1,0 +1,114 @@
+<section class="content">
+
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="view-header">
+                    <div class="pull-right text-right" style="line-height: 14px">
+                        <small>Table design<br>General<br> <span class="c-white">Table styles</span></small>
+                    </div>
+                    <div class="header-icon">
+                        <i class="pe page-header-icon pe-7s-menu"></i>
+                    </div>
+                    <div class="header-title">
+                        <h3>Table styles</h3>
+                        <small>
+                            Examples of various designs of tables.
+                        </small>
+                    </div>
+                </div>
+                <hr>
+            </div>
+        </div>
+    
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="add_and_search">
+                <div class="add">
+                    <button  class="btn btn-w-md btn-accent" data-toggle="modal" data-target="#myModal">Accent color</button>
+                </div>
+            </div>
+            <div class="input-group mb-3 mt-2 w-25">
+               <app-search (search)="on($event)"></app-search>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <table class="table table-responsive-sm">
+        <thead>
+        <tr>
+            <th>Couverture</th>
+            <th>Titre</th>
+            <th>Description</th>
+            <th>Semidescription</th>
+            <th>Opérations</th>
+        </tr>
+        </thead>
+        <tbody *ngFor="let conseil of arrayConseil ">
+        <tr *ngIf="searchText === '' || conseil.titre.toLowerCase().includes(searchText)" >
+          
+            <td>{{conseil.couverture}}</td>
+            <td>{{conseil.titre}}</td>
+            <td><p class="td">{{conseil.description}}</p></td>
+            <td>{{conseil.semidescription}}</td>
+            <td>supprimer modifier</td>
+           
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h4 class="modal-title">ADD AN ADVICE</h4>
+                <small>add an advisor by adding the different fields for each title.</small>
+            </div>
+            <div class="modal-body">
+                <div class=" ">
+                    <div class="col-md-12">
+                        <small class="stat-label">Couverture</small>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" [(ngModel)]="couverture" ngDefaultControl>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <small class="stat-label">Titre</small>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" [(ngModel)]="titre" ngDefaultControl>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <small class="stat-label">Description</small>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" [(ngModel)]="description" ngDefaultControl>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <small class="stat-label">Semidescription</small>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" [(ngModel)]="semidescription" ngDefaultControl>
+                        </div>
+                    </div>
+                  
+                </div>
+                <div class="progress m-t-xs full progress-small">
+                    <div style="width: 65%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="65" role="progressbar" class=" progress-bar progress-bar-warning" [(ngModel)]="titre" ngDefaultControl>
+                        <span class="sr-only">65% Complete (success)</span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-accent" (click)="addConseil()">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+    </div>
+</section>
