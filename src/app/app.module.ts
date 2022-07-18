@@ -6,16 +6,16 @@ import { AppComponent } from './app.component';
 import { SidemenuComponent } from './components/sidemenu/sidemenu.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { HttpClientModule } from '@angular/common/http';
-import { HabitationComponent } from './components/HABITATION/habitation/habitation.component';
 import { HabitationsComponent } from './components/HABITATION/habitations/habitations.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TypesQuestionsComponent } from './components/TYPES-QUESTIONS/types-questions.component';
 @NgModule({
   declarations: [
     AppComponent,
     SidemenuComponent,
     NavbarComponent,
-    HabitationComponent,
-    HabitationsComponent
+    HabitationsComponent,
+    TypesQuestionsComponent
   ],
   imports: [
     BrowserModule,
