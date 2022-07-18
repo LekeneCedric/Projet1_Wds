@@ -55,7 +55,7 @@ export class HabitationsComponent implements OnInit {
   }
   /*Cette methode permet de supprimer une habitation*/
   deleteHabitation(id:any):void{
-  this.service.deleteHabitation(id).subscribe(data=>{
+  this.service.deleteHabitation(Number(id)).subscribe(data=>{
    console.log("Habitation supprime avec success");
    this.ngOnInit();
   });

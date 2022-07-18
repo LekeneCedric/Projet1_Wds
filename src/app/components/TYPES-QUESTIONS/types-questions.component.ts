@@ -23,7 +23,7 @@ export class TypesQuestionsComponent implements OnInit {
   label_new_typeq:string="";
   /*(search) contient l'element texte temporaiement saisi dans la barre de recherche 
   qu'on utilise ainsi pour filtrer notre tableau de type de question */
-  serch:string = "";
+  search:string = "";
 
   async ngOnInit(){
     await this.service.getAllQuestionsType().subscribe(
@@ -36,36 +36,41 @@ export class TypesQuestionsComponent implements OnInit {
   setCurrentTypeQ(typeq:ITypequestion){
     this.current_typeq = typeq;
   }
-  deleteTypeQuestion(id:number){
-    this.service.deleteQuestionType(id).subscribe(data=>
+  deleteTypeQuestion(id:any){
+    this.service.deleteQuestionType(Number(id)).subscribe(data=>
       {
       console.log(data);
+      this.ngOnInit();
       }
       )
   }
   addTypeQuestion(){
     const typeq :ITypequestion = {
-      intitule: this.intitule_new_typeq,
-      label: this.label_new_typeq,
+      intitule:String(this.intitule_new_typeq),
+      label: String(this.label_new_typeq),
       created_at: new Date(),
       updated_at: new Date()
     }
     this.service.postQuestionType(typeq).subscribe(data=>
       {
+        
     console.log(data);  
+    this.ngOnInit();
       }
       )}
 
   updateTypeQuestion(){
     const updateTypeq :ITypequestion = {
-      id:this.current_typeq?.id,
-      intitule:String(this.current_typeq?.intitule),
-      label:String(this.current_typeq?.label),
+      id:Number(this.current_typeq?.id),
+      intitule:this.update_intitule!,
+      label:this.update_label!,
       updated_at:new Date()  
     }
     this.service.updateQuestionType(updateTypeq).subscribe(
       data =>{
         console.log(data);
+        console.log(updateTypeq);
+        this.ngOnInit();
       }
     )
   }    

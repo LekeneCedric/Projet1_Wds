@@ -9,13 +9,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { HabitationsComponent } from './components/HABITATION/habitations/habitations.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TypesQuestionsComponent } from './components/TYPES-QUESTIONS/types-questions.component';
+import { QUESTIONSComponent } from './components/QUESTIONS/questions.component';
 @NgModule({
   declarations: [
     AppComponent,
     SidemenuComponent,
     NavbarComponent,
     HabitationsComponent,
-    TypesQuestionsComponent
+    TypesQuestionsComponent,
+    QUESTIONSComponent
   ],
   imports: [
     BrowserModule,

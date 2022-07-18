@@ -1,5 +1,4 @@
 export default interface ITypequestion{
-
     id?: number,
     intitule: string,
     label: string,
