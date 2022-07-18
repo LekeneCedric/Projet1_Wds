@@ -12,7 +12,9 @@ export class VigilanceComponent implements OnInit {
 
   vigilances!:IVigilance[];
   formGroup!: FormGroup;
+  formGroup2!: FormGroup;
   submitted:boolean= false;
+  search:string = "";
 
   constructor(
     private vigilanceService : VigilanceService,
@@ -76,12 +78,16 @@ export class VigilanceComponent implements OnInit {
       
   }
 
-  onSearch(dataForm:any):void{
-    this.vigilanceService.searchByState(dataForm.keyword)
-    .subscribe(
-      (data)=>{this.vigilances = data;},
-      (err)=>console.log('error',err)
-    )
+  // onSearch(dataForm:any):void{
+  //   this.vigilanceService.searchByState(dataForm.keyword)
+  //   .subscribe(
+  //     (data)=>{this.vigilances = data;},
+  //     (err)=>console.log('error',err)
+  //   )
+  // }
+
+  onSearch():void{
+
   }
 
   onDeleteVigilance(item:IVigilance):void{
@@ -97,6 +103,16 @@ export class VigilanceComponent implements OnInit {
     }
   }
 
-  
+  onUpdateVigilance(item:IVigilance):void{
+    this.vigilanceService.updateVigilance(item)
+    .subscribe(
+      (data)=>{
+        alert('Edit Success');
+      },(err)=> console.log('error',err) 
+    )
+
+  }
+
+
 
 }
