@@ -14,6 +14,12 @@ import { EquipementComponent } from './components/equipement/equipement.componen
 import { EnvironnementComponent } from './components/environnement/environnement.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { VigilanceStateComponent } from './components/vigilance-state/vigilance-state.component';
+import { SidemenuComponent } from './components/sidemenu/sidemenu.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { HttpClientModule } from '@angular/common/http';
+import { HabitationComponent } from './components/HABITATION/habitation/habitation.component';
+import { HabitationsComponent } from './components/HABITATION/habitations/habitations.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -27,6 +33,10 @@ import { VigilanceStateComponent } from './components/vigilance-state/vigilance-
     EquipementComponent,
     EnvironnementComponent,
     VigilanceStateComponent,
+    SidemenuComponent,
+    NavbarComponent,
+    HabitationComponent,
+    HabitationsComponent
   ],
   imports: [
     BrowserModule,
@@ -34,6 +44,8 @@ import { VigilanceStateComponent } from './components/vigilance-state/vigilance-
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
