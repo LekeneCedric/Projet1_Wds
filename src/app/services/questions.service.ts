@@ -12,7 +12,16 @@ export class QuestionsService {
   constructor(private http:HttpClient) { }
 
 
- getAllQuestions():Observable<IQuestion[]>{
-  return this.http.get<IQuestion[]>(`${environment.host}/questions`);
+ getAllQuestions():Observable<any>{
+  return this.http.get<any>(`${environment.host}/questions`);
  }
+ postQuestion(question: IQuestion):Observable<any>{
+   return this.http.post<any>(`${environment.host}/questions`,question);
+ }
+ deleteQuestion(id:number):Observable<any>{
+  return this.http.delete<any>(`${environment.host}/questions/${id}`);
+ }
+ updateQuestion(item:IQuestion):Observable<any>{
+  return this.http.put<IQuestion>(`${environment.host}/questions/${item.id}`, item); 
+}
 }
