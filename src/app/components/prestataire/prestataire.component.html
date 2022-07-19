@@ -81,7 +81,7 @@
                         <td>
                             <div class="row">
                                <div class="font-example-box col-lg-2 col-md-3 col-sm-6 col-xs-6 px-3">
-                                   <span class="pe-7s-news-paper" style="font-size:25px" data-toggle="modal" data-target="#allUsers"  ></span>
+                                   <span class="pe-7s-news-paper" style="font-size:25px" data-toggle="modal" data-target="#allUsers" (click)="check(prestatire)" ></span>
                                    <span class="icon-example-name"> </span>
                                </div>
                             </div>
@@ -93,7 +93,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header text-center">
-                        <h4 class="modal-title">VIEW ALL INFORMATIONS USERS</h4>
+                        <h4 class="modal-title">VIEW ALL INFORMATIONS PRESTATAIRE</h4>
                         <small> </small>
                     </div>
                     <div class="modal-body">
@@ -101,55 +101,55 @@
                             <div class="col-md-12">
                                 <h4 class="stat-label">Nom</h4>
                                 <div class="input-group mb-3 mt-2">
-                                    <P>{{idelement}}</P>
+                                    <P>{{nom}}</P>
                                 </div>
                             </div>
                             <div class="col-md-12 ">
                                 <h4 class="stat-label">Email</h4>
                                 <div class="input-group mb-3 mt-2">
-                                    <P>{{idelement}}</P>
+                                    <P>{{email}}</P>
                                 </div>
                             </div>
                             <div class="col-md-12">
-                                <h4 class="stat-label">Password</h4>
+                                <h4 class="stat-label">Ville</h4>
                                 <div class="input-group mb-3 mt-2 td">
-                                  <p>{{idelement}}</p>
+                                  <p>{{ville}}</p>
                                 </div>
                             </div>
                             <div class="col-md-12">
-                                <h4 class="stat-label">Telephone</h4>
+                                <h4 class="stat-label">Secteur Activite</h4>
                                 <div class="input-group mb-3 mt-2">
-                                    {{idelement}}
+                                    {{secteur_activite}}
                                 </div>
                             </div>
                             <div class="col-md-12">
-                                <h4 class="stat-label">Proffesion</h4>
+                                <h4 class="stat-label">Etat Habitation</h4>
                                 <div class="input-group mb-3 mt-2">
-                                    {{idelement}}
+                                    {{etat_habitation}}
                                 </div>
                             </div>
                             <div class="col-md-12">
-                                <h4 class="stat-label">Profile</h4>
+                                <h4 class="stat-label">Type Formation</h4>
                                 <div class="input-group mb-3 mt-2">
-                                    {{idelement}}
+                                    {{typeformation}}
                                 </div>
                             </div>
                             <div class="col-md-12">
-                                <h4 class="stat-label">Isconnecter</h4>
+                                <h4 class="stat-label">Localisation</h4>
                                 <div class="input-group mb-3 mt-2">
-                                    {{idelement}}
+                                    {{localisation}}
                                 </div>
                             </div>
                             <div class="col-md-12">
-                                <h4 class="stat-label">Crée le</h4>
+                                <h4 class="stat-label">Fait le</h4>
                                 <div class="input-group mb-3 mt-2">
-                                    
+                                    {{fait_le}}
                                 </div>
                             </div>
                             <div class="col-md-12">
-                                <h4 class="stat-label">Mise a jour le</h4>
+                                <h4 class="stat-label">Demande</h4>
                                 <div class="input-group mb-3 mt-2">
-                                    
+                                    {{demande}}
                                 </div>
                             </div>
                         </div>
