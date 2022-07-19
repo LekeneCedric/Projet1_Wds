@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 import IFormation from 'src/app/models/formations.models';
 import IOutputs from 'src/app/models/outputs.models';
-import PageOutPuts from 'src/app/models/pageOutput.models';
+import PageOutPuts from 'src/app/models/modelsPages/pageOutput.models';
 import { OutputsService } from 'src/app/services/outputs.service';
 
 @Component({
@@ -17,7 +17,6 @@ export class OutputComponent implements OnInit {
   formGroup!: FormGroup;
   formGroup2!: FormGroup;
   submitted:boolean= false;
-  search:string = "";
   currentId?:number;
   currentPage:number = 0;
   pageSize:number = 10;
@@ -203,7 +202,7 @@ export class OutputComponent implements OnInit {
       (data)=>{
         alert('Update Succes');
         this.onGetAllOutput();
-        
+
       },err=> console.log('error',err)
     )
 }

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 import IFormation from 'src/app/models/formations.models';
-import pageFormation from 'src/app/models/pageFormation.models';
+import pageFormation from 'src/app/models/modelsPages/pageFormation.models';
 import { FormationsService } from 'src/app/services/formations.service';
 
 @Component({

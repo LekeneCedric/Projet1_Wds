@@ -19,11 +19,14 @@ export class EnvironnementService {
   getOutputenvironnement():Observable<IOutputEnvironnement[]>{
     return this.http.get<IOutputEnvironnement[]>(this.host+'/output_environnement');
   }
+  getEnvironnementById(id:number):Observable<IOutputEnvironnement>{
+    return this.http.get<IOutputEnvironnement>(this.host+'/output_environnement/'+id);
+  }
   addOutputenvironnement(item:IOutputEnvironnement):Observable<IOutputEnvironnement>{
     return this.http.post<IOutputEnvironnement>(this.host+'/output_environnement',item);
   }
-  updateOutputenvironnement(item:IOutputEnvironnement):Observable<IOutputEnvironnement>{
-    return this.http.put<IOutputEnvironnement>(this.host+'/output_environnement/'+item.id,item);
+  updateOutputenvironnement(id:number,item:IOutputEnvironnement):Observable<IOutputEnvironnement>{
+    return this.http.put<IOutputEnvironnement>(this.host+'/output_environnement/'+item.id+'?_method=PUT',item);
   }
   deleteOutputenvironnement(item:IOutputEnvironnement):Observable<boolean>{
     return this.http.delete<boolean>(this.host+'/output_environnement/'+item.id);

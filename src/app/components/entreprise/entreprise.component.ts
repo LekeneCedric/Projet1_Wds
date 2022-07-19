@@ -3,8 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 import IEntreprisesFormation from 'src/app/models/entreprises_formations.models';
 import IFormation from 'src/app/models/formations.models';
-import PageEntreprise from 'src/app/models/pageEntreprise.models';
-import pageFormation from 'src/app/models/pageFormation.models';
+import PageEntreprise from 'src/app/models/modelsPages/pageEntreprise.models';
+import pageFormation from 'src/app/models/modelsPages/pageFormation.models';
 import { EntreprisesService } from 'src/app/services/entreprises.service';
 
 @Component({

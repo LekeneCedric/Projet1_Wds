@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Observable, of } from 'rxjs';
 import IOutputEquipement from 'src/app/models/output_equipement.models';
-import PageEquipement from 'src/app/models/pageEquipement.models';
+import PageEquipement from 'src/app/models/modelsPages/pageEquipement.models';
 import { EquipementService } from 'src/app/services/equipement.service';
 
 @Component({

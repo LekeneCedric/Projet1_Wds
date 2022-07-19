@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import PageVigilance from 'src/app/models/PageVigilance.models';
+import PageVigilance from 'src/app/models/modelsPages/PageVigilance.models';
 import IVigilance from 'src/app/models/vigilance.models';
 import { VigilanceService } from 'src/app/services/vigilance.service';
 
