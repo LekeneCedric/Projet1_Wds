@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Observable, of } from 'rxjs';
 import IFormation from 'src/app/models/formations.models';
+import pageFormation from 'src/app/models/pageFormation.models';
 import { FormationsService } from 'src/app/services/formations.service';
 
 @Component({
@@ -15,6 +17,11 @@ export class FormationComponent implements OnInit {
   formGroup2!: FormGroup;
   submitted:boolean= false;
   search:string = "";
+  currentId?:number;
+  currentPage:number = 0;
+  pageSize:number = 5;
+  totalPages:number = 0;
+  selected:number = 10;
 
   constructor(
     private formationsService:FormationsService,
@@ -24,24 +31,50 @@ export class FormationComponent implements OnInit {
 
   ngOnInit(): void {
     this.onGetAllFormation();
+    
+    this.formGroup = this.fb.group({
+      equipement:["",Validators.required],
+      beneficiaire:["",Validators.required],
+      contenu:["",Validators.required],
+      document:["",Validators.required],
+      formateur:["",Validators.required],
+      reference:["",Validators.required],
+      isconstruction:[false],
+      isexploitation:[false]
+
+
+    });
+
+    this.formGroup2 = this.formGroup;
 
   }
 
-  get titre(){return this.formGroup.get('titre');}
+  get equipement(){return this.formGroup.get('equipement');}
 
-  get but(){return this.formGroup.get('but');}
+  get beneficiaire(){return this.formGroup.get('beneficiaire');}
 
-  get moment_faire(){return this.formGroup.get('moment_faire');}
-
-  get qui_faire(){return this.formGroup.get('qui_faire');}
-
-  get conseil(){return this.formGroup.get('conseil');}
+  get contenu(){return this.formGroup.get('contenu');}
 
   get document(){return this.formGroup.get('document');}
 
-  get etat(){return this.formGroup.get('etat');}
+  get formateur(){return this.formGroup.get('formateur');}
+
+  get reference(){return this.formGroup.get('reference');}
+
+  get isconstruction(){return this.formGroup.get('isconstruction');}
+
+  get isexploitation(){return this.formGroup.get('isexploitation');}
 
 
+  onSelected(value:string): void {
+		this.selected = Number(value);
+    if(this.selected != -1 || this.selected < this.formations.length){
+      this.pageSize = this.selected;
+    }else{
+      this.pageSize =this.formations.length;
+    }
+    this.onGetAllFormation();
+	}
 
 
   onGetAllFormation(): void {
@@ -49,6 +82,17 @@ export class FormationComponent implements OnInit {
     .subscribe(
       (data)=>{
         this.formations = data;
+        this.onGetPageFormation();
+      }
+    )
+  }
+
+  onGetPageFormation(): void {
+    this.getPage(this.currentPage,this.pageSize)
+    .subscribe(
+      (data)=> {
+        this.formations = data.formations;
+        this.totalPages = data.totalPages;
       }
     )
   }
@@ -58,7 +102,7 @@ export class FormationComponent implements OnInit {
     if(this.formGroup.invalid){
       alert('Invalid Form');
       return;
-    } 
+    }
     this.formationsService.addFormation(this.formGroup.value)
     .subscribe(
       (data)=>{
@@ -86,15 +130,60 @@ export class FormationComponent implements OnInit {
     }
   }
 
-  onUpdateFormation(item:IFormation):void{
-    this.formationsService.updateFormation(item)
-    .subscribe(
-      (data)=>{
-        alert('Edit Success');
-      },(err)=> console.log('error',err) 
-    )
 
+  onEditFormation(item:IFormation):void{
+
+    if(item.id ){
+
+      this.formationsService.getFormationById(item.id)
+      .subscribe(
+        (data)=> {
+          this.currentId = item.id;
+          this.formGroup2 = this.fb.group({
+            equipement:[data['equipement'],Validators.required],
+            beneficiare:[data['beneficiaire'],Validators.required],
+            contenu:[data['contenu'],Validators.required],
+            document:[data['document'],Validators.required],
+            formateur:[data['formateur'],Validators.required],
+            reference:[data['reference'],Validators.required],
+            isconstruction:[data['isconstruction'],Validators.required],
+            isexploitation:[data['isexploitation'],Validators.required]
+          })
+        }
+      )    
+  }
   }
 
+  getPage(page:number,size:number):Observable<pageFormation>{
+  
+    let index = page * size;
+    let totalPages = ~~(this.formations.length/size);
+    if(this.formations.length % size != 0)
+      totalPages ++;
+    let pageEquipements = this.formations.slice(index,index+size);
+    return of({
+      page:page,
+      size:size,
+      totalPages:totalPages,
+      formations:pageEquipements
+    })
+  }
+
+
+  onEdit(){
+    if(this.currentId)
+   
+    this.formationsService.updateFormation(this.currentId,this.formGroup2.value)
+    .subscribe(
+      (data)=>{
+        alert('Update Succes');
+      },err=> console.log('error',err)
+    )
+}
+
+gotoPage(i:number){
+  this.currentPage = i;
+  this.onGetAllFormation();
+}
 
 }

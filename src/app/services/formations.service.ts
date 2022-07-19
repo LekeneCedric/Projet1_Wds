@@ -18,11 +18,14 @@ export class FormationsService {
      getAllFormation():Observable<IFormation[]>{
       return this.http.get<IFormation[]>(this.host+'/formations');
     }
+    getFormationById(id:number):Observable<IFormation>{
+      return this.http.get<IFormation>(this.host+'/formations/'+id);
+    }
     addFormation(item:IFormation):Observable<IFormation>{
       return this.http.post<IFormation>(this.host+'/formations',item);
     }
-    updateFormation(item:IFormation):Observable<IFormation>{
-      return this.http.put<IFormation>(this.host+'/formations/'+item.id,item);
+    updateFormation(id:number,nouveau:IFormation):Observable<IFormation>{
+      return this.http.put<IFormation>(this.host+'/formations/'+id+'?_method=PUT',nouveau);
     }
     deleteFormation(item:IFormation):Observable<boolean>{
       return this.http.delete<boolean>(this.host+'/formations/'+item.id);

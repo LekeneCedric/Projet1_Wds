@@ -13,6 +13,7 @@ import { OutputComponent } from './components/output/output.component';
 import { EquipementComponent } from './components/equipement/equipement.component';
 import { EnvironnementComponent } from './components/environnement/environnement.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { VigilanceStateComponent } from './components/vigilance-state/vigilance-state.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     OutputComponent,
     EquipementComponent,
     EnvironnementComponent,
+    VigilanceStateComponent,
   ],
   imports: [
     BrowserModule,

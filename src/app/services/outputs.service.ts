@@ -18,11 +18,14 @@ export class OutputsService {
    getOutputs():Observable<IOutputs[]>{
     return this.http.get<IOutputs[]>(this.host+'/outputs');
   }
+  getOutputById(id:number):Observable<IOutputs>{
+    return this.http.get<IOutputs>(this.host+'/outputs/'+id);
+  }
   addOutput(item:IOutputs):Observable<IOutputs>{
     return this.http.post<IOutputs>(this.host+'/outputs',item);
   }
-  updateOutput(item:IOutputs):Observable<IOutputs>{
-    return this.http.put<IOutputs>(this.host+'/outputs/'+item.id,item);
+  updateOutput(id:number,nouveau:IOutputs):Observable<IOutputs>{
+    return this.http.put<IOutputs>(this.host+'/outputs/'+id,nouveau);
   }
   deleteOutput(item:IOutputs):Observable<boolean>{
     return this.http.delete<boolean>(this.host+'/outputs/'+item.id);

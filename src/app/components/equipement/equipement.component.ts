@@ -21,7 +21,7 @@ export class EquipementComponent implements OnInit {
   currentPage:number = 0;
   pageSize:number = 5;
   totalPages:number = 0;
-
+  selected:number = 10;
   constructor(
     private equipementService : EquipementService,
     private fb: FormBuilder,
@@ -54,7 +54,15 @@ export class EquipementComponent implements OnInit {
   get updated_at(){return this.formGroup.get('updated_at');}
 
 
-
+  onSelected(value:string): void {
+		this.selected = Number(value);
+    if(this.selected != -1 || this.selected < this.equipements.length){
+      this.pageSize = this.selected;
+    }else{
+      this.pageSize =this.equipements.length ;
+    }
+    this.onGetAllEquipement();
+	}
 
 
 
@@ -75,8 +83,6 @@ export class EquipementComponent implements OnInit {
       (data)=> {
         this.equipements = data.equipements;
         this.totalPages = data.totalPages;
-
-
       }
     )
   }
@@ -95,11 +101,6 @@ export class EquipementComponent implements OnInit {
       },(err)=> console.log('error',err)
     )
       
-  }
-
-
-  onSearch():void{
-
   }
 
   onDeleteEquipement(item:IOutputEquipement):void{
@@ -122,8 +123,6 @@ export class EquipementComponent implements OnInit {
       this.equipementService.getOutputEquipementById(item.id)
       .subscribe(
         (data)=> {
-
-          console.log(data);
           this.currentId = item.id;
           this.formGroup2 = this.fb.group({
             type:[data['type'],Validators.required],
@@ -159,13 +158,13 @@ export class EquipementComponent implements OnInit {
     .subscribe(
       (data)=>{
         alert('Update Succes');
+        this.onGetAllEquipement();
       },err=> console.log('error',err)
     )
 }
 
 gotoPage(i:number){
   this.currentPage = i;
-  console.log(i);
   this.onGetAllEquipement();
 }
 

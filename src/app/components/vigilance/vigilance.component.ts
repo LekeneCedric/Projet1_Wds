@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { Observable, of } from 'rxjs';
+import PageVigilance from 'src/app/models/PageVigilance.models';
 import IVigilance from 'src/app/models/vigilance.models';
 import { VigilanceService } from 'src/app/services/vigilance.service';
 
@@ -15,10 +18,16 @@ export class VigilanceComponent implements OnInit {
   formGroup2!: FormGroup;
   submitted:boolean= false;
   search:string = "";
+  currentId?:number;
+  currentPage:number = 0;
+  pageSize:number = 5;
+  totalPages:number = 0;
+  selected:number = 10;
 
   constructor(
     private vigilanceService : VigilanceService,
     private fb:FormBuilder,
+    private router:Router,
   ) { }
 
   ngOnInit(): void {
@@ -33,7 +42,10 @@ export class VigilanceComponent implements OnInit {
       document:["",Validators.required],
       etat:["",Validators.required],
 
-    })
+    });
+
+    this.formGroup2 = this.formGroup;
+
   }
 
 
@@ -52,13 +64,34 @@ export class VigilanceComponent implements OnInit {
   get etat(){return this.formGroup.get('etat');}
 
 
-
+  onSelected(value:string): void {
+		this.selected = Number(value);
+    if(this.selected != -1 || this.selected < this.vigilances.length){
+      this.pageSize = this.selected;
+    }else{
+      this.pageSize =this.vigilances.length;
+    }
+    this.onGetAllVigilance();
+	}
 
   onGetAllVigilance(): void {
     this.vigilanceService.getAllVigilance()
     .subscribe(
       (data)=>{
         this.vigilances = data;
+        this.onGetPageVigilance();
+      }
+    )
+  }
+
+  onGetPageVigilance(): void {
+    this.getPage(this.currentPage,this.pageSize)
+    .subscribe(
+      (data)=> {
+        this.vigilances = data.vigilances;
+        this.totalPages = data.totalPages;
+
+
       }
     )
   }
@@ -78,16 +111,9 @@ export class VigilanceComponent implements OnInit {
       
   }
 
-  // onSearch(dataForm:any):void{
-  //   this.vigilanceService.searchByState(dataForm.keyword)
-  //   .subscribe(
-  //     (data)=>{this.vigilances = data;},
-  //     (err)=>console.log('error',err)
-  //   )
-  // }
 
-  onSearch():void{
-
+  onSearch(dataForm:any):void{
+    this.vigilanceService.routeByState(dataForm.keyword);
   }
 
   onDeleteVigilance(item:IVigilance):void{
@@ -103,16 +129,63 @@ export class VigilanceComponent implements OnInit {
     }
   }
 
-  onUpdateVigilance(item:IVigilance):void{
-    this.vigilanceService.updateVigilance(item)
-    .subscribe(
-      (data)=>{
-        alert('Edit Success');
-      },(err)=> console.log('error',err) 
-    )
 
+  onEditEquipement(item:IVigilance):void{
+
+    if(item.id ){
+
+      this.vigilanceService.getVigilanceById(item.id)
+      .subscribe(
+        (data)=> {
+
+          
+          
+          console.log('moi data',data);
+          this.currentId = item.id;
+          this.formGroup2 = this.fb.group({
+            
+            titre:[data[0]['titre'],Validators.required],
+            but:[data[0]['but'],Validators.required],
+            moment_faire:[data[0]['moment_faire'],Validators.required],
+            qui_faire:[data[0]['qui_faire'],Validators.required],
+            conseil:[data[0]['conseil'],Validators.required],
+            document:[data[0]['document'],Validators.required],
+            etat:[data[0]['etat'],Validators.required]
+          })
+        }
+      )    
+  }
   }
 
+  getPage(page:number,size:number):Observable<PageVigilance>{
+  
+    let index = page * size;
+    let totalPages = ~~(this.vigilances.length/size);
+    if(this.vigilances.length % size != 0)
+      totalPages ++;
+    let pageEquipements = this.vigilances.slice(index,index+size);
+    return of({
+      page:page,
+      size:size,
+      totalPages:totalPages,
+      vigilances:pageEquipements
+    })
+  }
 
+  onEdit(){
+    if(this.currentId)
+   
+    this.vigilanceService.updateVigilance(this.currentId,this.formGroup2.value)
+    .subscribe(
+      (data)=>{
+        alert('Update Succes');
+      },err=> console.log('error',err)
+    )
+}
+
+  gotoPage(i:number){
+    this.currentPage = i;
+    this.onGetAllVigilance();
+  }
 
 }

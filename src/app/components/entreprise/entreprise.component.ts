@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Observable, of } from 'rxjs';
 import IEntreprisesFormation from 'src/app/models/entreprises_formations.models';
+import IFormation from 'src/app/models/formations.models';
+import PageEntreprise from 'src/app/models/pageEntreprise.models';
+import pageFormation from 'src/app/models/pageFormation.models';
 import { EntreprisesService } from 'src/app/services/entreprises.service';
 
 @Component({
@@ -15,6 +19,11 @@ export class EntrepriseComponent implements OnInit {
   formGroup2!: FormGroup;
   submitted:boolean= false;
   search:string = "";
+  currentId?:number;
+  currentPage:number = 0;
+  pageSize:number = 5;
+  totalPages:number = 0;
+  selected:number = 10;
 
   constructor(
     private entreprisesService:EntreprisesService,
@@ -22,8 +31,66 @@ export class EntrepriseComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    // this.
+    this.onGetAllEntreprise();
+    this.formGroup = this.fb.group({
+      logo:["",Validators.required],
+      nom:["",Validators.required],
+      type:["",Validators.required],
+      type_entreprise:["",Validators.required],
+      email:["",Validators.required],
+      tel:["",Validators.required],
+      adresse:["",Validators.required],
+      description:["",Validators.required],
+      catalogue:["",Validators.required],
+      calendrier:["",Validators.required],
+      isprestataire:[false,Validators.required],
+      isentreprise:[false,Validators.required],
+      type_prestataire:[""],
+      domaine:["",Validators.required],
+
+    });
+
+    this.formGroup2 = this.formGroup;
   }
+
+  get logo(){return this.formGroup.get('logo');}
+
+  get nom(){return this.formGroup.get('nom');}
+
+  get type(){return this.formGroup.get('type');}
+
+  get type_entreprise(){return this.formGroup.get('type_entreprise');}
+
+  get email(){return this.formGroup.get('email');}
+
+  get tel(){return this.formGroup.get('reference');}
+
+  get adresse(){return this.formGroup.get('adresse');}
+
+  get description(){return this.formGroup.get('description');}
+
+  get catalogue(){return this.formGroup.get('catalogue');}
+
+  get calendrier(){return this.formGroup.get('calendrier');}
+
+  get isprestataire(){return this.formGroup.get('isprestataire');}
+
+  get isentreprise(){return this.formGroup.get('isentreprise');}
+
+  get domaine(){return this.formGroup.get('domaine');}
+
+
+  onSelected(value:string): void {
+		this.selected = Number(value);
+    if(this.selected != -1 || this.selected < this.entreprises.length){
+      this.pageSize = this.selected;
+    }else{
+      this.pageSize =this.entreprises.length;
+    }
+    this.onGetAllEntreprise();
+	}
+
+
 
   
   onGetAllEntreprise(): void {
@@ -31,9 +98,23 @@ export class EntrepriseComponent implements OnInit {
     .subscribe(
       (data)=>{
         this.entreprises = data;
+        this.onGetPageEntreprise();
       }
     )
   }
+
+
+  onGetPageEntreprise() {
+     this.getPage(this.currentPage,this.pageSize)
+    .subscribe(
+      (data)=> {
+        this.entreprises = data.entreprises;
+        this.totalPages = data.totalPages;
+      }
+    )
+  }
+
+ 
 
   onAddEntreprise():void{
     this.submitted = true;
@@ -45,6 +126,7 @@ export class EntrepriseComponent implements OnInit {
     .subscribe(
       (data)=>{
         alert('Add Success');
+        this.onGetAllEntreprise();
       },(err)=> console.log('error',err)
     )
       
@@ -68,14 +150,66 @@ export class EntrepriseComponent implements OnInit {
     }
   }
 
-  onUpdateEntreprise(item:IEntreprisesFormation):void{
-    this.entreprisesService.updateEntreprises_formation(item)
-    .subscribe(
-      (data)=>{
-        alert('Edit Success');
-      },(err)=> console.log('error',err) 
-    )
+  onEditEntreprise(item:IEntreprisesFormation):void{
 
+    if(item.id ){
+
+      this.entreprisesService.getEntrepriseById(item.id)
+      .subscribe(
+        (data)=> {
+          console.log(data);
+          this.currentId = item.id;
+          this.formGroup2 = this.fb.group({
+            // logo:[data[0]['logo'],Validators.required],
+            nom:[data[0]['nom'],Validators.required],
+            type:[data[0]['type'],Validators.required],
+            type_entreprise:[data[0]['type_entreprise'],Validators.required],
+            email:[data[0]['email'],Validators.required],
+            tel:[data[0]['tel'],Validators.required],
+            adresse:[data[0]['adresse'],Validators.required],
+            description:[data[0]['description'],Validators.required],
+            catalogue:[data[0]['catalogue'],Validators.required],
+            calendrier:[data[0]['calendrier'],Validators.required],
+            isprestataire:[data[0]['isprestataire'],Validators.required],
+            isentreprise:[data[0]['isentreprise'],Validators.required],
+            type_prestataire:[data[0]['type_prestataire']],
+            domaine:[data[0]['domaine'],Validators.required],
+          })
+        }
+      )    
+  }
   }
 
+  getPage(page:number,size:number):Observable<PageEntreprise>{
+  
+    let index = page * size;
+    let totalPages = ~~(this.entreprises.length/size);
+    if(this.entreprises.length % size != 0)
+      totalPages ++;
+    let pageEquipements = this.entreprises.slice(index,index+size);
+    return of({
+      page:page,
+      size:size,
+      totalPages:totalPages,
+      entreprises:pageEquipements
+    })
+  }
+
+
+  onEdit(){
+    if(this.currentId)
+   
+    this.entreprisesService.updateEntreprises_formation(this.currentId,this.formGroup2.value)
+    .subscribe(
+      (data)=>{
+        alert('Update Succes');
+        this.onGetAllEntreprise();
+      },err=> console.log('error',err)
+    )
+}
+
+  gotoPage(i:number){
+    this.currentPage = i;
+    this.onGetAllEntreprise();
+  }
 }

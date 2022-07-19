@@ -19,11 +19,14 @@ export class EntreprisesService {
     getAllEntreprises_formation():Observable<IEntreprisesFormation[]>{
       return this.http.get<IEntreprisesFormation[]>(this.host+'/entreprises_formation');
     }
+    getEntrepriseById(id:number):Observable<IEntreprisesFormation[]>{
+      return this.http.get<IEntreprisesFormation[]>(this.host+'/entreprises_formation/'+id);
+    }
     addEntreprises_formation(item:IEntreprisesFormation):Observable<IEntreprisesFormation>{
       return this.http.post<IEntreprisesFormation>(this.host+'/entreprises_formation',item);
     }
-    updateEntreprises_formation(item:IEntreprisesFormation):Observable<IEntreprisesFormation>{
-      return this.http.put<IEntreprisesFormation>(this.host+'/entreprises_formation/'+item.id,item);
+    updateEntreprises_formation(id:number,nouveau:IEntreprisesFormation):Observable<IEntreprisesFormation>{
+      return this.http.put<IEntreprisesFormation>(this.host+'/entreprises_formation/'+id+'?_method=PUT',nouveau);
     }
     deleteEntreprises_formation(item:IEntreprisesFormation):Observable<boolean>{
       return this.http.delete<boolean>(this.host+'/entreprises_formation/'+item.id);

@@ -5,6 +5,7 @@ import { EnvironnementComponent } from './components/environnement/environnement
 import { EquipementComponent } from './components/equipement/equipement.component';
 import { FormationComponent } from './components/formation/formation.component';
 import { OutputComponent } from './components/output/output.component';
+import { VigilanceStateComponent } from './components/vigilance-state/vigilance-state.component';
 import { VigilanceComponent } from './components/vigilance/vigilance.component';
 
 const routes: Routes = [
@@ -14,6 +15,8 @@ const routes: Routes = [
   {path:'outputs' , component:OutputComponent },
   {path:'output_equipement' , component:EquipementComponent },
   {path:'output_environnement' , component:EnvironnementComponent },
+  {path:'propositionselt/getvigilance/:etat' , component:VigilanceStateComponent },
+
 
 
 ];
