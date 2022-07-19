@@ -14,8 +14,19 @@ export class ConseilService {
   ) { }
 
     // HTTP REQUEST FOR CONSEIL
-    getAllConseils():Observable<Iconseil[]>{
-      return this.http.get<Iconseil[]>(`${environment.host}conseil`);
+    getAllConseils(){
+     // return this.http.get<Iconseil[]>(`${environment.host}conseil`);
+     return new Promise((resolve, reject) => {
+      return this.http.get<Iconseil[]>(`${environment.host}conseil`)
+      .subscribe({
+        next: res => {
+          resolve(res);
+        },
+        error: err => {
+          reject(err)
+        }
+      });
+     })
     }
 
     getConseil(id:number):Observable<Iconseil>{

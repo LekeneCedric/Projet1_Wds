@@ -19,9 +19,9 @@ export class DetailconseilComponent implements OnInit {
     private conseil: ConseilService
   ) { }
 
-  async ngOnInit() {
+    ngOnInit() {
     
-   await this.conseil.getAllConseils().subscribe(data =>{
+      this.conseil.getAllConseils().then((data:any)=>{
       this.arrayConseil = data;
       console.table(this.arrayConseil);
 

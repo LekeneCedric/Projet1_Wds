@@ -12,7 +12,7 @@
                         <i class="pe page-header-icon pe-7s-menu"></i>
                     </div>
                     <div class="header-title">
-                        <h3>Table styles</h3>
+                        <h3> Conseils</h3>
                         <small>
                             Examples of various designs of tables.
                         </small>
@@ -22,46 +22,191 @@
             </div>
         </div>
     
+        <!--search component-->
 <div class="container-fluid">
     <div class="row">
         <div class="col-lg-12">
             <div class="add_and_search">
                 <div class="add">
-                    <button  class="btn btn-w-md btn-accent" data-toggle="modal" data-target="#myModal">Accent color</button>
+                    <button  class="btn btn-w-md btn-accent" data-toggle="modal" data-target="#myModal" (click)=" clear()">Add Conseil</button>
                 </div>
             </div>
             <div class="input-group mb-3 mt-2 w-25">
-               <app-search (search)="on($event)"></app-search>
+             <!--  <app-search (search)="on($event)"></app-search> -->
             </div>
         </div>
     </div>
 </div>
 
-<div class="container-fluid">
-    <table class="table table-responsive-sm">
-        <thead>
-        <tr>
-            <th>Couverture</th>
-            <th>Titre</th>
-            <th>Description</th>
-            <th>Semidescription</th>
-            <th>Opérations</th>
-        </tr>
-        </thead>
-        <tbody *ngFor="let conseil of arrayConseil ">
-        <tr *ngIf="searchText === '' || conseil.titre.toLowerCase().includes(searchText)" >
-          
-            <td>{{conseil.couverture}}</td>
-            <td>{{conseil.titre}}</td>
-            <td><p class="td">{{conseil.description}}</p></td>
-            <td>{{conseil.semidescription}}</td>
-            <td>supprimer modifier</td>
-           
-        </tr>
-        </tbody>
-    </table>
+<div class="row"><div class="col-sm-10">
+    <div class="dataTables_length" id="tableExample3_length">
+      <label>Show 
+          <select name="tableExample3_length" aria-controls="tableExample3" class="form-control form-control-sm">
+              <option value="10">10</option>
+              <option value="25">25</option>
+              <option value="50">50</option>
+              <option value="-1">All</option>
+          </select>
+    </label>
+      </div>
+      </div>
+
+      <div class="col-sm-2">
+          <div id="tableExample3_filter" class="dataTables_filter">
+                <app-search (search)="on($event)"></app-search>
+          </div>
+        </div>
 </div>
 
+<!--begin table-->
+  <div class="row">
+                <div class="col-md-12">
+                    <div class="panel panel-filled">
+                        <div class="panel-heading">
+                            <div class="panel-tools">
+                                <a class="panel-toggle"><i class="fa fa-chevron-up"></i></a>
+                                <a class="panel-close"><i class="fa fa-times"></i></a>
+                            </div>
+                           
+                        </div>
+                        <div class="panel-body">
+                          
+                            <div>
+                              
+                            </div>
+                            <table id="tableExample3" class="table table-striped table-hover table-responsive-sm">
+                                <thead>
+                                <tr>
+                                    <th>Couverture</th>
+                                    <th>Titre</th>
+                                   
+                                    <th>Semidescription</th>
+                                    <th>Options</th>
+                                </tr>
+                                </thead>
+                                <tbody >
+                                <tr *ngFor="let conseil of arrayConseil " >
+                                    <td >{{conseil.couverture}}</td>
+                                    <td>{{conseil.titre}}</td>
+                                    
+                                    <td>{{conseil.semidescription}}</td>
+                                    <td>
+                                        <div class="row">
+                                           <div class="font-example-box col-lg-2 col-md-3 col-sm-6 col-xs-6 col px-3">
+                                               <span class="pe-7s-note2" style=" font-size:25px" data-toggle="modal" data-target="#myModalUpdate" (click)="checkUpdate(conseil)"></span>
+                                               <span class="icon-example-name"> </span>
+                                           </div>
+                                           <div class="font-example-box col-lg-2 col-md-3 col-sm-6 col-xs-6 col">
+                                               <span class="pe-7s-trash" style=" font-size:25px" (click)="deleteConseil(conseil)"></span>
+                                               <span class="icon-example-name"> </span>
+                                           </div>
+                                           <div class="font-example-box col-lg-2 col-md-3 col-sm-6 col-xs-6 px-3">
+                                               <span class="pe-7s-news-paper" style="font-size:25px" data-toggle="modal" data-target="#allConseils" (click)="check(conseil)"></span>
+                                               <span class="icon-example-name"> </span>
+                           
+                                           </div>
+                                        </div>
+                                       </td>
+                                   <!--modal for update -->                           
+                                   <div class="modal fade" id="myModalUpdate" tabindex="-1" role="dialog" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header text-center">
+                                                <h4 class="modal-title">UPDATE AN ADVICE</h4>
+                                                <small> </small>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class=" ">
+                                                    <div class="col-md-12">
+                                                        <small class="stat-label">Couverture</small>
+                                                        <div class="input-group mb-3">
+                                                            <input type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" [(ngModel)]="couverture" ngDefaultControl>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <small class="stat-label">Titre</small>
+                                                        <div class="input-group mb-3">
+                                                            <input type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" [(ngModel)]="titre" ngDefaultControl>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <small class="stat-label">Description</small>
+                                                        <div class="input-group mb-3">
+                                                            <input type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" [(ngModel)]="description" ngDefaultControl>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <small class="stat-label">Semidescription</small>
+                                                        <div class="input-group mb-3">
+                                                            <input type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" [(ngModel)]="semidescription" ngDefaultControl>
+                                                        </div>
+                                                    </div>
+                                                  
+                                                </div>
+                                              
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-accent" (click)="updateConseille(conseil)">Save changes</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <!--end modale update-->
+                            
+                     <!--modale for look all Advice of user-->   
+                <div class="modal fade" id="allConseils" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header text-center">
+                                <h4 class="modal-title">VIEW ALL ADVICE</h4>
+                                <small> </small>
+                            </div>
+                            <div class="modal-body">
+                                <div class=" ">
+                                    <div class="col-md-12">
+                                        <h4 class="stat-label">Couverture</h4>
+                                        <div class="input-group mb-3 mt-2">
+                                            <P>{{conseil.couverture}}</P>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 ">
+                                        <h4 class="stat-label">Titre</h4>
+                                        <div class="input-group mb-3 mt-2">
+                                            <P>{{titre}}</P>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <h4 class="stat-label">Description</h4>
+                                        <div class="input-group mb-3 mt-2">
+                                            <div [ngxSummernoteView]="descriptionContent"></div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <h4 class="stat-label">Semidescription</h4>
+                                        <div class="input-group mb-3 mt-2">
+                                            <div [ngxSummernoteView]="semiDescriptionContent"></div>
+                                        </div>
+                                    </div>
+                                
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default " data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--end modal for look-->                        
+            </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <!--modale for add Advice-->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -86,7 +231,7 @@
                     <div class="col-md-12">
                         <small class="stat-label">Description</small>
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" [(ngModel)]="description" ngDefaultControl>
+                            <input type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" [(ngModel)]="description" ngDefaultControl >
                         </div>
                     </div>
                     <div class="col-md-12">
@@ -97,11 +242,7 @@
                     </div>
                   
                 </div>
-                <div class="progress m-t-xs full progress-small">
-                    <div style="width: 65%" aria-valuemax="100" aria-valuemin="0" aria-valuenow="65" role="progressbar" class=" progress-bar progress-bar-warning" [(ngModel)]="titre" ngDefaultControl>
-                        <span class="sr-only">65% Complete (success)</span>
-                    </div>
-                </div>
+              
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -110,5 +251,9 @@
         </div>
     </div>
 </div>
+<!--end modale-->
+
     </div>
 </section>
+
+
