@@ -5,11 +5,7 @@
             <div class="col-md-12">
                 <div class="panel panel-filled">
                     <div class="panel-heading">
-                        <div class="panel-tools">
-                            <a class="panel-toggle"><i class="fa fa-chevron-up"></i></a>
-                            <a class="panel-close"><i class="fa fa-times"></i></a>
-                        </div>
-                            Formations
+                        Point De Vigilance
                     </div>
                     <div class="panel-body">
                         
@@ -25,7 +21,7 @@
                                   </button>
                                 </div>
                                 <div class="modal-body">
-                                     <!--<form [formGroup]="formGroup" (ngSubmit)="onAddEntreprise()">
+                                    <form [formGroup]="formGroup" (ngSubmit)="onAddVigilance()">
                                         <div class="form-group"><label for="exampleInputName">Titre</label> <input type="text" formControlName="titre"  class="form-control" id="exampleInputName" placeholder="Titre"></div>
                                         <div class="form-group"><label for="exampleInputEmail1">But</label> <input type="text" formControlName="but"  class="form-control" id="exampleInputEmail1" placeholder="But"></div>
                                         <div class="form-group"><label for="exampleInputPassword1">Moment_Faire</label> <input type="text" formControlName="moment_faire"  class="form-control" id="exampleInputPassword1" placeholder="Moment_Faire"></div>
@@ -37,11 +33,10 @@
                                         <div class="form-group"><label for="exampleInputPassword1">Etat</label> <input type="text" formControlName="etat" class="form-control" id="exampleInputPassword1" placeholder="Etat"></div>
         
                                         <button type="submit" class="btn btn-default">Submit</button>
-                                    </form> -->
+                                    </form>
                                 </div>
                                 <div class="modal-footer">
                                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                  <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
                                 </div>
                               </div>
                             </div>
@@ -58,8 +53,7 @@
                                   </button>
                                 </div>
                                 <div class="modal-body">
-                                    <!-- (ngSubmit)="onUpdateVigilance(item)" -->
-                                     <!--   <form [formGroup]="formGroup2" >
+                                    <form [formGroup]="formGroup2" (ngSubmit)="onEdit()">
                                         <div class="form-group"><label for="exampleInputName">Titre</label> <input type="text" formControlName="titre"  class="form-control" id="exampleInputName" placeholder="Titre"></div>
                                         <div class="form-group"><label for="exampleInputEmail1">But</label> <input type="text" formControlName="but"  class="form-control" id="exampleInputEmail1" placeholder="But"></div>
                                         <div class="form-group"><label for="exampleInputPassword1">Moment_Faire</label> <input type="text" formControlName="moment_faire"  class="form-control" id="exampleInputPassword1" placeholder="Moment_Faire"></div>
@@ -71,11 +65,10 @@
                                         <div class="form-group"><label for="exampleInputPassword1">Etat</label> <input type="text" formControlName="etat" class="form-control" id="exampleInputPassword1" placeholder="Etat"></div>
         
                                         <button type="submit" class="btn btn-default">Submit</button>
-                                    </form>-->
+                                    </form>
                                 </div>
                                 <div class="modal-footer">
                                   <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                  <!-- <button type="button" class="btn btn-primary">Save changes</button> -->
                                 </div>
                               </div>
                             </div>
@@ -84,102 +77,93 @@
                    
                         <div id="tableExample3_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
                             <div class="row"><div class="col-sm-10">
-                              <div class="dataTables_length" id="tableExample3_length">
-                                <label>Show 
-                                    <select name="tableExample3_length" aria-controls="tableExample3" class="form-control form-control-sm">
-                                        <option value="10">10</option>
-                                        <option value="25">25</option>
-                                        <option value="50">50</option>
-                                        <option value="-1">All</option>
-                                    </select> entries</label>
+                                <div class="dataTables_length" id="tableExample3_length">
+                                    <label>Show 
+                                        <select #numbers (change)="onSelected(numbers.value)" name="tableExample3_length" aria-controls="tableExample3" class="form-control form-control-sm">
+                                            <option value="5">5</option>
+                                            <option value="10">10</option>
+                                            <option value="25">25</option>
+                                            <option value="50">50</option>
+                                            <option value="100">100</option>
+                                            <option value="500">All</option>
+                                        </select> entries</label>
+                                    </div>
                                 </div>
-                                </div>
-                                <!-- <div class="col-sm-4 text-center">
-                                    <div class="dt-buttons btn-group"> -->
-                                        <!-- <a class="btn btn-default buttons-copy buttons-html5 btn-sm" data-toggle="modal" data-target="#myModal1" tabindex="0" aria-controls="tableExample3" >
-                                            <span>Add</span>
-                                        </a> -->
-                                        <!-- <button type="button" class="btn btn-default btn-sm " data-toggle="modal" data-target="#exampleModal">
-                                            Add
-                                          </button> -->
-                                    <!-- </div>
-                                </div> -->
+
                                 <div class="col-sm-2">
                                     <div id="tableExample3_filter" class="dataTables_filter">
-                                        <!-- <form #f="ngForm" (ngSubmit)="onSearch(f.value)"> -->
-                                            
-                                            <label>Search:<input [(ngModel)]="search" name="search" type="search" (input)="onSearch()" class="form-control form-control-sm" placeholder="Entrer un Etat" aria-controls="tableExample3"></label>
-                                            <!-- <button class="btn btn-sm" type="submit">
-                                                <span class="fa fa-search"></span>
-                                              </button> -->
-                                        <!-- </form> -->
+                                        <form
+                                        #f="ngForm"
+                                        (ngSubmit)="onSearch(f.value)"
+                                      class="d-flex">
+                                        <input
+                                          ngModel
+                                          name="keyword"
+                                          class="form-control me-2"
+                                          type="search"
+                                          placeholder="EX: construction"
+                                          aria-label="Search">
+                                        <button class="btn btn-sm" type="submit">
+                                          <span class="fa fa-search"></span>
+                                        </button>
+                                      </form>
+                                            <!-- <label>Search:<input [(ngModel)]="search" name="search" type="search" (change)="onSearch()" class="form-control form-control-sm" placeholder="Entrer un Etat" aria-controls="tableExample3"></label> -->
                                     </div></div></div><table id="tableExample3" class="table table-striped table-hover table-responsive-sm dataTable no-footer" role="grid">
                                         
                             <thead>
                             <tr role="row">
-                                <!-- <th class="sorting_asc" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Name: activate to sort column descending" style="width: 47px;">ID</th> -->
-                                <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" >Logo</th>
-                                <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" >Nom</th>
-                                <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" >Type</th>
-                                <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" >Type Entreprise</th>
-                                <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" >Email</th>
-                                <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" >Tel</th>
-                                <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" >Adresse</th>
-                                <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" >Description</th>
-                                <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" >Catalogue</th>
-                                <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" >Calendrier</th>
-                                <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" >Est Prestataire</th>
-                                <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" >Est Entreprise</th>
-                                <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" >Type Prestataire</th>
-                                <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" >Domaine</th>
-
-
-
                                 <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" >
                                     <button title="Ajouter ici" type="button" class="btn btn-default btn-sm " data-toggle="modal" data-target="#exampleModal">
                                         <i class="fa fa-plus-circle" aria-hidden="true"></i>
                                       </button>
                                 </th>
+                                <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" >Titre</th>
+                                <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" >But</th>
+                                <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" >Moment_faire</th>
+                                <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" >Qui_faire</th>
+                                <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" >Conseil</th>
+                                <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" >Document</th>
+                                <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" >Etat</th>
                                 
                             </tr>
                                 
 
                             </thead>
                             <tbody style="display: content;">
-                                <tr role="row" class="even" *ngFor="let item of entreprises">
-                                    <!-- <td class="sorting_1">{{item.id}}</td> -->
-                                      <!--
-                                    <td>{{item.logo}}</td>
-                                    <td>{{item.nom}}</td>
-                                    <td>{{item.type}}</td>
-                                    <td>{{item.type_entreprise}}</td>
-                                    <td>{{item.email}}</td>
-                                    <td>{{item.tel}}</td>
-                                    <td>{{item.adresse}}</td>
-                                    <td>{{item.description}}</td>
-                                    <td>{{item.catalogue}}</td>
-                                    <td>{{item.calendrier}}</td>
-                                    <td>{{item.isprestataire}}</td>
-                                    <td>{{item.isentreprise}}</td>
-                                    <td>{{item.type_prestataire}}</td>
-                                    <td>{{item.domaine}}</td>
-                                        -->
-
+                                <tr role="row" class="even" *ngFor="let item of vigilances">
                                     <td style="display: content;">
-                                        <button data-toggle="modal" data-target="#exampleModal2" class="btn btn-sm" title="Modifier ici">
+                                        <button 
+                                        (click)="onEditEquipement(item)"
+                                        
+                                        data-toggle="modal" data-target="#exampleModal2" class="btn btn-sm" title="Modifier ici">
                                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                         </button>
-                                        <button (click)="onDeleteEntreprise(item)" class="btn btn-sm" title="Supprimer ici">
+                                        <button (click)="onDeleteVigilance(item)" class="btn btn-sm" title="Supprimer ici">
                                             <i class="fa fa-trash-o" aria-hidden="true"></i>
                                         </button>
                                     </td>
+                                    <td>{{item.titre}}</td>
+                                    <td>{{item.but}}</td>
+                                    <td>{{item.moment_faire}}</td>
+                                    <td>{{item.qui_faire}}</td>
+                                    <td>{{item.conseil}}</td>
+                                    <td>{{item.document}}</td>
+                                    <td>{{item.etat}}</td>
                                     
 
                                 </tr>
                               
                         </tbody>
                         </table>
-                            <div class="dataTables_paginate paging_simple_numbers" id="tableExample3_paginate"><ul class="pagination"><li class="paginate_button page-item previous disabled" id="tableExample3_previous"><a href="#" aria-controls="tableExample3" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li><li class="paginate_button page-item active"><a href="#" aria-controls="tableExample3" data-dt-idx="1" tabindex="0" class="page-link">1</a></li><li class="paginate_button page-item "><a href="#" aria-controls="tableExample3" data-dt-idx="2" tabindex="0" class="page-link">2</a></li><li class="paginate_button page-item "><a href="#" aria-controls="tableExample3" data-dt-idx="3" tabindex="0" class="page-link">3</a></li><li class="paginate_button page-item next" id="tableExample3_next"><a href="#" aria-controls="tableExample3" data-dt-idx="4" tabindex="0" class="page-link">Next</a></li></ul></div></div>
+                        
+                        <div class="dataTables_paginate paging_simple_numbers" id="tableExample3_paginate">
+                            <ul class="pagination">
+                                <li *ngFor="let item of [].constructor(this.totalPages);let i=index;" class="paginate_button page-item ">
+                                    <a (click)="gotoPage(i)"  aria-controls="tableExample3" data-dt-idx="3" tabindex="0" class="page-link">{{i}}</a>
+                                </li>
+                            </ul>
+                        </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -187,4 +171,4 @@
         </div>
     </div>
 </section>
-                         
+                                

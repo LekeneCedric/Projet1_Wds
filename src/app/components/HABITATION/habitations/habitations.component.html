@@ -1,0 +1,274 @@
+
+<div *ngIf="habitations_list.length <1" href="#"
+    class=" position-absolute top-50 start-50 translate-middle btn btn-success btn-rounded">
+    <i class="fa fa-spinner fa-spin"></i>
+</div>
+
+<div class="panel-body">
+    <div class="col-lg-12">
+        <div class="view-header">
+            <div class="pull-right text-right" style="line-height: 14px">
+            </div>
+            <div class="header-icon">
+                <i class="pe page-header-icon pe-7s-note2"></i>
+            </div>
+            <div class="d-flex justify-content-between">
+            <div class="header-title">
+                <h3>Habitations</h3>
+                <small>
+                    Liste des differentes habitations
+                </small>
+            </div>
+            <div class="header-icon mx-2">
+                <span class="pe-7s-plus" data-toggle="modal" data-target="#addHabitationModal"></span>
+            </div>
+        </div>
+        </div>
+        <hr>
+    </div>
+    <div class="col-md-12 container-fluid">
+        <div class="panel panel-filled">
+            
+            <div class="panel-body">
+
+                <div id="tableExample2_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="dataTables_length" id="tableExample2_length">
+                                <label>Show <select name="tableExample2_length" aria-controls="tableExample2"
+                                        class="form-control form-control-sm">
+                                        <option value="6">6</option>
+                                        <option value="25">25</option>
+                                        <option value="50">50</option>
+                                        <option value="-1">All</option>
+                                    </select> entries</label>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div id="tableExample2_filter" class="dataTables_filter" style="float: right;">
+                                <label>Search:<input [(ngModel)]="search" type="text"
+                                        class="form-control form-control-sm" placeholder=""
+                                        aria-controls="tableExample2">
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <table *ngIf="habitations_list.length >1"
+                       id="dtBasicExample" class="table table-striped table-bordered table-sm" cellspacing="0" width="100%">
+                        <thead>
+                            <tr role="row">
+                                <th class="th-sm">
+                                    Intitule</th>
+                                <th class="th-sm" >
+                                    Date creation</th>
+                                <th class="th-sm">
+                                    Date modification</th>
+                                <th class="th-sm" >
+                                    Action</th>
+                                
+                        </thead>
+                        <tbody *ngFor="let habitation of habitations_list">
+                            <tr *ngIf="habitation.intitule.toLowerCase().includes(search) || search==''">
+                                <td>{{habitation.intitule}}</td>
+                                <td>{{habitation.created_at | date:'dd/MM/yyyy'}}</td>
+                                <td>{{habitation.updated_at | date:'dd/MM/yyyy'}}</td>
+                                <td class="d-flex justify-content-between">
+                                    <svg xmlns="http://www.w3.org/2000/svg" title="Lier Habitation"
+                                     width="20" 
+                                     height="20" fill="orange"
+                                     data-toggle="modal" data-target="#linkHabitationModal"
+                                     (click)="setCurrentHabitation(habitation);getLinkedHabitation(habitation.id!)"
+                                      class="bi bi-diagram-2-fill"
+                                       viewBox="0 0 16 16">
+                                        <path fill-rule="evenodd" d="M6 3.5A1.5 1.5 0 0 1 7.5 2h1A1.5 1.5 0 0 1 10 3.5v1A1.5 1.5 0 0 1 8.5 6v1H11a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-1 0V8h-5v.5a.5.5 0 0 1-1 0v-1A.5.5 0 0 1 5 7h2.5V6A1.5 1.5 0 0 1 6 4.5v-1zm-3 8A1.5 1.5 0 0 1 4.5 10h1A1.5 1.5 0 0 1 7 11.5v1A1.5 1.5 0 0 1 5.5 14h-1A1.5 1.5 0 0 1 3 12.5v-1zm6 0a1.5 1.5 0 0 1 1.5-1.5h1a1.5 1.5 0 0 1 1.5 1.5v1a1.5 1.5 0 0 1-1.5 1.5h-1A1.5 1.5 0 0 1 9 12.5v-1z"/>
+                                      </svg>
+                                      <svg xmlns="http://www.w3.org/2000/svg"
+                                       width="20" height="20" fill="currentColor" 
+                                       class="bi bi-pencil-square" viewBox="0 0 16 16" (click)="setCurrentHabitation(habitation)"
+                                       data-toggle="modal" data-target="#updateHabitationModal">
+                                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
+                                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
+                                      </svg>
+                                 
+                                 <svg xmlns="http://www.w3.org/2000/svg"
+                                    (click)="setCurrentHabitation(habitation)"
+                                    data-toggle="modal" data-target="#removeHabitationModal"
+                                    width="20" height="20" fill="#ff4d4d"
+                                    class="bi bi-trash-fill"
+                                    viewBox="0 0 16 16">
+                                    <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
+                                 </svg>
+                            
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="dataTables_info" id="tableExample2_info" role="status" aria-live="polite">
+                                Showing 1 to 6 of 25 entries</div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="dataTables_paginate paging_simple_numbers" id="tableExample2_paginate">
+                                <ul class="pagination">
+                                    <li class="paginate_button page-item previous disabled" id="tableExample2_previous">
+                                        <a href="#" aria-controls="tableExample2" data-dt-idx="0" tabindex="0"
+                                            class="page-link">Previous</a></li>
+                                    <li class="paginate_button page-item active"><a href="#"
+                                            aria-controls="tableExample2" data-dt-idx="1" tabindex="0"
+                                            class="page-link">1</a></li>
+                                    <li class="paginate_button page-item "><a href="#" aria-controls="tableExample2"
+                                            data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
+                                    <li class="paginate_button page-item "><a href="#" aria-controls="tableExample2"
+                                            data-dt-idx="3" tabindex="0" class="page-link">3</a></li>
+                                    <li class="paginate_button page-item "><a href="#" aria-controls="tableExample2"
+                                            data-dt-idx="4" tabindex="0" class="page-link">4</a></li>
+                                    <li class="paginate_button page-item "><a href="#" aria-controls="tableExample2"
+                                            data-dt-idx="5" tabindex="0" class="page-link">5</a></li>
+                                    <li class="paginate_button page-item next" id="tableExample2_next"><a href="#"
+                                            aria-controls="tableExample2" data-dt-idx="6" tabindex="0"
+                                            class="page-link">Next</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal for 'adding habitation' functionality -->
+<div class="modal fade" id="addHabitationModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h4 class="modal-title">Ajouter nouvelle habitation</h4>
+                <!-- <small>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</small> -->
+            </div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <label for="exampleInputName">Intitule</label>
+                    <input type="text" [(ngModel)]="intitule_new_habitation"
+                     class="form-control" 
+                     placeholder="Intitule habitation">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+                <button type="button" class="btn btn-accent" data-dismiss="modal"
+                    (click)="addHabitation()">nouvelle_habitation</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Model fot 'Remove habitation' functionality -->
+<div class="modal fade" id="removeHabitationModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Confirmation suppression </h4>
+          </div>
+          <div class="modal-body">
+            <p>Confirmer la suppression de l'habitation "{{current_habitation?.intitule}}".</p>
+      
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal"
+            (click)="deleteHabitation(current_habitation?.id)">
+            Supprimer
+            </button>
+            <a class="btn btn-w-md btn-success" data-dismiss="modal">Annuler</a>
+            
+          </div>
+        </div>
+      </div>
+</div>
+<!-- Modal for 'Update habitation functionality' -->
+<div class="modal fade" id="updateHabitationModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Modification de {{current_habitation?.intitule}}</h4>
+          </div>
+          <div class="modal-body">
+            <p style="font-weight: bold;">Intitule</p>
+            <input type="text" [(ngModel)]="update_intitule"
+             class="form-control"
+              [placeholder]="current_habitation?.intitule">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-warning" data-dismiss="modal"
+            (click)="updateHabitation()">
+            Modifier
+            </button>
+            <a class="btn btn-w-md btn-success" data-dismiss="modal">Annuler</a>
+            
+          </div>
+        </div>
+      </div>
+</div>
+<!-- Modal for link habitation to another  -->
+<div class="modal fade" id="linkHabitationModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Lier Habitation(s) a <h3 style="color: orange;">{{current_habitation?.intitule}}</h3></h4>
+            <p style="color:grey">
+                <em><strong><u>consigne:</u></strong>selectionnez l'habitation a liee avec <strong>{{current_habitation?.intitule}}</strong>
+            si vous selectionnez une habitation deja liee a cette derniere , la liaison sera supprime , au cas 
+            contraire, la liaison sera cree</em></p>
+          </div>
+          <div class="modal-body">
+            <form>
+            <div *ngFor="let habitation of habitations_list">
+                    <label *ngIf="linked_current_habitations.indexOf(habitation.id!)==-1 && habitation?.id!=current_habitation?.id "
+                    style="color: rgb(147, 224, 147);"> 
+                        <input type="radio" name="habitation" (change)="changelinkhabitation($event)"
+                        [value]="habitation.id!"> 
+                        {{habitation?.intitule}} 
+                    </label>
+                    <label *ngIf="linked_current_habitations.indexOf(habitation.id!)!=-1 && habitation?.id!=current_habitation?.id " 
+                    style="color: rgb(255, 183, 48)"> 
+                        <input type="radio" name="habitation" (change)="changelinkhabitation($event)"
+                        [value]="habitation.id!"> 
+                        {{habitation?.intitule}}
+                    </label>
+                    <!-- <input class="form-check-input" type="radio"
+                     (change)="changelinkhabitation($event)"
+                     [value]="habitation.id!"
+                     >
+                    <label class="form-check-label" for="flexRadioDefault1" 
+                    *ngIf="linked_current_habitations.indexOf(habitation.id!)==-1"
+                    style="color: rgb(147, 224, 147);">
+                    
+                        {{habitation?.intitule}}
+                    </label>
+                    <label class="form-check-label" for="flexRadioDefault1" 
+                    *ngIf="linked_current_habitations.indexOf(habitation.id!)!=-1" 
+                    style="color: rgb(255, 183, 48)">
+                        {{habitation?.intitule}}
+                    </label> -->
+                  
+            </div></form>
+            
+          </div>
+          <div class="modal-footer">
+            <div>
+                <button type="button" class="btn btn-warning" *ngIf="lier"
+                data-dismiss="modal" [disabled]="id_link_habitation==null"
+                style="background-color: rgb(238, 155, 0);color: white;"
+                (click)="linkHabitation()">
+                 Lier
+               </button>
+               <button type="button" class="btn btn-warning" *ngIf="!lier"
+                data-dismiss="modal" style="background-color: rgb(255, 166, 0);color: white;" [disabled]="id_link_habitation==null"
+                (click)="linkHabitation()">
+                Delier
+               </button>
+            </div>
+           
+            <a class="btn btn-w-md btn-success" data-dismiss="modal">Annuler</a>
+            
+          </div>
+        </div>
+      </div>
+</div>

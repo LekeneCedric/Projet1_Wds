@@ -1,0 +1,43 @@
+<aside class="navigation">
+    <nav>
+        <ul class="nav luna-nav">
+            <li class="nav-category">
+                Main Menu
+            </li>
+            <li id="habitations" (click)="isactive()">
+                <a [routerLink]="['/habitations']">Habitations</a>
+            </li>
+            <li id="typesquestions" (click)="isactive()">
+                <a [routerLink]="['/typesquestions']">Types Questions</a>
+            </li>
+            <li id="questions" (click)="isactive()">
+                <a [routerLink]="['/questions']">Questions</a>
+            </li>
+            <li id="equipements" (click)="isactive()">
+                <a [routerLink]="['/equipements']">Equipements</a>
+            </li>
+            <li id="categories" (click)="isactive()">
+                <a [routerLink]="['/categories']">Categories</a>
+            </li>
+            <li>
+                <a routerLink="vigilance">Point De Vigilance</a>
+            </li>
+            <li>
+                <a routerLink="formations">formation</a>
+            </li>
+            <li>
+                <a routerLink="entreprises_formation">Entreprise</a>
+            </li>
+            <li>
+                <a routerLink="outputs" >Output</a>
+            </li>
+            <li>
+                <a routerLink="output_equipement">Output Des Equipements</a>
+            </li>
+            <li>
+                <a routerLink="output_environnement">Output Environnement</a>
+            </li>
+           
+        </ul>
+    </nav>
+</aside>

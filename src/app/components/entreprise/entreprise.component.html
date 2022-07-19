@@ -1,0 +1,206 @@
+<section class="content">
+    <div class="container-fluid">
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-filled">
+                    <div class="panel-heading">
+                            Entreprises
+                    </div>
+                    <div class="panel-body">
+                        
+                          
+                          <!-- Modal -->
+                          <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel">Add Entreprise</h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form [formGroup]="formGroup" (ngSubmit)="onAddEntreprise()">
+                                        <div class="form-group">
+                                        <p>Votre Logo </p>
+                                            <label class="btn btn-default" for="file-selector1">
+                                                <input 
+                                                formControlName="logo"
+                                                id="file-selector1" type="file" style="display:none;"
+                                                       onchange="$('#upload-file-info').html($(this).val());">
+                                                Upload file
+                                            </label>
+                                            <span class='label label-default' id="upload-file-info"></span>
+                                        </div>
+                                        <div class="form-group"><label for="exampleInputEmail1">Nom</label> <input type="text" formControlName="nom"  class="form-control" id="exampleInputEmail1" placeholder="But"></div>
+                                        <div class="form-group"><label for="exampleInputPassword1">Type</label> <input type="text" formControlName="type"  class="form-control" id="exampleInputPassword1" placeholder="Moment_Faire"></div>
+                                        <div class="form-group"><label for="exampleInputPassword1">Type Entreprise</label> <input type="text" formControlName="type_entreprise" class="form-control" id="exampleInputPassword1" placeholder="Qui_Faire"></div>
+                                        <div class="form-group"><label for="exampleInputPassword1">Email</label> 
+                                            <input type="text" formControlName="email" class="form-control" id="exampleInputPassword1" placeholder="email">
+                                        </div>
+                                        <div class="form-group"><label for="exampleInputPassword1">Tel</label> <input type="text" formControlName="tel"  class="form-control" id="exampleInputPassword1" placeholder="Document"></div>
+                                        <div class="form-group"><label for="exampleInputPassword1">Adresse</label> <input type="text" formControlName="adresse" class="form-control" id="exampleInputPassword1" placeholder="Etat"></div>
+                                        <div class="form-group"><label for="exampleInputPassword1">Description</label> <input type="text" formControlName="description" class="form-control" id="exampleInputPassword1" placeholder="Etat"></div>
+                                        <div class="form-group"><label for="exampleInputPassword1"> Catalogue</label> <input type="text" formControlName="catalogue" class="form-control" id="exampleInputPassword1" placeholder="Etat"></div>
+                                        <div class="form-group"><label for="exampleInputPassword1">Calendrier</label> <input type="text" formControlName="calendrier" class="form-control" id="exampleInputPassword1" placeholder="Etat"></div>
+                                        <div><label> <input type="checkbox" formControlName="isprestataire">Est Prestataire </label></div>
+                                        <div><label> <input type="checkbox" formControlName="isentreprise"> Est Enreprise </label></div>
+                                        <div class="form-group"><label for="exampleInputPassword1">Type Prestataire</label> <input type="text" formControlName="type_prestataire" class="form-control" id="exampleInputPassword1" placeholder="Etat"></div>
+                                        <div class="form-group"><label for="exampleInputPassword1">Domaine</label> <input type="text" formControlName="domaine" class="form-control" id="exampleInputPassword1" placeholder="Etat"></div>
+        
+                                        <button type="submit" class="btn btn-default">Submit</button>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                          <!-- Modal -->
+                          <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-lg" role="document">
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel">Update Entreprise</h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                  </button>
+                                </div>
+                                <div class="modal-body">
+                                    <form [formGroup]="formGroup2" (ngSubmit)="onEdit()">
+                                        <div class="form-group">
+                                            <p>Votre Logo </p>
+                                                <label class="btn btn-default" for="file-selector1">
+                                                    <input 
+                                                    formControlName="logo"
+                                                    id="file-selector1" type="file" style="display:none;"
+                                                           onchange="$('#upload-file-info').html($(this).val());">
+                                                    Upload file
+                                                </label>
+                                                <span class='label label-default' id="upload-file-info"></span>
+                                            </div>
+                                            <div class="form-group"><label for="exampleInputEmail1">Nom</label> <input type="text" formControlName="nom"  class="form-control" id="exampleInputEmail1" placeholder="But"></div>
+                                            <div class="form-group"><label for="exampleInputPassword1">Type</label> <input type="text" formControlName="type"  class="form-control" id="exampleInputPassword1" placeholder="Moment_Faire"></div>
+                                            <div class="form-group"><label for="exampleInputPassword1">Type Entreprise</label> <input type="text" formControlName="type_entreprise" class="form-control" id="exampleInputPassword1" placeholder="Qui_Faire"></div>
+                                            <div class="form-group"><label for="exampleInputPassword1">Email</label> 
+                                                <input type="text" formControlName="email" class="form-control" id="exampleInputPassword1" placeholder="email">
+                                            </div>
+                                            <div class="form-group"><label for="exampleInputPassword1">Tel</label> <input type="text" formControlName="tel"  class="form-control" id="exampleInputPassword1" placeholder="Document"></div>
+                                            <div class="form-group"><label for="exampleInputPassword1">Adresse</label> <input type="text" formControlName="adresse" class="form-control" id="exampleInputPassword1" placeholder="Etat"></div>
+                                            <div class="form-group"><label for="exampleInputPassword1">Description</label> <input type="text" formControlName="description" class="form-control" id="exampleInputPassword1" placeholder="Etat"></div>
+                                            <div class="form-group"><label for="exampleInputPassword1"> Catalogue</label> <input type="text" formControlName="catalogue" class="form-control" id="exampleInputPassword1" placeholder="Etat"></div>
+                                            <div class="form-group"><label for="exampleInputPassword1">Calendrier</label> <input type="text" formControlName="calendrier" class="form-control" id="exampleInputPassword1" placeholder="Etat"></div>
+                                            <div><label> <input type="checkbox" formControlName="isprestataire">Est Prestataire </label></div>
+                                            <div><label> <input type="checkbox" formControlName="isentreprise"> Est Enreprise </label></div>
+                                            <div class="form-group"><label for="exampleInputPassword1">Type Prestataire</label> <input type="text" formControlName="type_prestataire" class="form-control" id="exampleInputPassword1" placeholder="Etat"></div>
+                                            <div class="form-group"><label for="exampleInputPassword1">Domaine</label> <input type="text" formControlName="domaine" class="form-control" id="exampleInputPassword1" placeholder="Etat"></div>
+            
+                                        <button type="submit" class="btn btn-default">Submit</button>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+
+                   
+                        <div id="tableExample3_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
+                            <div class="row"><div class="col-sm-10">
+                                <div class="dataTables_length" id="tableExample3_length">
+                                    <label>Show 
+                                        <select #numbers (change)="onSelected(numbers.value)" name="tableExample3_length" aria-controls="tableExample3" class="form-control form-control-sm">
+                                            <option value="5">5</option>
+                                            <option value="10">10</option>
+                                            <option value="25">25</option>
+                                            <option value="50">50</option>
+                                            <option value="100">100</option>
+                                            <option value="500">All</option>
+                                        </select> entries</label>
+                                    </div>
+                                </div>
+                                <div class="col-sm-2">
+                                    <div id="tableExample3_filter" class="dataTables_filter">
+                                            <!-- <label>Search:<input [(ngModel)]="search" name="search" type="search" (input)="onSearch()" class="form-control form-control-sm" placeholder="Entrer un Etat" aria-controls="tableExample3"></label> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table id="tableExample3" class="table table-striped table-hover table-responsive-sm dataTable no-footer" role="grid">
+                                            
+                                <thead>
+                                <tr role="row">
+                                    <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" >
+                                        <button title="Ajouter ici" type="button" class="btn btn-default btn-sm " data-toggle="modal" data-target="#exampleModal">
+                                            <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                                          </button>
+                                    </th>
+                                    <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" >Logo</th>
+                                    <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" >Nom</th>
+                                    <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" >Type</th>
+                                    <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" >Type Entreprise</th>
+                                    <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" >Email</th>
+                                    <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" >Tel</th>
+                                    <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" >Adresse</th>
+                                    <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" >Description</th>
+                                    <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" >Catalogue</th>
+                                    <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" >Calendrier</th>
+                                    <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" >Est Prestataire</th>
+                                    <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" >Est Entreprise</th>
+                                    <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" >Type Prestataire</th>
+                                    <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" >Domaine</th>  
+                                </tr>
+                                    
+    
+                                </thead>
+                                <tbody style="display: content;">
+                                    <tr role="row" class="even" *ngFor="let item of entreprises">
+                                        <td style="display: content;">
+                                            <button 
+                                            (click)="onEditEntreprise(item)"
+                                            data-toggle="modal" data-target="#exampleModal2" class="btn btn-sm" title="Modifier ici">
+                                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                            </button>
+                                            <button (click)="onDeleteEntreprise(item)" class="btn btn-sm" title="Supprimer ici">
+                                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                            </button>
+                                        </td>
+                                        <td>{{item.logo}}</td>
+                                        <td>{{item.nom}}</td>
+                                        <td>{{item.type}}</td>
+                                        <td>{{item.type_entreprise}}</td>
+                                        <td>{{item.email}}</td>
+                                        <td>{{item.tel}}</td>
+                                        <td>{{item.adresse}}</td>
+                                        <td>{{item.description}}</td>
+                                        <td>{{item.catalogue}}</td>
+                                        <td>{{item.calendrier}}</td>
+                                        <td>{{item.isprestataire}}</td>
+                                        <td>{{item.isentreprise}}</td>
+                                        <td>{{item.type_prestataire}}</td>
+                                        <td>{{item.domaine}}</td>
+                                    </tr>
+                                  
+                            </tbody>
+                            </table>
+                            </div>
+                            <div class="dataTables_paginate paging_simple_numbers" id="tableExample3_paginate">
+                                <ul class="pagination">
+                                    <li *ngFor="let item of [].constructor(this.totalPages);let i=index;" class="paginate_button page-item ">
+                                        <a (click)="gotoPage(i)"  aria-controls="tableExample3" data-dt-idx="3" tabindex="0" class="page-link">{{i}}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+                                

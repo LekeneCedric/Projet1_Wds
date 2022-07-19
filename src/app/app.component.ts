@@ -1,7 +1,4 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import IHabitation from './models/habitation.models';
-import { ApiService } from './services/api.service';
 
 @Component({
   selector: 'app-root',
@@ -9,9 +6,14 @@ import { ApiService } from './services/api.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-   ngOnInit(): void {
+   
+  ngOnInit(): void {
    }
-   constructor(){
+
+
+   constructor(
+
+   ){
     
    }
 }
