@@ -1,0 +1,49 @@
+<section class="content">
+    
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="view-header">
+                    <div class="pull-right text-right" style="line-height: 14px">
+                        <small>Table design<br>General<br> <span class="c-white">Table styles</span></small>
+                    </div>
+                    <div class="header-icon">
+                        <i class="pe page-header-icon pe-7s-menu"></i>
+                    </div>
+                    <div class="header-title">
+                        <h3> ABONNEMENT SEARCH</h3>
+                        <small>
+                            Examples of various designs of tables.
+                        </small>
+                    </div>
+                </div>
+                <hr>
+            </div>
+        </div>
+
+    </div>
+
+    <!--search component -->
+
+    <div class="row"><div class="col-sm-10">
+        <div class="dataTables_length" id="tableExample3_length">
+          <label>Show 
+              <select name="tableExample3_length" aria-controls="tableExample3" class="form-control form-control-sm">
+                  <option value="10">10</option>
+                  <option value="25">25</option>
+                  <option value="50">50</option>
+                  <option value="-1">All</option>
+              </select>
+        </label>
+          </div>
+          </div>
+    
+          <div class="col-sm-2">
+              <div id="tableExample3_filter" class="dataTables_filter">
+                    <app-search (search)="onSearch($event)"></app-search>
+              </div>
+            </div>
+    </div>
+
+</section>

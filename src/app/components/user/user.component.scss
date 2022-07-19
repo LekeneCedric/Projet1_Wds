@@ -1,0 +1,13 @@
+.td{
+    -webkit-line-clamp: 3;
+    display:-webkit-box;
+    -webkit-box-orient: vertical;
+    overflow:hidden;
+    /*text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;*/
+}
+
+.tableau{
+    background-color: #20202b;
+}

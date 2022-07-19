@@ -1,4 +1,4 @@
-export default interface Abonnement{
+export default interface IabonnementSearch{
     id: number;
     idabonnement: number;
     iduser: number;
@@ -6,6 +6,10 @@ export default interface Abonnement{
     datefin: Date;
     montant: number;
     etat: number;
-    created_at: string;
+    created_at: Date;
     updated_at: Date;
+    titre: string;
+    duree: string;
+    periode: string;
+    couleur: string
 }

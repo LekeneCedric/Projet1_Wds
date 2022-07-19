@@ -1,9 +1,10 @@
 export default interface Iabonnement{
     id: number;
     periode: number;
-    frequence: string;
+    intitule: string
+    frequence : string;
     montant: number;
     description: string;
-    created_at: Date;
-    updated_at : Date;
+    created_at: Date | null;
+    updated_at : Date | null;
 }

@@ -1,12 +1,24 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {HttpClientModule} from '@angular/common/http';
 import { VigilanceComponent } from './components/vigilance/vigilance.component';
 import { HeaderComponent } from './components/header/header.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { ConseilComponent } from './components/conseil/conseil.component';
+import { DetailconseilComponent } from './components/detailconseil/detailconseil.component';
+import { SearchComponent } from './components/search/search.component';
+import { NgxSummernoteModule } from 'ngx-summernote';
+import { UserComponent } from './components/user/user.component';
+import { AbonnementUsersComponent } from './components/abonnement-users/abonnement-users.component';
+import { AbonnementComponent } from './components/abonnement/abonnement.component';
+import { PrestataireComponent } from './components/prestataire/prestataire.component';
+
+
+
+
+
 import { FormationComponent } from './components/formation/formation.component';
 import { EntrepriseComponent } from './components/entreprise/entreprise.component';
 import { OutputComponent } from './components/output/output.component';
@@ -29,6 +41,13 @@ import { EQUIPEMENTSComponent } from './components/equipements/equipements.compo
     VigilanceComponent,
     HeaderComponent,
     SidebarComponent,
+    ConseilComponent,
+    DetailconseilComponent,
+    SearchComponent,
+    UserComponent,
+    AbonnementUsersComponent,
+    AbonnementComponent,
+    PrestataireComponent,
     FormationComponent,
     EntrepriseComponent,
     OutputComponent,
@@ -48,6 +67,7 @@ import { EQUIPEMENTSComponent } from './components/equipements/equipements.compo
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    NgxSummernoteModule,
     FormsModule,
     ReactiveFormsModule,
     ReactiveFormsModule,

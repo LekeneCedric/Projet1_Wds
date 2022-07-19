@@ -1,5 +1,6 @@
 export default interface Iuser{
     id: number;
+    nom: string;
     email: string;
     password: string;
     telephone: number;
