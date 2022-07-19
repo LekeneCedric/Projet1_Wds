@@ -14,10 +14,23 @@ export class EquipementsService {
 
   // HTTP REQUEST FOR EQUIPEMENT AND TYPE
 
-  getAllEquipements():Observable<IEquipement[]>{
+  getAllEquipementsQuestions():Observable<IEquipement[]>{
     return this.http.get<IEquipement[]>(`${environment.host}/questionselt/equipement`);
   }
-  getTypeEquipement():Observable<ITypeEquipement[]>{
-    return this.http.get<ITypeEquipement[]>(`${environment.host}/questionselt/equipement/search`);
-  }  
+  getAllEquipements():Observable<IEquipement[]>{
+    return this.http.get<IEquipement[]>(`${environment.host}/propositions`);
+  }
+  
+  postEquipement(data:IEquipement):Observable<IEquipement>{
+    return this.http.post<IEquipement>(`${environment.host}/propositions`, data);
+  }
+  getEquipement(data:IEquipement):Observable<IEquipement>{
+     return this.http.get<IEquipement>(`${environment.host}/propositions/${data.id}`);  
+  }
+  deleteEquipement(id:number):Observable<void>{
+     return this.http.delete<any>(`${environment.host}/propositions/${id}`);  
+  }
+  putEquipement(data:IEquipement):Observable<void>{
+    return this.http.put<any>(`${environment.host}/propositions/${data.id}`,data);
+  }
 }

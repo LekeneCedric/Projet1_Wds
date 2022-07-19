@@ -10,6 +10,9 @@ import { HabitationsComponent } from './components/HABITATION/habitations/habita
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TypesQuestionsComponent } from './components/TYPES-QUESTIONS/types-questions.component';
 import { QUESTIONSComponent } from './components/QUESTIONS/questions.component';
+import { CATEGORIESComponent } from './components/categories/categories.component';
+import { PROPOSITIONSComponent } from './components/propositions/propositions.component';
+import { EQUIPEMENTSComponent } from './components/equipements/equipements.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -17,7 +20,10 @@ import { QUESTIONSComponent } from './components/QUESTIONS/questions.component';
     NavbarComponent,
     HabitationsComponent,
     TypesQuestionsComponent,
-    QUESTIONSComponent
+    QUESTIONSComponent,
+    CATEGORIESComponent,
+    PROPOSITIONSComponent,
+    EQUIPEMENTSComponent
   ],
   imports: [
     BrowserModule,

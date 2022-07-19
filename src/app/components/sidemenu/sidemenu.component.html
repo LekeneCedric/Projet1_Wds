@@ -4,14 +4,20 @@
             <li class="nav-category">
                 Main Menu
             </li>
-            <li class="active">
+            <li id="habitations" (click)="isactive()">
                 <a [routerLink]="['/habitations']">Habitations</a>
             </li>
-            <li class="active">
+            <li id="typesquestions" (click)="isactive()">
                 <a [routerLink]="['/typesquestions']">Types Questions</a>
             </li>
-            <li class="active">
+            <li id="questions" (click)="isactive()">
                 <a [routerLink]="['/questions']">Questions</a>
+            </li>
+            <li id="equipements" (click)="isactive()">
+                <a [routerLink]="['/equipements']">Equipements</a>
+            </li>
+            <li id="categories" (click)="isactive()">
+                <a [routerLink]="['/categories']">Categories</a>
             </li>
            
         </ul>
