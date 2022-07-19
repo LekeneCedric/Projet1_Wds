@@ -17,7 +17,7 @@ export class ConseilService {
     getAllConseils(){
      // return this.http.get<Iconseil[]>(`${environment.host}conseil`);
      return new Promise((resolve, reject) => {
-      return this.http.get<Iconseil[]>(`${environment.host}conseil`)
+      return this.http.get<Iconseil[]>(`${environment.host}/conseil`)
       .subscribe({
         next: res => {
           resolve(res);
@@ -30,13 +30,13 @@ export class ConseilService {
     }
 
     getConseil(id:number):Observable<Iconseil>{
-      return this.http.get<Iconseil>(`${environment.host}conseil/${id}`);
+      return this.http.get<Iconseil>(`${environment.host}/conseil/${id}`);
      }
 
      addConseil(item:Iconseil){
       // return this.http.post<Iconseil>(`${environment.host}conseil`,item);
       return new Promise((resolve, reject) => {
-        return this.http.post<Iconseil>(`${environment.host}conseil`,item)
+        return this.http.post<Iconseil>(`${environment.host}/conseil`,item)
         .subscribe({
           next: res => {
             resolve(res);
@@ -50,7 +50,7 @@ export class ConseilService {
 
      updateConseil(item:Iconseil){
        return new Promise((resolve, reject) => {
-        this.http.put<Iconseil>(`${environment.host}conseil/${item.id}`,item)
+        this.http.put<Iconseil>(`${environment.host}/conseil/${item.id}`,item)
         .subscribe({
           next: res => {
             resolve(res);
@@ -65,7 +65,7 @@ export class ConseilService {
      deleteConseil(id:number){
        // return this.http.delete<Iconseil>(`${environment.host}conseil/${id}`);
         return new Promise((resolve, reject) => {
-          return this.http.delete<Iconseil>(`${environment.host}conseil/${id}`)
+          return this.http.delete<Iconseil>(`${environment.host}/conseil/${id}`)
           .subscribe({
             next: res => {
               resolve(res);
