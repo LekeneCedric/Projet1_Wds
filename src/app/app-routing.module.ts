@@ -8,7 +8,13 @@ import { OutputComponent } from './components/output/output.component';
 import { VigilanceStateComponent } from './components/vigilance-state/vigilance-state.component';
 import { VigilanceComponent } from './components/vigilance/vigilance.component';
 import { HabitationComponent } from './components/HABITATION/habitation/habitation.component';
+
+import { CATEGORIESComponent } from './components/categories/categories.component';
+import { EQUIPEMENTSComponent } from './components/equipements/equipements.component';
 import { HabitationsComponent } from './components/HABITATION/habitations/habitations.component';
+import { QUESTIONSComponent } from './components/QUESTIONS/questions.component';
+import { TypesQuestionsComponent } from './components/TYPES-QUESTIONS/types-questions.component';
+import { PropositionsService } from './services/propositions.service';
 const routes: Routes = [
   {path:'vigilance' , component:VigilanceComponent },
   {path:'formations' , component:FormationComponent },
@@ -20,7 +26,12 @@ const routes: Routes = [
   
   {path:'',component:HabitationsComponent},
   {path:'habitations',component:HabitationsComponent},
-  {path:'habitations/:id',component:HabitationComponent}]
+  {path:'typesquestions',component:TypesQuestionsComponent},
+  {path:'questions',component:QUESTIONSComponent},
+  {path:'categories',component:CATEGORIESComponent},
+  {path:'propositions',component:PropositionsService},
+  {path:'equipements',component:EQUIPEMENTSComponent}]
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

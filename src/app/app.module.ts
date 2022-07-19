@@ -12,15 +12,17 @@ import { EntrepriseComponent } from './components/entreprise/entreprise.componen
 import { OutputComponent } from './components/output/output.component';
 import { EquipementComponent } from './components/equipement/equipement.component';
 import { EnvironnementComponent } from './components/environnement/environnement.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { VigilanceStateComponent } from './components/vigilance-state/vigilance-state.component';
 import { SidemenuComponent } from './components/sidemenu/sidemenu.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { HttpClientModule } from '@angular/common/http';
-import { HabitationComponent } from './components/HABITATION/habitation/habitation.component';
 import { HabitationsComponent } from './components/HABITATION/habitations/habitations.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+import { TypesQuestionsComponent } from './components/TYPES-QUESTIONS/types-questions.component';
+import { QUESTIONSComponent } from './components/QUESTIONS/questions.component';
+import { CATEGORIESComponent } from './components/categories/categories.component';
+import { PROPOSITIONSComponent } from './components/propositions/propositions.component';
+import { EQUIPEMENTSComponent } from './components/equipements/equipements.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,8 +37,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     VigilanceStateComponent,
     SidemenuComponent,
     NavbarComponent,
-    HabitationComponent,
-    HabitationsComponent
+    HabitationsComponent,
+    TypesQuestionsComponent,
+    QUESTIONSComponent,
+    CATEGORIESComponent,
+    PROPOSITIONSComponent,
+    EQUIPEMENTSComponent
   ],
   imports: [
     BrowserModule,

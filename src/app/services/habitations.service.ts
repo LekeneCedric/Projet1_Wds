@@ -30,4 +30,16 @@ export class HabitationsService {
   deleteHabitation(id:number):Observable<any>{
      return this.http.delete<IHabitation>(`${environment.host}/habitations/${id}`);
   }
+  // Fonction permettant de lier une habitation a une autre
+  linkHabitation(idhabitation:number, idorigine:number):Observable<any>{
+     return this.http.post<any>(`${environment.host}/habitations/save`,{
+      idhabitation:idhabitation,
+      idorigine:idorigine
+     }) 
+  }
+  //Fonction permettant de lister toutes les habitatiions liees a une habitation
+  listLinkHabitations(idhabitation:number):Observable<any>
+  {
+    return this.http.get<any[]>(`${environment.host}/habitationsautres/${idhabitation}`)
+  }
 }

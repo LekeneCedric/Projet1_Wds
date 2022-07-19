@@ -4,35 +4,22 @@
             <li class="nav-category">
                 Main Menu
             </li>
-            <li class="active">
+            <li id="habitations" (click)="isactive()">
                 <a [routerLink]="['/habitations']">Habitations</a>
             </li>
-            <!-- <li>
-                <a href="#monitoring" data-toggle="collapse" aria-expanded="false">
-                    Questions<span class="sub-nav-icon"> <i class="stroke-arrow"></i> </span>
-                </a>
-                <ul id="monitoring" class="nav nav-second collapse">
-                    <li><a href="metrics.html"> Types Questions</a></li>
-                </ul>
+            <li id="typesquestions" (click)="isactive()">
+                <a [routerLink]="['/typesquestions']">Types Questions</a>
             </li>
-            <li>
-                <a href="#monitoring" data-toggle="collapse" aria-expanded="false">
-                    Equipements<span class="sub-nav-icon"> <i class="stroke-arrow"></i> </span>
-                </a>
-                <ul id="monitoring" class="nav nav-second collapse">
-                    <li><a href="metrics.html"> Types Equipements</a></li>
-                </ul>
+            <li id="questions" (click)="isactive()">
+                <a [routerLink]="['/questions']">Questions</a>
             </li>
-            <li class="active">
-                <a [routerLink]="['/vigilance']">Categories</a>
+            <li id="equipements" (click)="isactive()">
+                <a [routerLink]="['/equipements']">Equipements</a>
+            </li>
+            <li id="categories" (click)="isactive()">
+                <a [routerLink]="['/categories']">Categories</a>
             </li>
            
-            <li class="active">
-                <a [routerLink]="['/vigilance']">Propositions</a>
-            </li> -->
-
-           
-            
         </ul>
     </nav>
 </aside>
