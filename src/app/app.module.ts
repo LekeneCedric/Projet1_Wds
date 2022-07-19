@@ -3,11 +3,21 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import {HttpClientModule} from '@angular/common/http';
+import { VigilanceComponent } from './components/vigilance/vigilance.component';
+import { HeaderComponent } from './components/header/header.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { FormationComponent } from './components/formation/formation.component';
+import { EntrepriseComponent } from './components/entreprise/entreprise.component';
+import { OutputComponent } from './components/output/output.component';
+import { EquipementComponent } from './components/equipement/equipement.component';
+import { EnvironnementComponent } from './components/environnement/environnement.component';
+import { VigilanceStateComponent } from './components/vigilance-state/vigilance-state.component';
 import { SidemenuComponent } from './components/sidemenu/sidemenu.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { HttpClientModule } from '@angular/common/http';
 import { HabitationsComponent } from './components/HABITATION/habitations/habitations.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
 import { TypesQuestionsComponent } from './components/TYPES-QUESTIONS/types-questions.component';
 import { QUESTIONSComponent } from './components/QUESTIONS/questions.component';
 import { CATEGORIESComponent } from './components/categories/categories.component';
@@ -16,6 +26,15 @@ import { EQUIPEMENTSComponent } from './components/equipements/equipements.compo
 @NgModule({
   declarations: [
     AppComponent,
+    VigilanceComponent,
+    HeaderComponent,
+    SidebarComponent,
+    FormationComponent,
+    EntrepriseComponent,
+    OutputComponent,
+    EquipementComponent,
+    EnvironnementComponent,
+    VigilanceStateComponent,
     SidemenuComponent,
     NavbarComponent,
     HabitationsComponent,
@@ -29,6 +48,8 @@ import { EQUIPEMENTSComponent } from './components/equipements/equipements.compo
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule,
     ReactiveFormsModule,
     FormsModule
   ],
