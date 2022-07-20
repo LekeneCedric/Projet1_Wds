@@ -99,7 +99,6 @@ export class FormationComponent implements OnInit {
 
   onAddFormation():void{
     this.submitted = true;
-    console.log(this.formGroup.value)
     if(this.formGroup.invalid){
       alert('Invalid Form');
       return;
