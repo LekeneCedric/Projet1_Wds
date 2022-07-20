@@ -157,7 +157,7 @@
                                     
     
                                 </thead>
-                                <tbody style="display: content;">
+                                <tbody>
                                     <tr role="row" class="even" *ngFor="let item of entreprises">
                                         <td style="display: content;">
                                             <button 
@@ -169,20 +169,20 @@
                                                 <i class="fa fa-trash-o" aria-hidden="true"></i>
                                             </button>
                                         </td>
-                                        <td>{{item.logo}}</td>
-                                        <td>{{item.nom}}</td>
-                                        <td>{{item.type}}</td>
-                                        <td>{{item.type_entreprise}}</td>
-                                        <td>{{item.email}}</td>
-                                        <td>{{item.tel}}</td>
-                                        <td>{{item.adresse}}</td>
-                                        <td>{{item.description}}</td>
-                                        <td>{{item.catalogue}}</td>
-                                        <td>{{item.calendrier}}</td>
-                                        <td>{{item.isprestataire}}</td>
-                                        <td>{{item.isentreprise}}</td>
-                                        <td>{{item.type_prestataire}}</td>
-                                        <td>{{item.domaine}}</td>
+                                        <td [innerHTML]="item.logo"></td>
+                                        <td [innerHTML]="item.nom"></td>
+                                        <td [innerHTML]="item.type"></td>
+                                        <td [innerHTML]="item.type_entreprise"></td>
+                                        <td [innerHTML]="item.email"></td>
+                                        <td [innerHTML]="item.tel"></td>
+                                        <td [innerHTML]="item.adresse"></td>
+                                        <td [innerHTML]="item.description"></td>
+                                        <td [innerHTML]="item.catalogue"></td>
+                                        <td [innerHTML]="item.calendrier"></td>
+                                        <td [innerHTML]="item.isprestataire"></td>
+                                        <td [innerHTML]="item.isentreprise"></td>
+                                        <td [innerHTML]="item.type_prestataire"></td>
+                                        <td [innerHTML]="item.domaine"></td>
                                     </tr>
                                   
                             </tbody>

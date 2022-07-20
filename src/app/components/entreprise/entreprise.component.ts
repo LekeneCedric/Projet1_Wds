@@ -157,7 +157,6 @@ export class EntrepriseComponent implements OnInit {
       this.entreprisesService.getEntrepriseById(item.id)
       .subscribe(
         (data)=> {
-          console.log(data);
           this.currentId = item.id;
           this.formGroup2 = this.fb.group({
             // logo:[data[0]['logo'],Validators.required],

@@ -159,10 +159,10 @@
                                 </thead>
                                 <tbody style="display: content;">
                                     <tr role="row" class="even" *ngFor="let item of outputs">
-                                        <td style="display: content;">
+                                        <td style="display: content;" *ngIf="item.id">
                                             <button 
-                                            (click)="onLink()"
-                                            data-toggle="modal" data-target="#exampleModal2" class="btn btn-sm" title="Modifier ici">
+                                            (click)="onLink(item.id)"
+                                            class="btn btn-sm" title="Lier ici">
                                             <i class="fa fa-link" aria-hidden="true"></i>    
                                         </button>
                                             <button 
@@ -190,8 +190,8 @@
                                         <td>{{item.frequence}}</td>
                                         <td>{{item.isrelation}}</td>
                                         <td>{{item.ordre}}</td>
-                                        <td>{{item.created_at}}</td>
-                                        <td>{{item.updated_at}}</td>
+                                        <td>{{item.created_at | date:'dd/MM/yyyy'}}</td>
+                                        <td>{{item.updated_at | date:'dd/MM/yyyy'}}</td>
     
                                 
                                         
@@ -217,4 +217,4 @@
         </div>
     </div>
 </section>
-                                
+        

@@ -12,6 +12,7 @@ export class VigilanceStateComponent implements OnInit {
 
   etat!:string;
   vigilances!: IVigilance[];
+  search:string = '';
   constructor(
     private vigilanceService : VigilanceService,
     private activatedRoute: ActivatedRoute,

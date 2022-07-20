@@ -5,6 +5,7 @@ import IFormation from 'src/app/models/formations.models';
 import IOutputs from 'src/app/models/outputs.models';
 import PageOutPuts from 'src/app/models/modelsPages/pageOutput.models';
 import { OutputsService } from 'src/app/services/outputs.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-output',
@@ -26,7 +27,12 @@ export class OutputComponent implements OnInit {
   constructor(
     private outputsService:OutputsService,
     private fb: FormBuilder,
-  ) { }
+    private router: Router,
+    
+
+  ) { 
+  }
+
 
   ngOnInit(): void {
     this.onGetAllOutput();
@@ -213,7 +219,7 @@ gotoPage(i:number){
   this.onGetAllOutput();
 }
 
-onLink(){
-
+onLink(id:number){
+ this.router.navigateByUrl('/outputequipementlie/'+id);
 }
 }

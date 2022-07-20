@@ -29,6 +29,9 @@
                                         <div class="form-group"><label for="exampleInputPassword1">Formateur</label> 
                                             <input type="text" formControlName="formateur" class="form-control" id="exampleInputPassword1" placeholder="Qui_Faire">
                                         </div>
+                                        <div class="form-group"><label for="exampleInputPassword1">Reference</label> 
+                                            <input type="text" formControlName="reference" class="form-control" id="exampleInputPassword1" placeholder="Referencce">
+                                        </div>
                                         <div><label> <input type="checkbox" formControlName="isconstruction"> En Construction </label></div>
                                         <div><label> <input type="checkbox" formControlName="isexploitation"> En Exploitation </label></div>
                                         <button type="submit" class="btn btn-default">Submit</button>
@@ -59,6 +62,9 @@
                                         <div class="form-group"><label for="exampleInputPassword1">Document</label> <input type="text" formControlName="document" class="form-control" id="exampleInputPassword1" placeholder="Qui_Faire"></div>
                                         <div class="form-group"><label for="exampleInputPassword1">Formateur</label> 
                                             <input type="text" formControlName="formateur" class="form-control" id="exampleInputPassword1" placeholder="Qui_Faire">
+                                        </div>
+                                        <div class="form-group"><label for="exampleInputPassword1">Reference</label> 
+                                            <input type="text" formControlName="reference" class="form-control" id="exampleInputPassword1" placeholder="Referencce">
                                         </div>
                                         <div><label> <input type="checkbox" formControlName="isconstruction"> En Construction </label></div>
                                         <div><label> <input type="checkbox" formControlName="isexploitation"> En Exploitation </label></div>
@@ -131,17 +137,14 @@
                                                     <i class="fa fa-trash-o" aria-hidden="true"></i>
                                                 </button>
                                             </td>
-                                            <td>{{item.equipement}}</td>
-                                            <td>{{item.beneficiaire}}</td>
-                                            <td>{{item.contenu}}</td>
-                                            <td>{{item.document}}</td>
-                                            <td>{{item.formateur}}</td>
-                                            <td>{{item.reference}}</td>
-                                            <td>{{item.isconstruction}}</td>
-                                            <td>{{item.isexploitation}}</td>
-                                            
-                                            
-        
+                                            <td [innerHTML]="item.equipement"></td>
+                                            <td [innerHTML]="item.beneficiaire"></td>
+                                            <td [innerHTML]="item.contenu"></td>
+                                            <td [innerHTML]="item.document"></td>
+                                            <td [innerHTML]="item.formateur"></td>
+                                            <td [innerHTML]="item.reference"></td>
+                                            <td [innerHTML]="item.isconstruction"></td>
+                                            <td [innerHTML]="item.isexploitation"></td>
                                         </tr>
                                       
                                 </tbody>

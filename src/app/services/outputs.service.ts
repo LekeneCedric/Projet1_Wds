@@ -30,4 +30,11 @@ export class OutputsService {
   deleteOutput(item:IOutputs):Observable<boolean>{
     return this.http.delete<boolean>(this.host+'/outputs/'+item.id);
   }
+
+  linkToEquipement(idOutput:number,idEquipementsArr:number | number[]):Observable<any>{
+    return this.http.post<any>(`${environment.host}/output_equipementelt/save`,{
+      idoutput:idOutput,
+      idequipement:idEquipementsArr
+     }) 
+  }
 }

@@ -19,6 +19,7 @@ import { HabitationsComponent } from './components/HABITATION/habitations/habita
 import { QUESTIONSComponent } from './components/QUESTIONS/questions.component';
 import { TypesQuestionsComponent } from './components/TYPES-QUESTIONS/types-questions.component';
 import { PropositionsService } from './services/propositions.service';
+import { OutputEquipementLieComponent } from './components/output-equipement-lie/output-equipement-lie.component';
 
 const routes: Routes = [
   { path:'vigilance', component:VigilanceComponent },
@@ -41,7 +42,11 @@ const routes: Routes = [
   {path:'questions',component:QUESTIONSComponent},
   {path:'categories',component:CATEGORIESComponent},
   {path:'propositions',component:PropositionsService},
-  {path:'equipements',component:EQUIPEMENTSComponent}]
+  {path:'equipements',component:EQUIPEMENTSComponent},
+  {path:'outputequipementlie/:id' , component:OutputEquipementLieComponent },
+
+
+]
 
 
 @NgModule({

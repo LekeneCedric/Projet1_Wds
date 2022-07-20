@@ -35,6 +35,7 @@ import { QUESTIONSComponent } from './components/QUESTIONS/questions.component';
 import { CATEGORIESComponent } from './components/categories/categories.component';
 import { PROPOSITIONSComponent } from './components/propositions/propositions.component';
 import { EQUIPEMENTSComponent } from './components/equipements/equipements.component';
+import { OutputEquipementLieComponent } from './components/output-equipement-lie/output-equipement-lie.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -61,7 +62,8 @@ import { EQUIPEMENTSComponent } from './components/equipements/equipements.compo
     QUESTIONSComponent,
     CATEGORIESComponent,
     PROPOSITIONSComponent,
-    EQUIPEMENTSComponent
+    EQUIPEMENTSComponent,
+    OutputEquipementLieComponent
   ],
   imports: [
     BrowserModule,

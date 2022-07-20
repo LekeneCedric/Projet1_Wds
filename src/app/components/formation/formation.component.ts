@@ -39,8 +39,8 @@ export class FormationComponent implements OnInit {
       document:["",Validators.required],
       formateur:["",Validators.required],
       reference:["",Validators.required],
-      isconstruction:[false],
-      isexploitation:[false]
+      isconstruction:false,
+      isexploitation:false
 
 
     });
@@ -99,6 +99,7 @@ export class FormationComponent implements OnInit {
 
   onAddFormation():void{
     this.submitted = true;
+    console.log(this.formGroup.value)
     if(this.formGroup.invalid){
       alert('Invalid Form');
       return;
@@ -107,6 +108,7 @@ export class FormationComponent implements OnInit {
     .subscribe(
       (data)=>{
         alert('Add Success');
+        this.onGetAllFormation();
       },(err)=> console.log('error',err)
     )
       
@@ -140,14 +142,14 @@ export class FormationComponent implements OnInit {
         (data)=> {
           this.currentId = item.id;
           this.formGroup2 = this.fb.group({
-            equipement:[data['equipement'],Validators.required],
-            beneficiare:[data['beneficiaire'],Validators.required],
-            contenu:[data['contenu'],Validators.required],
-            document:[data['document'],Validators.required],
-            formateur:[data['formateur'],Validators.required],
-            reference:[data['reference'],Validators.required],
-            isconstruction:[data['isconstruction'],Validators.required],
-            isexploitation:[data['isexploitation'],Validators.required]
+            equipement:[data[0]['equipement'],Validators.required],
+            beneficiaire:[data[0]['beneficiaire'],Validators.required],
+            contenu:[data[0]['contenu'],Validators.required],
+            document:[data[0]['document'],Validators.required],
+            formateur:[data[0]['formateur'],Validators.required],
+            reference:[data[0]['reference'],Validators.required],
+            isconstruction:[data[0]['isconstruction'],Validators.required],
+            isexploitation:[data[0]['isexploitation'],Validators.required]
           })
         }
       )    
@@ -177,6 +179,7 @@ export class FormationComponent implements OnInit {
     .subscribe(
       (data)=>{
         alert('Update Succes');
+        this.onGetAllFormation();
       },err=> console.log('error',err)
     )
 }

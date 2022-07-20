@@ -18,8 +18,8 @@ export class FormationsService {
      getAllFormation():Observable<IFormation[]>{
       return this.http.get<IFormation[]>(this.host+'/formations');
     }
-    getFormationById(id:number):Observable<IFormation>{
-      return this.http.get<IFormation>(this.host+'/formations/'+id);
+    getFormationById(id:number):Observable<IFormation[]>{
+      return this.http.get<IFormation[]>(this.host+'/formations/'+id);
     }
     addFormation(item:IFormation):Observable<IFormation>{
       return this.http.post<IFormation>(this.host+'/formations',item);
