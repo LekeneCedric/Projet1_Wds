@@ -36,6 +36,7 @@ import { CATEGORIESComponent } from './components/categories/categories.componen
 import { PROPOSITIONSComponent } from './components/propositions/propositions.component';
 import { EQUIPEMENTSComponent } from './components/equipements/equipements.component';
 import { OutputEquipementLieComponent } from './components/output-equipement-lie/output-equipement-lie.component';
+import { LierquestionComponent } from './components/lierquestion/lierquestion.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -63,7 +64,8 @@ import { OutputEquipementLieComponent } from './components/output-equipement-lie
     CATEGORIESComponent,
     PROPOSITIONSComponent,
     EQUIPEMENTSComponent,
-    OutputEquipementLieComponent
+    OutputEquipementLieComponent,
+    LierquestionComponent
   ],
   imports: [
     BrowserModule,

@@ -20,6 +20,7 @@ import { QUESTIONSComponent } from './components/QUESTIONS/questions.component';
 import { TypesQuestionsComponent } from './components/TYPES-QUESTIONS/types-questions.component';
 import { PropositionsService } from './services/propositions.service';
 import { OutputEquipementLieComponent } from './components/output-equipement-lie/output-equipement-lie.component';
+import { LierquestionComponent } from './components/lierquestion/lierquestion.component';
 
 const routes: Routes = [
   { path:'vigilance', component:VigilanceComponent },
@@ -43,6 +44,7 @@ const routes: Routes = [
   {path:'categories',component:CATEGORIESComponent},
   {path:'propositions',component:PropositionsService},
   {path:'equipements',component:EQUIPEMENTSComponent},
+  {path:'attribuerQuestion' , component:LierquestionComponent},
   {path:'outputequipementlie/:id' , component:OutputEquipementLieComponent },
 
 

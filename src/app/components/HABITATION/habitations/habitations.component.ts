@@ -51,6 +51,7 @@ export class HabitationsComponent implements OnInit {
   /*Cette methode permet de recuperer l'habitation acutellement selectionner 
   afin d'y appliquer des modification*/ 
   setCurrentHabitation(habitation:IHabitation){
+    this.update_intitule = this.current_habitation?.intitule;
     this.current_habitation = habitation;
   }
   /*Cette methode permet de supprimer une habitation*/

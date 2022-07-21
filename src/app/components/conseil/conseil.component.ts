@@ -79,7 +79,7 @@ export class ConseilComponent implements OnInit {
       this.semidescription = " "; 
   }
 
-  updateConseille(conseil:Iconseil){
+  updateConseille(){
   
     // recuperation des nouvelles valeurs 
    // alert(conseil.id);
@@ -89,13 +89,12 @@ export class ConseilComponent implements OnInit {
     this.conseilItem.description = this.description!;
     this.conseilItem.semidescription = this.semidescription!;
 
-    this.conseil.updateConseil(this.conseilItem).then((data)=>{
-      console.log("conseil update successfully"+ data);
-      this.getAllConseils();
-    }).catch((err)=>{
-      console.log("enable update" + err.message());
-    });
-    this.getAllConseils();
+   this.conseil.updateConseil(this.conseilItem).subscribe(
+    data=>{
+      console.log(data);
+      this.ngOnInit();
+    }
+   )
   }
   
   deleteConseil(conseil:Iconseil){

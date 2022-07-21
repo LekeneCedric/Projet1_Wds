@@ -67,6 +67,7 @@
                                     Action</th>
                                 
                         </thead>
+                        //A modifier
                         <tbody *ngFor="let habitation of habitations_list">
                             <tr *ngIf="habitation.intitule.toLowerCase().includes(search) || search==''">
                                 <td>{{habitation.intitule}}</td>
@@ -191,9 +192,8 @@
           </div>
           <div class="modal-body">
             <p style="font-weight: bold;">Intitule</p>
-            <input type="text" [(ngModel)]="update_intitule"
-             class="form-control"
-              [placeholder]="current_habitation?.intitule">
+            <input type="text" [(ngModel)]="update_intitule" ngDefaultControl
+             class="form-control">
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-warning" data-dismiss="modal"
