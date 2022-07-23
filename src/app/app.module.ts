@@ -14,6 +14,8 @@ import { UserComponent } from './components/user/user.component';
 import { AbonnementUsersComponent } from './components/abonnement-users/abonnement-users.component';
 import { AbonnementComponent } from './components/abonnement/abonnement.component';
 import { PrestataireComponent } from './components/prestataire/prestataire.component';
+import { NgSelectModule } from "@ng-select/ng-select";
+
 
 
 
@@ -75,7 +77,8 @@ import { LierquestionComponent } from './components/lierquestion/lierquestion.co
     FormsModule,
     ReactiveFormsModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    NgSelectModule
   ],
   providers: [],
   bootstrap: [AppComponent]

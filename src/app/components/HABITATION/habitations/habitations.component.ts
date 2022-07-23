@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { FormArray, FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs/internal/Observable';
+import { of } from 'rxjs/internal/observable/of';
 import IHabitation from 'src/app/models/habitation.models';
+import PageHabitation from 'src/app/models/modelsPages/pageHabitations.models';
 import { HabitationsService } from 'src/app/services/habitations.service';
 
 @Component({
@@ -10,13 +14,21 @@ import { HabitationsService } from 'src/app/services/habitations.service';
 })
 export class HabitationsComponent implements OnInit {
 
-  constructor(private service:HabitationsService,private router:Router) { }
+  constructor(private service:HabitationsService,private router:Router) {}
+
+  linkedAction :string ='';
+  selectedLinked :any[]=[];
+  currentPage:number = 0;
+  pageSize:number = 6;
+  totalPages:number = 0;
+
   update_intitule?: string;
   /*Current_habitation ici renvoie a l'habitation selectionnee
   a la quelle l'admin veux appliquer les modifications*/
   current_habitation?:IHabitation;
   /*habitations_list ici renvoie a un tableau contenant la liste de toutes les habitations*/
   habitations_list:IHabitation[]=[];
+  definitive_list:IHabitation[] = [];
   /*lorsque l'admin voudra ajouter une nouvelle habitation , l'intitule de cette 
   derniere se stockera temporairement dans la variable (intitule_new_habitation)*/
   intitule_new_habitation:String ="";
@@ -27,13 +39,69 @@ export class HabitationsComponent implements OnInit {
   search:string = "";
   lier?:boolean;
   /*tableau contenant la liste des ID des habitations liees a l'habitation actuellement selectionne*/
-  linked_current_habitations:number[]=[];
+  linked_current_habitations_id:number[]=[];
+  linked_current_habitations:any[]=[];
+  unlinked_current_habitations:any[]=[];
   /**/
+  
+  selected:number = 10;
+  getPage(page:number,size:number):Observable<PageHabitation>{
+  
+    let index = page * size;
+    let totalPages = ~~(this.habitations_list.length/size);
+    if(this.habitations_list.length % size != 0)
+      totalPages ++;
+    let pageEquipements = this.habitations_list.slice(index,index+size);
+    return of({
+      page:page,
+      size:size,
+      totalPages:totalPages,
+      habitations:pageEquipements
+    })
+  }
+
+  onGetPageHabitation(): void {
+    this.getPage(this.currentPage,this.pageSize)
+    .subscribe(
+      (data)=> {
+        this.habitations_list = data.habitations;
+        this.totalPages = data.totalPages;
+
+
+      }
+    )
+  }
+
+ 
+  onSelected(value:string): void {
+		this.selected = Number(value);
+    if(this.selected != -1 || this.selected < this.habitations_list.length){
+      this.pageSize = this.selected;
+    }else{
+      this.pageSize =this.habitations_list.length;
+    }
+    this.getListHabitation();
+	}
+
+  async getListHabitation(){
+    await this.service.getAllHabitations().subscribe(data=>{
+      /*Et on les stocke dans notre variable (habitations_list)*/
+      this.habitations_list = data.reverse();
+      this.onGetPageHabitation();
+    })
+  }
+  gotoPage(i:number){
+    this.currentPage = i;
+    this.getListHabitation();
+
+  }
   async ngOnInit(){
     /*A l'initialisation de notre composants , on recupere toutes les habitations*/
     await this.service.getAllHabitations().subscribe(data=>{
       /*Et on les stocke dans notre variable (habitations_list)*/
-      this.habitations_list = data;
+      this.habitations_list = data.reverse();
+      this.definitive_list = this.habitations_list;
+      this.onGetPageHabitation();
     })
 
   }
@@ -46,12 +114,12 @@ export class HabitationsComponent implements OnInit {
    /**/
    changelinkhabitation(event:any){
     this.id_link_habitation = event.target.value;
-    this.lier = true ? this.linked_current_habitations.indexOf(Number(event.target.value)) ==-1 : this.lier=false;
+    this.lier = true ? this.linked_current_habitations_id.indexOf(Number(event.target.value)) ==-1 : this.lier=false;
   }
   /*Cette methode permet de recuperer l'habitation acutellement selectionner 
-  afin d'y appliquer des modification*/ 
+  afin d'y appliquer des modification*/
   setCurrentHabitation(habitation:IHabitation){
-    this.update_intitule = this.current_habitation?.intitule;
+    this.update_intitule = habitation?.intitule;
     this.current_habitation = habitation;
   }
   /*Cette methode permet de supprimer une habitation*/
@@ -72,6 +140,7 @@ export class HabitationsComponent implements OnInit {
 
     
     this.service.addHabitation(new_habitation!).subscribe(data=>{
+      this.intitule_new_habitation="";
       console.log(data);
       console.log("Habitation ajoute avec success");
       this.ngOnInit();
@@ -95,28 +164,67 @@ export class HabitationsComponent implements OnInit {
  
   /* Fonction permettant de lier une habitattion a une autre*/
   linkHabitation():void{
-    this.service.linkHabitation(this.id_link_habitation!,this.current_habitation?.id!).subscribe(
-      data=>{
+    // this.service.linkHabitation(this.id_link_habitation!,this.current_habitation?.id!).subscribe(
+    //   data=>{
+    //     console.log(data);
+    //     console.log(`L'habitation ${this.id_link_habitation} viens d'etre liee a :  ${this.current_habitation?.intitule}`);
+    //     this.refresh();
+    //   }
+    // )
+    let id_pack :number[]=[];
+    this.selectedLinked.forEach(link=>{
+      console.log(link.id)
+      id_pack.push(link.id);
+    })
+    console.log(id_pack);
+    this.service.linkMultipleHabitation(this.current_habitation?.id!,id_pack!).subscribe(
+      data =>{
         console.log(data);
-        console.log(`L'habitation ${this.id_link_habitation} viens d'etre liee a :  ${this.current_habitation?.intitule}`);
         this.refresh();
       }
     )
+    console.log(this.selectedLinked);
+    console.log(this.current_habitation?.id);
    
+  }
+  unlinkHabitation():void{
+    console.log(this.selectedLinked);
+    let id_pack :number[]=[];
+    this.selectedLinked.forEach(link=>{
+      console.log(link.id)
+      id_pack.push(link.id);
+    })
+    this.service.linkMultipleHabitation(this.current_habitation?.id!,id_pack!).subscribe(
+      data =>{
+        console.log(data);
+        this.refresh();
+      })
   }
  getLinkedHabitation(id:number)
   {
     this.service.listLinkHabitations(id).subscribe(
       async data=>{
-        console.log(data);
-        /*Dans ce cas , nous chargons notre tableau d'Id (linked_current_habitations) avec
+        /*Dans ce cas , nous chargons notre tableau d'Id (linked_current_habitations_id) avec
          les id des differentes habitations liees a celle selectionnee recuperes*/
        await data.forEach((dict:any)=>{
-          this.linked_current_habitations.push(Number(dict.id));
-        })
-
-        console.log(this.linked_current_habitations)
+          this.linked_current_habitations_id.push(Number(dict.id));
+          this.linked_current_habitations.push({id:dict.id,name:dict.intitule});
+        });
+        
+       this.definitive_list.forEach(habitation=>{
+        if(this.linked_current_habitations_id.indexOf(habitation.id!)==-1 && habitation.id !=id)
+        {
+          this.unlinked_current_habitations.push({id:habitation.id,name:habitation.intitule});
+        }
+       }) 
       }
     )  
+  }
+  clear():void{
+    this.linkedAction  = "";
+this.selectedLinked = [];
+this.linked_current_habitations = [];
+this.unlinked_current_habitations = [];
+this.linked_current_habitations_id = [];
   }
 }

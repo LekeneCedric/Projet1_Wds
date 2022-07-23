@@ -7,21 +7,19 @@
     <div class="col-lg-12">
         <div class="view-header">
             <div class="pull-right text-right" style="line-height: 14px">
+                <div class="header-icon mx-2">
+                    <span class="pe-7s-plus" data-toggle="modal" data-target="#addTypeQuestionModal" title="Ajouter categorie"></span>
+                </div>
             </div>
             <div class="header-icon">
-                <i class="pe page-header-icon pe-7s-note2"></i>
+                <i class="ppe page-header-icon pe-7s-note2"></i>
             </div>
-            <div class="d-flex justify-content-between">
             <div class="header-title">
-                <h3>Categories</h3>
+                <h3> Categories</h3>
                 <small>
                     Management des differentes categories
                 </small>
             </div>
-            <div class="header-icon mx-2">
-                <span class="pe-7s-plus" data-toggle="modal" data-target="#addTypeQuestionModal"></span>
-            </div>
-        </div>
         </div>
         <hr>
     </div>
@@ -34,18 +32,18 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="dataTables_length" id="tableExample2_length">
-                                <label>Show <select name="tableExample2_length" aria-controls="tableExample2"
+                                <label>Show <select #numbers (change)="onSelected(numbers.value)" name="tableExample2_length" aria-controls="tableExample2"
                                         class="form-control form-control-sm">
                                         <option value="6">6</option>
                                         <option value="25">25</option>
                                         <option value="50">50</option>
-                                        <option value="-1">All</option>
+                                        <option value="50000">All</option>
                                     </select> entries</label>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div id="tableExample2_filter" class="dataTables_filter" style="float: right;">
-                                <label>Search:<input [(ngModel)]="search" type="text"
+                                <label>Search:<input [(ngModel)]="search" type="text" title="Entrez l'intitule de la categorie a rechercher"
                                         class="form-control form-control-sm" placeholder=""
                                         aria-controls="tableExample2">
                                 </label>
@@ -59,32 +57,25 @@
                                 <th class="th-sm">Idparent</th>
                                 <th class="th-sm">Intitule</th>
                                 <th class="th-sm">Parent</th>
-                                <th class="th-sm">Action</th>
+                                <th class="th-sm">Actions</th>
                                 
                         </thead>
-                        <tbody *ngFor="let categorie of categories_list!">
-                            <tr *ngIf="categorie.intitule.toLowerCase().includes(search) || search==''">
-                                <td>{{categorie.idparent}}</td>
-                                <td>{{categorie.intitule}}</td>
-                                <td>{{categorie.parent}}</td>
-                                <td class="d-flex justify-content-between">
-                                    
-                                      <svg xmlns="http://www.w3.org/2000/svg"
-                                       width="20" height="20" fill="orange" 
-                                       class="bi bi-pencil-square" viewBox="0 0 16 16" (click)="setCurrentCategorie(categorie)"
-                                       data-toggle="modal" data-target="#updateTypeQuestionModal">
-                                        <path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
-                                        <path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5v11z"/>
-                                      </svg>
-                                 
-                                 <svg xmlns="http://www.w3.org/2000/svg"
-                                    (click)="setCurrentCategorie(categorie)"
+                        <tbody >
+                            <tr *ngFor="let categorie of categories_list!" >
+                                <td *ngIf="categorie.intitule.toLowerCase().includes(search) || search==''">{{categorie.idparent}}</td>
+                                <td *ngIf="categorie.intitule.toLowerCase().includes(search) || search==''">{{categorie.intitule}}</td>
+                                <td *ngIf="categorie.intitule.toLowerCase().includes(search) || search==''">{{categorie.parent}}</td>
+                                <td *ngIf="categorie.intitule.toLowerCase().includes(search) || search==''" class="d-flex justify-content-between">
+                                    <span class="pe-7s-pen" style=" font-size:25px" 
+                                    data-toggle="modal" data-target="#updateHabitationModal"
+                                    title="modifier habitation"
+                                    data-toggle="modal" data-target="#updateTypeQuestionModal"
+                                    (click)="setCurrentCategorie(categorie)"></span>
+                                    <span class="pe-7s-trash" style=" font-size:25px" 
+                                    data-toggle="modal" data-target="#removeHabitationModal"
+                                    title="supprimer habitation" (click)="setCurrentCategorie(categorie)"
                                     data-toggle="modal" data-target="#removeTypeQuestionModal"
-                                    width="20" height="20" fill="#ff4d4d"
-                                    class="bi bi-trash-fill"
-                                    viewBox="0 0 16 16">
-                                    <path d="M2.5 1a1 1 0 0 0-1 1v1a1 1 0 0 0 1 1H3v9a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V4h.5a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H10a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1H2.5zm3 4a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 .5-.5zM8 5a.5.5 0 0 1 .5.5v7a.5.5 0 0 1-1 0v-7A.5.5 0 0 1 8 5zm3 .5v7a.5.5 0 0 1-1 0v-7a.5.5 0 0 1 1 0z"/>
-                                 </svg>
+                                    ></span>
                             
                             </tr>
                         </tbody>
@@ -95,25 +86,11 @@
                                 Showing 1 to 6 of 25 entries</div>
                         </div>
                         <div class="col-sm-6">
-                            <div class="dataTables_paginate paging_simple_numbers" id="tableExample2_paginate">
+                            <div class="dataTables_paginate paging_simple_numbers" id="tableExample2_paginate" style="float: right;">
                                 <ul class="pagination">
-                                    <li class="paginate_button page-item previous disabled" id="tableExample2_previous">
-                                        <a href="#" aria-controls="tableExample2" data-dt-idx="0" tabindex="0"
-                                            class="page-link">Previous</a></li>
-                                    <li class="paginate_button page-item active"><a href="#"
-                                            aria-controls="tableExample2" data-dt-idx="1" tabindex="0"
-                                            class="page-link">1</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="tableExample2"
-                                            data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="tableExample2"
-                                            data-dt-idx="3" tabindex="0" class="page-link">3</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="tableExample2"
-                                            data-dt-idx="4" tabindex="0" class="page-link">4</a></li>
-                                    <li class="paginate_button page-item "><a href="#" aria-controls="tableExample2"
-                                            data-dt-idx="5" tabindex="0" class="page-link">5</a></li>
-                                    <li class="paginate_button page-item next" id="tableExample2_next"><a href="#"
-                                            aria-controls="tableExample2" data-dt-idx="6" tabindex="0"
-                                            class="page-link">Next</a></li>
+                                    <li *ngFor="let item of [].constructor(this.totalPages);let i=index;" class="paginate_button page-item ">
+                                        <a (click)="gotoPage(i)"  aria-controls="tableExample3" data-dt-idx="3" tabindex="0" class="page-link">{{i}}</a>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -132,31 +109,19 @@
                 </div>
                 <div class="panel-body">
                     <div class="form-group">
-                        <label for="exampleInputName" class="mt-3">IDparent</label>
-                        <input type="number" [(ngModel)]="new_idparent"
-                         class="form-control" 
-                         placeholder="Id parent">
+                       
                          <label for="exampleInputName" class="mt-3">Intitule categorie</label>
                         <input type="text" [(ngModel)]="new_intitule"
                          class="form-control" 
                          placeholder="Intitule categorie">
                          <label for="exampleInputName" class="mt-3">Parent</label>
-                        <input type="text" [(ngModel)]="new_parent"
-                         class="form-control" 
-                         placeholder="Intitule habitation">
-                         
-                         <!-- <label for="" class="mt-3">Categorie Intitule</label>
                          <select class="select2_demo_1 form-control select2-hidden-accessible" 
-                         style="width: 100%" tabindex="-1" aria-hidden="true" [(ngModel)]="new_categorieintitule">
-                            <option *ngFor="let categorie of categories_list"
-                             [value]="categorie.intitule">
-                             {{categorie.intitule}}
-                            </option></select> -->
-                         <!-- <label for="" class="mt-3"> Intitule Type</label>
-                         <select  class="select2_demo_1 form-control select2-hidden-accessible" 
-                         style="width: 100%" tabindex="1" aria-hidden="true" [(ngModel)]="new_intituletype">
-                           <option value="equipement">equipement</option>
-                         </select> -->
+                     style="width: 100%" tabindex="-1" aria-hidden="true" [(ngModel)]="new_idparent">
+                        <option *ngFor="let categorie of categories_list"
+                         [value]="categorie.id">
+                         {{categorie.intitule}}
+                        </option>
+                    </select>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -179,12 +144,12 @@
           
               </div>
               <div class="modal-footer">
+                
+                <a class="btn btn-w-md btn-success" data-dismiss="modal">Annuler</a>
                 <button type="button" class="btn btn-danger" data-dismiss="modal"
                 (click)="deleteCategorie(current_categorie?.id!)">
                 Supprimer
                 </button>
-                <a class="btn btn-w-md btn-success" data-dismiss="modal">Annuler</a>
-                
               </div>
             </div>
           </div>
@@ -199,24 +164,30 @@
               <div class="modal-body">
                 <div class="form-group">
                     <label for="exampleInputName" class="mt-3">IDparent</label>
-                    <input type="number" [(ngModel)]="update_idparent" [value]="current_categorie?.idparent"
+                    <input type="number" [(ngModel)]="update_idparent" ngDefaultControl disabled
                      class="form-control" 
                      placeholder="Id parent">
                      <label for="exampleInputName" class="mt-3">Intitule categorie</label>
-                    <input type="text" [(ngModel)]="update_intitule"
-                     class="form-control" [value]="current_categorie?.intitule"
+                    <input type="text" [(ngModel)]="update_intitule" ngDefaultControl
+                     class="form-control" [value]="update_intitule"
                      placeholder="Intitule categorie">
                      <label for="exampleInputName" class="mt-3">Parent</label>
-                    <input type="text" [(ngModel)]="update_parent"
-                     class="form-control" [value]="current_categorie?.parent"
-                     placeholder="Intitule habitation">
+                     <select class="select2_demo_1 form-control select2-hidden-accessible" 
+                     style="width: 100%" tabindex="-1" aria-hidden="true" [(ngModel)]="update_idparent" ngDefaultControl
+                     [value]="update_idparent">
+                        <option *ngFor="let categorie of categories_list"
+                         [value]="categorie.id">
+                         {{categorie.intitule}}
+                        </option>
+                    </select>
                 </div>
               <div class="modal-footer">
+               
+                <a class="btn btn-w-md btn-success" data-dismiss="modal">Annuler</a>
                 <button type="button" class="btn btn-warning" data-dismiss="modal"
                 (click)="updateCategorie()">
                 Modifier
                 </button>
-                <a class="btn btn-w-md btn-success" data-dismiss="modal">Annuler</a>
                 
               </div>
             </div>

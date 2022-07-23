@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/internal/Observable';
+import { of } from 'rxjs/internal/observable/of';
+import PageQuestion from 'src/app/models/modelsPages/pageQuestions.models';
 import IQuestion from 'src/app/models/question.models';
 import ITypequestion from 'src/app/models/typequestion.models';
 import { QuestionsService } from 'src/app/services/questions.service';
@@ -12,12 +15,67 @@ import { TypeQuestionsService } from 'src/app/services/type-questions.service';
 export class QUESTIONSComponent implements OnInit {
 
   constructor(private service:QuestionsService,private qtype:TypeQuestionsService) { }
+  currentPage:number = 0;
+  pageSize:number = 6;
+  totalPages:number = 0;
+  selected:number = 10;
+  getPage(page:number,size:number):Observable<PageQuestion>{
+  
+    let index = page * size;
+    let totalPages = ~~(this.questions_list.length/size);
+    if(this.questions_list.length % size != 0)
+      totalPages ++;
+    let pageEquipements = this.questions_list.slice(index,index+size);
+    return of({
+      page:page,
+      size:size,
+      totalPages:totalPages,
+      questions:pageEquipements
+    })
+  }
+
+  onGetPageQuestions(): void {
+    this.getPage(this.currentPage,this.pageSize)
+    .subscribe(
+      (data)=> {
+        this.questions_list = data.questions;
+        this.totalPages = data.totalPages;
+
+
+      }
+    )
+  }
+
+ 
+  onSelected(value:string): void {
+		this.selected = Number(value);
+    if(this.selected != -1 || this.selected < this.questions_list.length){
+      this.pageSize = this.selected;
+    }else{
+      this.pageSize =this.questions_list.length;
+    }
+    this.getListQuestions();
+	}
+
+  async getListQuestions(){
+    await this.service.getAllQuestions().subscribe(data=>{
+      /*Et on les stocke dans notre variable (habitations_list)*/
+      this.questions_list = data.reverse();
+      this.onGetPageQuestions();
+    })
+  }
+  
+  gotoPage(i:number){
+    this.currentPage = i;
+    this.getListQuestions();
+
+  }
    //Renvoie a l'intitule entre par l'utilisateur lors de la modification d'un type de question
    update_intitule?:string;
    update_type?:string;
    update_idtype?:number;
    update_ordre?:number;
-   update_obligatoire?:boolean;
+   update_obligatoire?:number;
    /*renvoie ici au type de question selectionne */ 
    current_question?:IQuestion;
    //Renvoie au la liste des types de question recuperes
@@ -36,7 +94,8 @@ export class QUESTIONSComponent implements OnInit {
  async ngOnInit(){
   await this.service.getAllQuestions().subscribe(
     data=>{
-      this.questions_list = data;
+      this.questions_list = data.reverse();
+      this.onGetPageQuestions();
       console.log(data);
     }
   )
@@ -53,7 +112,21 @@ export class QUESTIONSComponent implements OnInit {
     )
    return type;
   }
+  getupdateObligatoire(updatevalue:any):number{
+  if(updatevalue === true)
+  {
+    return 1;
+  }
+  else{
+    return 0;
+  }
+  }
   setCurrentQuestion(question:IQuestion){
+    this.update_intitule = question.intitule;
+    this.update_idtype = question.idtype;
+    this.update_type = question.type;
+    this.update_ordre = question.ordre;
+    this.update_obligatoire = question.obligatoire
     this.current_question = question;
   }
   deleteQuestion(id:any){
@@ -88,7 +161,7 @@ export class QUESTIONSComponent implements OnInit {
       intitule:this.update_intitule!,
       ordre:this.update_ordre!,
       type:this.update_type!,
-      obligatoire:this.update_obligatoire==true?1:0,
+      obligatoire:this.update_obligatoire!,
       updated_at:new Date()
     }
     console.log(updateq);

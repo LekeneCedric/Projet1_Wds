@@ -15,6 +15,13 @@ export class QuestionsService {
  getAllQuestions():Observable<any>{
   return this.http.get<any>(`${environment.host}/questions`);
  }
+ getOneQuestion(id:number):string {
+  let question =  "";
+ this.http.get<any>(`${environment.host}/questions/${id}`).subscribe(data=>{
+    question = data.label;
+  })
+  return question;
+ }
  postQuestion(question: IQuestion):Observable<any>{
    return this.http.post<any>(`${environment.host}/questions`,question);
  }

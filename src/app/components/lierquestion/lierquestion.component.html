@@ -7,7 +7,7 @@
           </tr>
           <tr>
             <th scope="row" colspan="2"></th>
-            <td *ngFor="habitation for habitations_list.length;let i=index">
+            <td *ngFor="habitation for habitations_list.length*2;let i=index">
                 <table *ngIf="i%2==0">
                     <tr>
                         <td>construction</td>

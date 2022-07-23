@@ -37,6 +37,14 @@ export class HabitationsService {
       idorigine:idorigine
      }) 
   }
+  linkMultipleHabitation(idorigine:number,habitations:number[]):Observable<any>{
+    console.log(`test${idorigine}, ${habitations}`);
+    console.log(habitations)
+    return this.http.post<any>(`${environment.host}/habitations/save`,{
+      idorigine: idorigine,
+      idhabitation: habitations
+    })
+  }
   //Fonction permettant de lister toutes les habitatiions liees a une habitation
   listLinkHabitations(idhabitation:number):Observable<any>
   {
