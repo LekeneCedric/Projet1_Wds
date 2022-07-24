@@ -19,7 +19,7 @@ export class EquipementComponent implements OnInit {
   search:string = "";
   currentId?:number;
   currentPage:number = 0;
-  pageSize:number = 5;
+  pageSize:number = 10;
   totalPages:number = 0;
   selected:number = 10;
   constructor(
@@ -70,7 +70,7 @@ export class EquipementComponent implements OnInit {
     this.equipementService.getOutputEquipement()
     .subscribe(
       (data)=>{
-        this.equipements = data;
+        this.equipements = data.reverse();
         
         this.onGetPageEquipement();
       }
@@ -157,7 +157,6 @@ export class EquipementComponent implements OnInit {
     this.equipementService.updateOutputEquipement(this.currentId,this.formGroup2.value)
     .subscribe(
       (data)=>{
-        alert('Update Succes');
         this.onGetAllEquipement();
       },err=> console.log('error',err)
     )

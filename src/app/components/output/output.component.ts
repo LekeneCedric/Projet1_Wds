@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Observable, of } from 'rxjs';
-import IFormation from 'src/app/models/formations.models';
 import IOutputs from 'src/app/models/outputs.models';
 import PageOutPuts from 'src/app/models/modelsPages/pageOutput.models';
 import { OutputsService } from 'src/app/services/outputs.service';
@@ -20,9 +19,18 @@ export class OutputComponent implements OnInit {
   submitted:boolean= false;
   currentId?:number;
   currentPage:number = 0;
-  pageSize:number = 10;
+  pageSize:number = 25;
   totalPages:number = 0;
-  selected:number = 10;
+  selected:number = 5;
+  livrableVal:string = '';
+  validiteVal:string = '';
+  delaiVal:string = '';
+  coutVal:string = '';
+  frais:string = '';
+  penaliteVal:string = '';
+  frequenceVal:string= '';
+  search:string = '';
+
 
   constructor(
     private outputsService:OutputsService,
@@ -38,22 +46,22 @@ export class OutputComponent implements OnInit {
     this.onGetAllOutput();
 
     this.formGroup = this.fb.group({
-      titre:["",Validators.required],
-      classement:["",Validators.required],
-      standard:["",Validators.required],
-      livrable:["",Validators.required],
-      validite:["",Validators.required],
-      delai:["",Validators.required],
-      cout_etude:["",Validators.required],
-      frais_admin:["",Validators.required],
-      penalite:["",Validators.required],
-      ispayer:[true,Validators.required],
-      isenvironnement:[true,Validators.required],
-      isdate:[true,Validators.required],
-      periode:[""],
-      frequence:[""],
-      isrelation:[true,Validators.required],
-      ordre:[0,Validators.required],
+      titre:['',Validators.required],
+            classement:['',Validators.required],
+            standard:['',Validators.required],
+            livrable:['',Validators.required],
+            validite:['',Validators.required],
+            delai:['',Validators.required],
+            cout_etude:['',Validators.required],
+            frais_admin:['',Validators.required],
+            penalite:['',Validators.required],
+            ispayer:false,
+            isenvironnement:false,
+            isdate:false,
+            periode:'',
+            frequence:'',
+            isrelation:false,
+            ordre:[0,Validators.required],
 
     });
 
@@ -77,9 +85,8 @@ export class OutputComponent implements OnInit {
   get frequence(){return this.formGroup.get('frequence');}
   get isrelation(){return this.formGroup.get('isrelation');}
   get ordre(){return this.formGroup.get('ordre');}
-  get created_at(){return this.formGroup.get('created_at');}
-  get updated_at(){return this.formGroup.get('updated_at');}
-
+  // get created_at(){return this.formGroup.get('created_at');}
+  // get updated_at(){return this.formGroup.get('updated_at');}
 
 
   onSelected(value:string): void {
@@ -98,7 +105,7 @@ export class OutputComponent implements OnInit {
     this.outputsService.getOutputs()
     .subscribe(
       (data)=>{
-        this.outputs = data;
+        this.outputs = data.reverse();
         this.onGetPageOutput();
       }
     )
@@ -122,10 +129,13 @@ export class OutputComponent implements OnInit {
       alert('Invalid Form');
       return;
     } 
+    
+    // console.log(this.formGroup.value);
     this.outputsService.addOutput(this.formGroup.value)
     .subscribe(
       (data)=>{
-        alert('Add Success');
+        console.log('data',data);
+        console.log('form',this.formGroup.value);
         this.onGetAllOutput();
       },(err)=> console.log('error',err)
     )
@@ -206,8 +216,9 @@ export class OutputComponent implements OnInit {
     this.outputsService.updateOutput(this.currentId,this.formGroup2.value)
     .subscribe(
       (data)=>{
-        alert('Update Succes');
+        console.log(data);
         this.onGetAllOutput();
+
 
       },err=> console.log('error',err)
     )
@@ -221,5 +232,15 @@ gotoPage(i:number){
 
 onLink(id:number){
  this.router.navigateByUrl('/outputequipementlie/'+id);
+}
+
+showInModal(item:IOutputs){
+  this.livrableVal = item.livrable;
+  this.validiteVal = item.validite;
+  this.delaiVal = item.delai;
+  this.coutVal = item.cout_etude;
+  this.frais = item.frais_admin;
+  this.penaliteVal = item.penalite;
+  this.frequenceVal = item.frequence;
 }
 }

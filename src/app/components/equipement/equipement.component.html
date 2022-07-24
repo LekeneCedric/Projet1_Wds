@@ -2,11 +2,27 @@
     <div class="container-fluid">
         
         <div class="row">
+          <div class="col-lg-12">
+            <div class="view-header">
+                <div class="pull-right text-right" style="line-height: 14px">
+                  <div title="Ajouter ici" class="header-icon mx-2">
+                    <span class="pe-7s-plus" data-toggle="modal" data-target="#exampleModal"></span>
+                </div>
+                </div>
+                <div class="header-icon">
+                    <i class="pe page-header-icon pe-7s-note2"></i>
+                </div>
+                <div class="header-title">
+                    <h3>Ouput Des Equipements</h3>
+                </div>
+            </div>
+            <hr>
+        </div>
             <div class="col-md-12">
                 <div class="panel panel-filled">
-                    <div class="panel-heading">
+                    <!-- <div class="panel-heading">
                             Equipemennts
-                    </div>
+                    </div> -->
                     <div class="panel-body">
                         
                           
@@ -15,7 +31,7 @@
                             <div class="modal-dialog modal-lg" role="document">
                               <div class="modal-content">
                                 <div class="modal-header">
-                                  <h5 class="modal-title" id="exampleModalLabel">Add Equipement</h5>
+                                  <h5 class="modal-title" id="exampleModalLabel">Ajoujet Nouvel Output Equipement</h5>
                                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                   </button>
@@ -26,11 +42,11 @@
                                         <div class="form-group"><label for="exampleInputEmail1">Frequence</label> <input type="text" formControlName="moment_frequence"  class="form-control" id="exampleInputEmail1" placeholder="Frequence"></div>
                                         <div class="form-group"><label for="exampleInputPassword1">Organisme</label> <input type="text" formControlName="personne_organisme"  class="form-control" id="exampleInputPassword1" placeholder="Organisme"></div>
                                         <div class="form-group"><label for="exampleInputPassword1">Reference</label> <input type="text" formControlName="reference" class="form-control" id="exampleInputPassword1" placeholder="Reference"></div>
-                                        <button type="submit" class="btn btn-default">Submit</button>
+                                        <button type="submit"  data-dismiss="modal" class="btn btn-default">Submit</button>
                                     </form>
                                 </div>
                                 <div class="modal-footer">
-                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                  <button type="button" class="btn btn-secondary" (click)="onAddEquipement()" data-dismiss="modal">Close</button>
                                 </div>
                               </div>
                             </div>
@@ -41,7 +57,7 @@
                             <div class="modal-dialog modal-lg" role="document">
                               <div class="modal-content">
                                 <div class="modal-header">
-                                  <h5 class="modal-title" id="exampleModalLabel">Update Equipement</h5>
+                                  <h5 class="modal-title" id="exampleModalLabel">Modifier Output Equipement</h5>
                                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                   </button>
@@ -53,7 +69,7 @@
                                         <div class="form-group"><label for="exampleInputPassword1">Organisme</label> <input type="text" formControlName="personne_organisme"  class="form-control" id="exampleInputPassword1" placeholder="Organisme"></div>
                                         <div class="form-group"><label for="exampleInputPassword1">Reference</label> <input type="text" formControlName="reference" class="form-control" id="exampleInputPassword1" placeholder="Reference"></div>
                                         
-                                        <button type="submit" class="btn btn-default">Submit</button>
+                                        <button type="submit"  data-dismiss="modal" (click)="onEdit()" class="btn btn-default">Submit</button>
                                     </form>
                                 </div>
                                 <div class="modal-footer">
@@ -69,7 +85,6 @@
                                 <div class="dataTables_length" id="tableExample3_length">
                                     <label>Show 
                                         <select #numbers (change)="onSelected(numbers.value)" name="tableExample3_length" aria-controls="tableExample3" class="form-control form-control-sm">
-                                            <option value="5">5</option>
                                             <option value="10">10</option>
                                             <option value="25">25</option>
                                             <option value="50">50</option>
@@ -79,6 +94,14 @@
                                     </div>
                                 </div>
                                 <div class="col-sm-2">
+                                  <div id="tableExample2_filter" class="dataTables_filter" style="float: right;">
+                                      <label>Search:<input [(ngModel)]="search" type="text"
+                                              class="form-control form-control-sm" placeholder="Entrer un Tyoe ..."
+                                              aria-controls="tableExample2">
+                                      </label>
+                                  </div>
+                              </div>
+                                <div class="col-sm-2">
                                     <div id="tableExample3_filter" class="dataTables_filter">
                                             
                                             <!-- <label>Search:<input [(ngModel)]="search" name="search" type="search" (input)="onSearch()" class="form-control form-control-sm" placeholder="Entrer un Etat" aria-controls="tableExample3"></label> -->
@@ -87,17 +110,15 @@
                                         
                             <thead>
                             <tr role="row">
-                                <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" >
-                                    <button title="Ajouter ici" type="button" class="btn btn-default btn-sm " data-toggle="modal" data-target="#exampleModal">
-                                        <i class="fa fa-plus-circle" aria-hidden="true"></i>
-                                      </button>
-                                </th>
-                                <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" >Type</th>
-                                <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" >Frequence</th>
-                                <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" >Organisme</th>
-                                <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" >Reference</th>
-                                <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" >Cree le</th>
-                                <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" >Modifie le</th>
+                              <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" >Type</th>
+                              <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" >Frequence</th>
+                              <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" >Organisme</th>
+                              <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" >Reference</th>
+                              <!-- <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" >Cree le</th> -->
+                              <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" >
+                                  Actions
+                              </th>
+                                <!-- <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" >Modifie le</th> -->
                                 
                             </tr>
                                 
@@ -105,22 +126,22 @@
                             </thead>
                             <tbody style="display: content;">
                                 <tr role="row" class="even" *ngFor="let item of equipements">
-                                    <td style="display: content;">
-                                        <button
-                                        (click)="onEditEquipement(item)"
-                                        data-toggle="modal" data-target="#exampleModal2" class="btn btn-sm" title="Modifier ici">
-                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                                        </button>
-                                        <button (click)="onDeleteEquipement(item)" class="btn btn-sm" title="Supprimer ici">
-                                            <i class="fa fa-trash-o" aria-hidden="true"></i>
-                                        </button>
-                                    </td>
-                                    <td>{{item.type}}</td>
-                                    <td>{{item.moment_frequence}}</td>
-                                    <td>{{item.personne_organisme}}</td>
-                                    <td>{{item.reference}}</td>
-                                    <td>{{item.created_at | date:'dd/MM/yyyy'}}</td>
-                                    <td>{{item.updated_at | date:'dd/MM/yyyy'}}</td>
+                                  <td *ngIf="item.type.toLowerCase().includes(search) || search==''">{{item.type}}</td>
+                                  <td *ngIf="item.type.toLowerCase().includes(search) || search==''">{{item.moment_frequence}}</td>
+                                  <td *ngIf="item.type.toLowerCase().includes(search) || search==''">{{item.personne_organisme}}</td>
+                                  <td *ngIf="item.type.toLowerCase().includes(search) || search==''">{{item.reference}}</td>
+                                  <!-- <td *ngIf="item.type.toLowerCase().includes(search) || search==''">{{item.created_at | date:'dd/MM/yyyy'}}</td> -->
+                                  <td *ngIf="item.type.toLowerCase().includes(search) || search==''" style="display: content;" class="d-flex">
+                                      <button
+                                      (click)="onEditEquipement(item)"
+                                      data-toggle="modal" data-target="#exampleModal2" class="btn btn-sm" title="Modifier ici">
+                                      <span class="pe-7s-pen"></span>
+                                    </button>
+                                      <button (click)="onDeleteEquipement(item)" class="btn btn-sm" title="Supprimer ici">
+                                        <span class="pe-7s-trash"></span>
+                                      </button>
+                                  </td>
+                                    <!-- <td>{{item.updated_at | date:'dd/MM/yyyy'}}</td> -->
                                     
                                 </tr>
                               

@@ -21,9 +21,17 @@ export class EntrepriseComponent implements OnInit {
   search:string = "";
   currentId?:number;
   currentPage:number = 0;
-  pageSize:number = 5;
+  pageSize:number = 10;
   totalPages:number = 0;
   selected:number = 10;
+  descVal:string = '';
+  catalogueVal:string = '';
+  calendrierVal:string = '';
+  isprestataireVal:boolean = false;
+  isentrepriseVal:number = 0;
+  domaineVal:string = '';
+  logoVal:string = '';
+
 
   constructor(
     private entreprisesService:EntreprisesService,
@@ -125,7 +133,7 @@ export class EntrepriseComponent implements OnInit {
     this.entreprisesService.addEntreprises_formation(this.formGroup.value)
     .subscribe(
       (data)=>{
-        alert('Add Success');
+        // alert('Add Success');
         this.onGetAllEntreprise();
       },(err)=> console.log('error',err)
     )
@@ -201,7 +209,6 @@ export class EntrepriseComponent implements OnInit {
     this.entreprisesService.updateEntreprises_formation(this.currentId,this.formGroup2.value)
     .subscribe(
       (data)=>{
-        alert('Update Succes');
         this.onGetAllEntreprise();
       },err=> console.log('error',err)
     )
@@ -210,5 +217,34 @@ export class EntrepriseComponent implements OnInit {
   gotoPage(i:number){
     this.currentPage = i;
     this.onGetAllEntreprise();
+  }
+
+  showInModal(item:IEntreprisesFormation){
+    console.log(item.isentreprise)
+   this.descVal = item.description;
+   this.catalogueVal = item.catalogue;
+   this.calendrierVal = item.calendrier;
+   this.isprestataireVal = item.isprestataire;
+   this.isentrepriseVal = Number(Boolean(this.isentreprise));
+   console.log(this.isentrepriseVal);
+    this.domaineVal = item.domaine;
+    this.logoVal = item.logo;
+  }
+
+   //config for summer note
+   config:any = {
+    placeholder: '',
+    tabsize: 2,
+    height: 200,
+  
+    toolbar: [
+        ['misc', ['codeview', 'undo', 'redo']],
+        ['style', ['bold', 'italic', 'underline', 'clear']],
+        ['font', ['bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'clear']],
+        ['fontsize', ['fontname', 'fontsize', 'color']],
+        ['para', ['style', 'ul', 'ol', 'paragraph', 'height']],
+        ['insert', ['table', 'picture', 'link', 'video', 'hr']]
+    ],
+    fontNames: ['Helvetica', 'Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Roboto', 'Times']
   }
 }
