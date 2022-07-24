@@ -60,16 +60,16 @@
                         <thead>
                             <tr role="row" >
                                 <th class="th-sm">Choix</th>
-                                <th class="th-sm">ID Categorie</th>
-                                <th class="th-sm">ID Question</th>
+                                <th class="th-sm">Categorie</th>
+                                <th class="th-sm">Question</th>
                                 <th class="th-sm">Actions</th>
                                 
                         </thead>
                         <tbody>
                             <tr *ngFor="let equipement of equipements_list" >
                                 <td *ngIf="equipement.choix.toLowerCase().includes(search) || search==''" >{{equipement.choix}}</td>
-                                <td *ngIf="equipement.choix.toLowerCase().includes(search) || search==''" ></td>
-                                <td *ngIf="equipement.choix.toLowerCase().includes(search) || search==''" >{{equipement.idquestion}}</td>
+                                <td *ngIf="equipement.choix.toLowerCase().includes(search) || search==''" >{{getCategoryLabel(equipement.idcategorie)}}</td>
+                                <td *ngIf="equipement.choix.toLowerCase().includes(search) || search==''" >{{getQuestionTypeLabel(equipement.idquestion)}}</td>
                                 <td  *ngIf="equipement.choix.toLowerCase().includes(search) || search==''" class="d-flex justify-content-between">
                                     <span class="pe-7s-pen" style=" font-size:25px" 
                                     data-toggle="modal" data-target="#updateTypeQuestionModal"

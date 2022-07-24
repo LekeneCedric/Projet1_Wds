@@ -72,8 +72,8 @@
                                     (click)="setCurrentHabitation(habitation);getLinkedHabitation(habitation.id!);clear()" 
                                     data-toggle="modal" data-target="#linkHabitationModal"></span>
                                     <span class="pe-7s-search" style=" font-size:25px" 
-                                    data-toggle="modal" data-target="#updateHabitationModal"
-                                    title="Lier << {{habitation.intitule}} >> a une question"
+                                    data-toggle="modal" data-target="#linkQuestionModal"
+                                    title="Lier une question a << {{habitation.intitule}} >>"
                                     
                                     (click)="setCurrentHabitation(habitation);clear()"></span>
                                     <span class="pe-7s-pen" style=" font-size:25px" 
@@ -218,6 +218,7 @@
             
           </div>
           <div class="modal-footer">
+            <a class="btn btn-w-md btn-success" data-dismiss="modal" (click)="clear()">Annuler</a>
             <div *ngIf="linkedAction=='lier'">
                 <button type="button" class="btn btn-warning" *ngIf="selectedLinked.length>=1"data-dismiss="modal"
                 style="background-color: rgb(238, 155, 0);color: white;"
@@ -234,6 +235,123 @@
                </button>
                
             </div> 
+            
+          </div>
+        </div>
+      </div>
+</div>
+
+<div class="modal fade" id="linkQuestionModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Lier / Delier Question(s) a <h3 style="color: orange;">{{current_habitation?.intitule}}</h3></h4>
+            <p style="color:grey">
+                <em>Selectionnez dans un premier temps la categorie de la question ( exploitation / construction ) , puis dans un second plan , selectionner la question que vous 
+                    desirez lier a l'habitation ( 1 question maximum )
+                </em>
+          </div>
+          <label for="" class="mx-3">Etat (Exploitation / Contruction )</label>
+          <select class="form-select mx-5 my-2" aria-label="Default select example" [(ngModel)]="QuestionEtat" (change)="getLinkedQuestion(current_habitation?.id! , QuestionEtat)">
+            <option selected>Etat question </option>
+            <option value="exploitation">Exploitation</option>
+            <option value="construction">Contstruction</option>
+          </select>
+          <label for="" class="mx-3">Action (Lier / Delier)</label>
+          <select class="form-select mx-5 my-2" aria-label="Default select example" [(ngModel)]="QuestionAction" >
+            <option selected>Choisir action </option>
+            <option value="lier">Lier Question</option>
+            <option value="delier">Delier Question</option>
+          </select>
+<!-- Cas ou on choisis etat Exploitation et action liaison -->
+          <div class="modal-body" *ngIf="QuestionEtat=='exploitation'&&QuestionAction=='lier'">
+            <em>Lier Question exploitation</em>
+            <ng-select
+            [items]="unlinkedExploitationQuestions"
+              bindLabel="label"
+            placeholder="Select Question"
+            appendTo="body"
+            [multiple]="true"
+            [(ngModel)]="selectedQuestion">
+           </ng-select>
+          </div>
+<!-- Cas ou on choisis etat Construction et action liaison -->
+          <div class="modal-body" *ngIf="QuestionEtat=='construction' && QuestionAction=='lier'">
+            <em>Lier Question construction</em>
+            <ng-select
+            [items]="unlinkedContructionQuestions"
+              bindLabel="label"
+            placeholder="Select Question"
+            appendTo="body"
+            [multiple]="true"
+            [(ngModel)]="selectedQuestion">
+           </ng-select>
+          </div>
+<!-- Cas ou on choisis etat Exploitation et action deliaison -->
+          <div class="modal-body" *ngIf="QuestionEtat=='exploitation' && QuestionAction=='delier'">
+            <em>Delier Question exploitation</em>
+            <ng-select
+            [items]="linkedExploitationQuestions"
+              bindLabel="label"
+            placeholder="Select Question"
+            appendTo="body"
+            [multiple]="true"
+            [(ngModel)]="selectedQuestion">
+           </ng-select>
+          </div>
+<!-- Cas ou on choisis etat Construction et action deliaison -->
+          <div class="modal-body" *ngIf="QuestionEtat=='construction'&& QuestionAction=='delier'">
+            <em>Delier Question construction</em>
+            <ng-select
+            [items]="linkedContructionQuestions"
+              bindLabel="label"
+            placeholder="Select Question"
+            appendTo="body"
+            [multiple]="true"
+            [(ngModel)]="selectedQuestion">
+           </ng-select>
+          </div>
+          
+        
+          <div class="modal-footer">
+          
+            <div *ngIf="QuestionEtat=='exploitation'&& QuestionAction=='lier'&&selectedQuestion.length>=0">
+                <button type="button" class="btn btn-warning" *ngIf="selectedQuestion.length>=0"data-dismiss="modal"
+                style="background-color: rgb(238, 155, 0);color: white;"
+                (click)="linkQuestion()"
+                >
+                 Lier Question (Exploitation)
+               </button>
+               
+            </div> 
+            <div *ngIf="QuestionEtat=='exploitation'&& QuestionAction=='delier'&&selectedQuestion.length>=0">
+                <button type="button" class="btn btn-warning" *ngIf="selectedQuestion.length>=0"data-dismiss="modal"
+                style="background-color: rgb(238, 155, 0);color: white;"
+                (click)="breaklinkQuestion()"
+                >
+                 Delier Question (Exploitation)
+               </button>
+               
+            </div> 
+            <div *ngIf="QuestionEtat=='construction'&& QuestionAction=='lier'&&selectedQuestion.length>=0">
+                <button type="button" class="btn btn-warning" *ngIf="selectedQuestion.length>=0"data-dismiss="modal"
+                style="background-color: rgb(238, 155, 0);color: white;"
+                (click)="linkQuestion()"
+                >
+                 Lier Question (Construction)
+               </button>
+               
+            </div> 
+            <div *ngIf="QuestionEtat=='construction'&& QuestionAction=='delier'&&selectedQuestion.length>=0">
+                <button type="button" class="btn btn-warning" *ngIf="selectedQuestion.length>=0"data-dismiss="modal"
+                style="background-color: rgb(238, 155, 0);color: white;"
+                (click)="breaklinkQuestion()"
+                >
+                 Delier Question (Construction)
+               </button>
+               
+            </div> 
+            
             <a class="btn btn-w-md btn-success" data-dismiss="modal" (click)="clear()">Annuler</a>
           </div>
         </div>

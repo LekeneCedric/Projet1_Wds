@@ -6,6 +6,7 @@ import { of } from 'rxjs/internal/observable/of';
 import IHabitation from 'src/app/models/habitation.models';
 import PageHabitation from 'src/app/models/modelsPages/pageHabitations.models';
 import { HabitationsService } from 'src/app/services/habitations.service';
+import { QuestionsService } from 'src/app/services/questions.service';
 
 @Component({
   selector: 'app-habitations',
@@ -14,13 +15,20 @@ import { HabitationsService } from 'src/app/services/habitations.service';
 })
 export class HabitationsComponent implements OnInit {
 
-  constructor(private service:HabitationsService,private router:Router) {}
-
-  linkedAction :string ='';
-  selectedLinked :any[]=[];
-  currentPage:number = 0;
-  pageSize:number = 6;
-  totalPages:number = 0;
+  constructor(private service:HabitationsService,private router:Router,private questionService:QuestionsService) {}
+  QuestionEtat : string ='';
+  QuestionAction:string = '';
+  selectedQuestion: any []= [];
+  linkedExploitationQuestions: any []= [];
+  unlinkedExploitationQuestions: any[]= [];
+  linkedContructionQuestions: any[]= [];
+  unlinkedContructionQuestions: any[]= [];
+  questionList : any[] = [];
+  linkedAction : string ='';
+  selectedLinked : any[]=[];
+  currentPage: number = 0;
+  pageSize: number = 6;
+  totalPages: number = 0;
 
   update_intitule?: string;
   /*Current_habitation ici renvoie a l'habitation selectionnee
@@ -39,12 +47,14 @@ export class HabitationsComponent implements OnInit {
   search:string = "";
   lier?:boolean;
   /*tableau contenant la liste des ID des habitations liees a l'habitation actuellement selectionne*/
+  
   linked_current_habitations_id:number[]=[];
   linked_current_habitations:any[]=[];
   unlinked_current_habitations:any[]=[];
   /**/
   
   selected:number = 10;
+  
   getPage(page:number,size:number):Observable<PageHabitation>{
   
     let index = page * size;
@@ -103,6 +113,18 @@ export class HabitationsComponent implements OnInit {
       this.definitive_list = this.habitations_list;
       this.onGetPageHabitation();
     })
+
+    await this.questionService.getAllQuestions().subscribe(
+      
+      data=>{
+        console.log(data)
+        data.forEach((question:any)=>{
+          this.questionList.push({id:question.question.id,label:question.label});
+        })
+        console.log(this.questionList)
+      }
+    )
+    
 
   }
   refresh(){
@@ -200,6 +222,43 @@ export class HabitationsComponent implements OnInit {
         this.refresh();
       })
   }
+  getLinkedQuestion(idhabitation:number, etatQuestion:string):void{
+    this.QuestionAction=""
+    this.linkedContructionQuestions=[];
+    this.linkedExploitationQuestions=[];
+    this.unlinkedContructionQuestions=[];
+    this.unlinkedExploitationQuestions=[];
+    this.service.listLinkedHabitationQuestions(idhabitation, etatQuestion).subscribe(
+      async data=>{
+        await data.forEach((question:any)=>{
+          etatQuestion=='construction'
+          ?this.linkedContructionQuestions.push({id:question.id,label:question.intitule})
+          :this.linkedExploitationQuestions.push({id:question.id,label:question.intitule});
+        })
+        this.questionList.forEach(question=>{
+        console.log(question);
+        etatQuestion=='construction'
+        ?(this.linkedContructionQuestions.indexOf(question)==-1?this.unlinkedContructionQuestions.push(question):console.log('constrcuc'))
+        :(this.linkedExploitationQuestions.indexOf(question)==-1?this.unlinkedExploitationQuestions.push(question):console.log('pass'));
+        
+        })
+        console.log('test');
+        
+        console.log(this.unlinkedContructionQuestions);
+        console.log(this.unlinkedExploitationQuestions)
+      }
+    )
+  }
+  linkQuestion():void{
+    this.service.linkHabitationToQuestions(this.current_habitation?.id!,this.QuestionEtat,Number(this.selectedQuestion[0].id)).subscribe(
+      data=>window.alert(data.message)
+    )
+  }
+  breaklinkQuestion():void{
+    this.service.breaklinkHabitationToQuestions(this.current_habitation?.id!,this.QuestionEtat,Number(this.selectedQuestion[0].id)).subscribe(
+      data=>window.alert(data.message)
+    )
+  }
  getLinkedHabitation(id:number)
   {
     this.service.listLinkHabitations(id).subscribe(
@@ -220,7 +279,16 @@ export class HabitationsComponent implements OnInit {
       }
     )  
   }
+
   clear():void{
+    this.QuestionEtat  ='';
+  this.QuestionAction = '';
+  this.selectedQuestion= [];
+  this.linkedExploitationQuestions= [];
+  this.unlinkedExploitationQuestions= [];
+  this.linkedContructionQuestions= [];
+  this.unlinkedContructionQuestions= [];
+  this.selectedLinked =[];
     this.linkedAction  = "";
 this.selectedLinked = [];
 this.linked_current_habitations = [];

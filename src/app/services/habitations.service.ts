@@ -37,6 +37,7 @@ export class HabitationsService {
       idorigine:idorigine
      }) 
   }
+  // Fonction permettant de lier de maniere multiple une habitation a plusieurs habitations
   linkMultipleHabitation(idorigine:number,habitations:number[]):Observable<any>{
     console.log(`test${idorigine}, ${habitations}`);
     console.log(habitations)
@@ -44,6 +45,16 @@ export class HabitationsService {
       idorigine: idorigine,
       idhabitation: habitations
     })
+  }
+  // Fonction permmetant de lier une habitation a une ou plusieurs questions
+  linkHabitationToQuestions(idhabitation:number,etat:string,idquestion:number):Observable<any> {
+    return this.http.post<any>(`${environment.host}/questionselt/getquestionhabitation/${idhabitation}~${etat}~${idquestion}/save`,{});
+  }
+  breaklinkHabitationToQuestions(idhabitation:number,etat:string,idquestion:number):Observable<any> {
+    return this.http.post<any>(`${environment.host}/questionselt/getquestionhabitation/${idhabitation}~${etat}~${idquestion}/delete`,{});
+  }
+  listLinkedHabitationQuestions(idhabitation:number,etat:string):Observable<any>{
+    return this.http.get(`${environment.host}/questionselt/getquestionhabitation/${idhabitation}~${etat}`);
   }
   //Fonction permettant de lister toutes les habitatiions liees a une habitation
   listLinkHabitations(idhabitation:number):Observable<any>

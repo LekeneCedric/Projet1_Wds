@@ -79,14 +79,18 @@ export class CATEGORIESComponent implements OnInit {
 
   current_categorie?:ICategorie;
   categories_list?:ICategorie[]=[];
+  parents_categories_list?:ICategorie[]=[];
   async ngOnInit(){
-    this.service.getAllCategory().subscribe(
+   await this.service.getAllCategory().subscribe(
       data=>{
-        console.log(data);
         this.categories_list=data.reverse();
         this.onGetPageQuestions();
+        this.categories_list?.forEach(category=>{
+          category.idparent==null?this.parents_categories_list?.push(category):null;
+        })
       }
-    )
+    );
+  
   }
   setCurrentCategorie(categorie:ICategorie){
     this.update_idparent = categorie.idparent;
@@ -97,8 +101,7 @@ export class CATEGORIESComponent implements OnInit {
   deleteCategorie(id:number){
     this.service.deleteCategorie(id).subscribe(data =>
       { this.ngOnInit();
-      console.log(data)});
-      
+      console.log(data)});   
   }
   addCategorie(){
     const cat :ICategorie = {

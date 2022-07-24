@@ -102,6 +102,14 @@ export class QUESTIONSComponent implements OnInit {
   await this.qtype.getAllQuestionsType().subscribe(data=> {
     this.questionType_list = data;
   });
+
+  }
+  getQuestionTypeLabel(id:number):string{
+    let Label="";
+   this.questionType_list!.forEach(question=>{
+    question.id == id?Label=question.label:null;   
+   })
+   return Label
   }
   getLabelTypeAssocie(id:number):string{
    let type:string = "";

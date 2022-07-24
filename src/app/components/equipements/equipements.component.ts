@@ -124,6 +124,20 @@ export class EQUIPEMENTSComponent implements OnInit {
       }
     )
   }
+  getQuestionTypeLabel(id:number):string{
+    let Label="";
+   this.questions_list!.forEach(question=>{
+    question.question.id == id?Label=question.label:null;   
+   })
+   return Label
+  }
+  getCategoryLabel(id:number):string{
+    let Label="";
+    this.categories_list!.forEach(category=>{
+      category.id == id?Label=category.intitule:null;
+    });
+    return Label;
+  }
 
   setCurrentEquipement(equipement:IEquipement){
     this.update_categorieintitule=equipement.categorieintitule;

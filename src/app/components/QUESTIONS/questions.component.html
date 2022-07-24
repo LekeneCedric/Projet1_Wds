@@ -76,7 +76,7 @@
                             <tr  *ngFor="let question of questions_list">
                                 <td *ngIf="question.question.intitule.toLowerCase().includes(search) || search==''" >{{question.label}}</td>
                                 <td *ngIf="question.question.intitule.toLowerCase().includes(search) || search==''" >{{question.question.intitule}}</td>
-                                <td *ngIf="question.question.intitule.toLowerCase().includes(search) || search==''" >{{question.question.idtype}}</td>
+                                <td *ngIf="question.question.intitule.toLowerCase().includes(search) || search==''" >{{getQuestionTypeLabel(question.question.idtype)}}</td>
                                 <td *ngIf="question.question.intitule.toLowerCase().includes(search) || search==''" >{{question.question.ordre}}</td>
                                 <td *ngIf="question.question.intitule.toLowerCase().includes(search) || search==''" >{{question.question.obligatoire==1?"oui":"Non"}}</td>
                                 <td *ngIf="question.question.intitule.toLowerCase().includes(search) || search==''" >{{question.question.type}}</td>
