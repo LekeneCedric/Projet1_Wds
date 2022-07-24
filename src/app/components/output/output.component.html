@@ -206,8 +206,10 @@
                                         <td  
                                         *ngIf="item.titre.toLowerCase().includes(search) || search==''"
                                         style="display: content;" class="d-flex">
-                                            <button  *ngIf="item.id"
-                                            (click)="onLink(item.id)"
+                                            <button *ngIf="item.id"
+                                            (click)="getId(item)"
+
+                                            data-toggle="modal" data-target="#exampleModal4"
                                             class="btn btn-sm" title="Lier a Des Equipements ici">
                                             <span class="pe-7s-link"></span>
                                         </button>
@@ -315,4 +317,32 @@
             </div>
         </div>
     </div>
+</div>
+
+<div class="modal fade" id="exampleModal4" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <h4 class="modal-title" >Lier<span class="text-warning"> {{titreOut}} </span> a Des Equipements</h4>
+                <small> </small>
+            </div>
+            <div class="modal-body">
+                <!-- <form> -->
+                    <div *ngFor="let item of equipementsALies" class="form-group">
+                        <div>
+                            <input type="checkbox" (click)="onLink(item.id)">
+                            <label [ngClass]="idArr.includes(item.id) ?'text-warning':'text-success' " class="mx-2"> {{item.intitule}}</label>
+                        </div>
+                    </div>
+                    
+                    
+                    <button type="submit"(click)="doLink()" data-dismiss="modal" class="btn btn-default">Lier</button>
+                <!-- </form> -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default " data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
     

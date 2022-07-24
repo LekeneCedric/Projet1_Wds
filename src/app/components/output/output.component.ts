@@ -30,6 +30,10 @@ export class OutputComponent implements OnInit {
   penaliteVal:string = '';
   frequenceVal:string= '';
   search:string = '';
+  equipementsALies :any[];
+  idArr:number[] = [];
+  titreOut:string = '';
+  intituleArr:string[] = [];
 
 
   constructor(
@@ -39,6 +43,13 @@ export class OutputComponent implements OnInit {
     
 
   ) { 
+    this.outputsService.getEquipementsForLink().subscribe(
+      (data)=>{this.equipementsALies = data;
+      console.log(this.equipementsALies);
+
+      },
+      (err)=>console.log('error',err)
+    )
   }
 
 
@@ -230,8 +241,32 @@ gotoPage(i:number){
   this.onGetAllOutput();
 }
 
+getId(item:IOutputs){
+  this.currentId = item.id;
+  this.titreOut = item.titre;
+}
+
 onLink(id:number){
- this.router.navigateByUrl('/outputequipementlie/'+id);
+  this.idArr.push(id);
+  console.log(this.idArr);
+}
+
+doLink(){
+  if(this.idArr.length > 0){
+    if(this.currentId){
+      this.outputsService.linkToEquipement(this.currentId,this.idArr)
+        .subscribe(
+          (data)=>{
+            alert(data.message);
+            console.log(data);
+    
+          },(err)=> console.log('error',err)
+        )
+    }
+  }
+   else {
+    alert('Veuillez Selectionner des items');
+  }
 }
 
 showInModal(item:IOutputs){

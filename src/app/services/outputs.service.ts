@@ -37,4 +37,8 @@ export class OutputsService {
       idequipement:idEquipementsArr
      }) 
   }
+
+  getEquipementsForLink():Observable<any[]>{
+    return this.http.get<any[]>(this.host+'/questionselt/equipement/search');
+  }
 }
