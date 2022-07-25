@@ -41,7 +41,7 @@ export class EntrepriseComponent implements OnInit {
   ngOnInit(): void {
     this.onGetAllEntreprise();
     this.formGroup = this.fb.group({
-      logo:["",Validators.required],
+      logo:'',
       nom:["",Validators.required],
       type:["",Validators.required],
       type_entreprise:["",Validators.required],
@@ -133,6 +133,8 @@ export class EntrepriseComponent implements OnInit {
     this.entreprisesService.addEntreprises_formation(this.formGroup.value)
     .subscribe(
       (data)=>{
+        console.log('form',this.formGroup);
+        console.log('data',data);
         // alert('Add Success');
         this.onGetAllEntreprise();
       },(err)=> console.log('error',err)
@@ -228,7 +230,7 @@ export class EntrepriseComponent implements OnInit {
    this.isentrepriseVal = Number(Boolean(this.isentreprise));
    console.log(this.isentrepriseVal);
     this.domaineVal = item.domaine;
-    this.logoVal = item.logo;
+    // this.logoVal = item.logo;
   }
 
    //config for summer note
@@ -246,5 +248,17 @@ export class EntrepriseComponent implements OnInit {
         ['insert', ['table', 'picture', 'link', 'video', 'hr']]
     ],
     fontNames: ['Helvetica', 'Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Roboto', 'Times']
+  }
+
+  onUploadFile($event:any){
+    if ($event.target.files.length > 0)
+    {
+        let ftu: File ;
+        ftu = $event.target.files[0];
+        console.log(ftu);
+        this.formGroup.controls['logo'].setValue(ftu);
+        this.logoVal = ftu.name;
+        // this.model.content = $event.target.files[0];
+    }
   }
 }

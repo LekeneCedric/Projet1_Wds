@@ -42,7 +42,8 @@
                                         <p>Votre Logo </p>
                                             <label class="btn btn-default" for="file-selector1">
                                                 <input 
-                                                formControlName="logo"
+                                                accept="image/*"
+                                                (change)="onUploadFile($event)"
                                                 id="file-selector1" type="file">
                                                 Upload file
                                             </label>
