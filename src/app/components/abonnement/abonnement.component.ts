@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AbonnementService } from '../../services/abonnement.service';
 import  Iabonnement  from '../../models/abonnements.models';
+import PageAbonnement from '../../models/pages/Page.Abonnement.model';
+import { Observable, of } from 'rxjs';
 
 @Component({
   selector: 'app-abonnement',
@@ -20,7 +22,7 @@ export class AbonnementComponent implements OnInit {
     created_at: null,
     updated_at: null
   };
-
+ //for update
   periode:number | undefined ;
   frequence:string | undefined;
   montant:number | undefined;
@@ -29,10 +31,38 @@ export class AbonnementComponent implements OnInit {
   updated_at:  Date | null;
   intitule: string | undefined;
   
-  searchText:string = " ";
+  searchText:string = "";
 
   descriptionContent = " ";
   id:number | undefined ;
+
+  currentPage:number ;
+
+  user:string | number | undefined = 41;
+  abonnement:string |number | undefined = 2;
+  etat:string | number | undefined = 0;
+
+  pageSize:number = 5;
+  totalPages:number = 0;
+  selected:number = 10;
+  
+  //config for summer note
+  config:any = {
+    placeholder: '',
+    tabsize: 2,
+    height: 200,
+  
+    toolbar: [
+        ['misc', ['codeview', 'undo', 'redo']],
+        ['style', ['bold', 'italic', 'underline', 'clear']],
+        ['font', ['bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'clear']],
+        ['fontsize', ['fontname', 'fontsize', 'color']],
+        ['para', ['style', 'ul', 'ol', 'paragraph', 'height']],
+        ['insert', ['table', 'picture', 'link', 'video', 'hr']]
+    ],
+    fontNames: ['Helvetica', 'Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Roboto', 'Times']
+  }
+
   
   constructor(
     private abonnementservice:AbonnementService
@@ -40,12 +70,14 @@ export class AbonnementComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllAbonnement();
+    this.gotoPage(0);
   }
 
   getAllAbonnement(){
     this.abonnementservice.getAllAbonnements().then((data:any) =>{
-      this.arrayAbonnements = data;
-      console.log(this.arrayAbonnements);
+      this.arrayAbonnements = data.reverse();
+      this.onGetPageVigilance();
+    //  console.log(this.arrayAbonnements);
     }).catch((err) =>{
       console.log(err.message());
     }
@@ -75,7 +107,7 @@ export class AbonnementComponent implements OnInit {
 
     //utilisation de la fonction d'ajout du service
     this.abonnementservice.addAbonnement(this.abonnementItem).then((data) => {
-      console.log("abonnement add successfully"+ data);
+     // console.log("abonnement add successfully"+ data);
       this.getAllAbonnement();
     }).catch((err)=>{
       console.log("enable add" + err.message());
@@ -139,7 +171,7 @@ export class AbonnementComponent implements OnInit {
   deleteAbonnement(abonnement:Iabonnement){
      if(window.confirm("est vous sure de vouloir supprimer le conseil de titre "+`${abonnement.intitule}`)){
        this.abonnementservice.deleteAbonnement(abonnement.id).then((data)=>{
-         console.log("conseil delete successfully"+ data);
+        // console.log("conseil delete successfully"+ data);
          this.getAllAbonnement();
        }).catch((err)=>{
          console.log("enable delete" + err.message());
@@ -147,4 +179,44 @@ export class AbonnementComponent implements OnInit {
      }
    
    }
+
+    //pagination
+  getPage(page:number,size:number):Observable<PageAbonnement>{
+  
+    let index = page * size;
+    let totalPages = ~~(this.arrayAbonnements.length/size);
+    if(this.arrayAbonnements.length % size != 0)
+      totalPages ++;
+    let pageAbonnements = this.arrayAbonnements.slice(index,index+size);
+    return of({
+      page:page,
+      size:size,
+      totalPages:totalPages,
+      abonnements:pageAbonnements
+    })
+  }
+  onGetPageVigilance(): void {
+    this.getPage(this.currentPage,this.pageSize)
+    .subscribe(
+      (data)=> {
+        this.arrayAbonnements = data.abonnements;
+        this.totalPages = data.totalPages;
+      }
+    )
+  }
+
+  gotoPage(i:number){
+    this.currentPage = i;
+    this.getAllAbonnement();
+  }
+  
+  onSelected(value:string): void {
+		this.selected = Number(value);
+    if(this.selected != -1 || this.selected < this.arrayAbonnements.length){
+      this.pageSize = this.selected;
+    }else{
+      this.pageSize =this.arrayAbonnements.length;
+    }
+    this.getAllAbonnement;
+  }
 }

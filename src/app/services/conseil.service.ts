@@ -50,7 +50,11 @@ export class ConseilService {
 
      updateConseil(item:Iconseil){
        return new Promise((resolve, reject) => {
+<<<<<<< HEAD
+        return this.http.put<Iconseil>(`${environment.host}conseil/${item.id}`,item)
+=======
         this.http.put<Iconseil>(`${environment.host}/conseil/${item.id}`,item)
+>>>>>>> 9bcb49e18f121e459b62134dbfa1287fe4c17e1d
         .subscribe({
           next: res => {
             resolve(res);
