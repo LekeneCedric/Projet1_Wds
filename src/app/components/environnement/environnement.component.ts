@@ -21,6 +21,15 @@ export class EnvironnementComponent implements OnInit {
   pageSize:number = 10;
   totalPages:number = 0;
   selected:number = 10;
+  livrableVal:string = '';
+  validiteVal:string = '';
+  delaiVal:string = '';
+  coutVal:string = '';
+  frais:string = '';
+  penaliteVal:string = '';
+  frequenceVal:string= ''
+  classementVal: string;
+  search:string= '';
 
   constructor(
     private environnementService : EnvironnementService,
@@ -40,12 +49,12 @@ export class EnvironnementComponent implements OnInit {
       cout_etude:["",Validators.required],
       frais_admin:["",Validators.required],
       penalite:["",Validators.required],
-      ispayer:[true,Validators.required],
-      isenvironnement:[true,Validators.required],
-      isdate:[true,Validators.required],
+      ispayer:[false,Validators.required],
+      isenvironnement:[false,Validators.required],
+      isdate:[false,Validators.required],
       periode:[""],
       frequence:[""],
-      isrelation:[true,Validators.required],
+      isrelation:[false,Validators.required],
       ordre:[0,Validators.required],
 
     });
@@ -89,7 +98,7 @@ export class EnvironnementComponent implements OnInit {
     this.environnementService.getOutputenvironnement()
     .subscribe(
       (data)=>{
-        this.environnements = data;
+        this.environnements = data.reverse();
         this.onGetPageEnvironnement();
       }
     )
@@ -110,13 +119,14 @@ export class EnvironnementComponent implements OnInit {
   onAddEnvironnement():void{
     this.submitted = true;
     if(this.formGroup.invalid){
-      alert('Invalid Form');
+      alert('Champs Vides');
       return;
     } 
     this.environnementService.addOutputenvironnement(this.formGroup.value)
     .subscribe(
       (data)=>{
-        alert('Add Success');
+        console.log('data',data);
+        console.log('form',this.formGroup.value);
         this.onGetAllEnvironnement();
       },(err)=> console.log('error',err)
     )
@@ -138,40 +148,6 @@ export class EnvironnementComponent implements OnInit {
     }
   }
 
-  // onEditEnvironnement(item:IOutputEnvironnement):void{
-
-  //   if(item.id ){
-
-  //     this.environnementService.getEnvironnementById(item.id)
-  //     .subscribe(
-  //       (data)=> {
-
-  //         console.log(data);
-  //         this.currentId = item.id;
-  //         this.formGroup2 = this.fb.group({
-  //           // titre:[data['titre'],Validators.required],
-  //           // classement:[data['classement'],Validators.required],
-  //           // standard:[data['standard'],Validators.required],
-  //           // livrable:[data['livrable'],Validators.required],
-  //           // validite:[data['validite'],Validators.required],
-  //           // delai:[data['delai'],Validators.required],
-  //           // cout_etude:[data['cout_etude'],Validators.required],
-  //           // frais_admin:[data['frais_admin'],Validators.required],
-  //           // penalite:[data['penalite'],Validators.required],
-  //           // ispayer:[data['ispayer'],Validators.required],
-  //           // isenvironnement:[data['isenvironnement'],Validators.required],
-  //           // isdate:[data['isdate'],Validators.required],
-  //           // periode:[data['periode']],
-  //           // frequence:[data['frequence']],
-  //           // isrelation:[data['isrelation'],Validators.required],
-  //           // ordre:[data['ordre'],Validators.required],
-
-  //         })
-  //       }
-  //     )    
-  // }
-  // }
- 
   onEditEnvironnement(item:IOutputEnvironnement):void{
 
     if(item.id ){
@@ -228,7 +204,6 @@ export class EnvironnementComponent implements OnInit {
     this.environnementService.updateOutputenvironnement(this.currentId,this.formGroup2.value)
     .subscribe(
       (data)=>{
-        alert('Update Succes');
         this.onGetAllEnvironnement();
 
       },err=> console.log('error',err)
@@ -239,6 +214,17 @@ gotoPage(i:number){
   this.currentPage = i;
   console.log(i);
   this.onGetAllEnvironnement();
+}
+
+showInModal(item:IOutputEnvironnement){
+  this.livrableVal = item.livrable;
+  this.validiteVal = item.validite;
+  this.delaiVal = item.delai;
+  this.coutVal = item.cout_etude;
+  this.frais = item.frais_admin;
+  this.penaliteVal = item.penalite;
+  this.frequenceVal = item.frequence;
+  this.classementVal = item.classement;
 }
 
 

@@ -25,7 +25,7 @@ export class OutputsService {
     return this.http.post<IOutputs>(this.host+'/outputs',item);
   }
   updateOutput(id:number,nouveau:IOutputs):Observable<IOutputs>{
-    return this.http.put<IOutputs>(this.host+'/outputs/'+id,nouveau);
+    return this.http.put<IOutputs>(this.host+'/outputs/'+id+'?_method=PUT',nouveau);
   }
   deleteOutput(item:IOutputs):Observable<boolean>{
     return this.http.delete<boolean>(this.host+'/outputs/'+item.id);
@@ -36,5 +36,9 @@ export class OutputsService {
       idoutput:idOutput,
       idequipement:idEquipementsArr
      }) 
+  }
+
+  getEquipementsForLink():Observable<any[]>{
+    return this.http.get<any[]>(this.host+'/questionselt/equipement/search');
   }
 }
