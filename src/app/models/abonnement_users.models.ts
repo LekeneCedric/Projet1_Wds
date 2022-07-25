@@ -1,3 +1,5 @@
+import Iuser from './users.models';
+
 export default interface IabonnementSearch{
     id: number;
     idabonnement: number;
@@ -6,10 +8,7 @@ export default interface IabonnementSearch{
     datefin: Date;
     montant: number;
     etat: number;
-    created_at: Date;
-    updated_at: Date;
-    titre: string;
-    duree: string;
-    periode: string;
-    couleur: string
+    created_at: Date | null;
+    updated_at: Date | null;
+    utilisateurs:Iuser[];
 }

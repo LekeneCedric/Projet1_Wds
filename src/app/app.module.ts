@@ -16,6 +16,16 @@ import { EQUIPEMENTSComponent } from './components/equipements/equipements.compo
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { SidemenuComponent } from './components/sidemenu/sidemenu.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { AbonnementUsersComponent } from './components/abonnement-users/abonnement-users.component';
+import { AbonnementComponent } from './components/abonnement/abonnement.component';
+import { ConseilComponent } from './components/conseil/conseil.component';
+import { DetailconseilComponent } from './components/detailconseil/detailconseil.component';
+import { HeaderComponent } from './components/header/header.component';
+import { PrestataireComponent } from './components/prestataire/prestataire.component';
+import { SearchComponent } from './components/search/search.component';
+import { UserComponent } from './components/user/user.component';
+
+import { NgxSummernoteModule } from 'ngx-summernote';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +37,17 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     QUESTIONSComponent,
     CATEGORIESComponent,
     PROPOSITIONSComponent,
-    EQUIPEMENTSComponent
+    EQUIPEMENTSComponent,
+
+    HeaderComponent,
+    SidebarComponent,
+    ConseilComponent,
+    DetailconseilComponent,
+    SearchComponent,
+    UserComponent,
+    AbonnementUsersComponent,
+    AbonnementComponent,
+    PrestataireComponent
   ],
   imports: [
     BrowserModule,
@@ -35,10 +55,9 @@ import { NavbarComponent } from './components/navbar/navbar.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    ReactiveFormsModule,
     FormsModule,
-    NgSelectModule
-  ],
+    NgSelectModule,
+    NgxSummernoteModule  ],
   providers: [],
   bootstrap: [AppComponent]
 })
