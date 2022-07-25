@@ -16,7 +16,7 @@ export class AbonnementService {
 
   getAllAbonnements(){
     return new Promise((resolve, reject) => {
-     return this.http.get<Iabonnement[]>(`${environment.host}/abonnements`)
+     return this.http.get<Iabonnement[]>(`${environment.host}abonnements`)
      .subscribe({
        next: res => {
          resolve(res);
@@ -30,7 +30,7 @@ export class AbonnementService {
 
    addAbonnement(item:Iabonnement){
     return new Promise((resolve, reject) => {
-      return this.http.post<Iabonnement>(`${environment.host}/abonnements`,item)
+      return this.http.post<Iabonnement>(`${environment.host}abonnements`,item)
       .subscribe({
         next: res => {
           resolve(res);
@@ -44,7 +44,7 @@ export class AbonnementService {
 
    updateAbonnement(item:Iabonnement){
     return new Promise((resolve, reject) => {
-     this.http.put<Iabonnement>(`${environment.host}/abonnements/${item.id}`,item)
+     this.http.put<Iabonnement>(`${environment.host}abonnements/${item.id}`,item)
      .subscribe({
        next: res => {
          resolve(res);
@@ -58,7 +58,7 @@ export class AbonnementService {
 
   deleteAbonnement(id:number){
      return new Promise((resolve, reject) => {
-       return this.http.delete<Iabonnement>(`${environment.host}/abonnements/${id}`)
+       return this.http.delete<Iabonnement>(`${environment.host}abonnements/${id}`)
        .subscribe({
          next: res => {
            resolve(res);

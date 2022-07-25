@@ -6,15 +6,15 @@
             <div class="col-lg-12">
                 <div class="view-header">
                     <div class="pull-right text-right" style="line-height: 14px">
-                        <small>Table design<br>General<br> <span class="c-white">Table styles</span></small>
+                       
                     </div>
                     <div class="header-icon">
                         <i class="pe page-header-icon pe-7s-menu"></i>
                     </div>
                     <div class="header-title">
-                        <h3> Users</h3>
+                        <h3> Utilisateurs</h3>
                         <small>
-                            Examples of various designs of tables.
+                           pages regroupant les utilisateurs du system
                         </small>
                     </div>
                 </div>
@@ -25,34 +25,37 @@
     </div>
 
       <!--search component -->
-
-      <div class="row"><div class="col-sm-10">
-        <div class="dataTables_length" id="tableExample3_length">
-          <label>Show 
-              <select name="tableExample3_length" aria-controls="tableExample3" class="form-control form-control-sm">
-                  <option value="10">10</option>
-                  <option value="25">25</option>
-                  <option value="50">50</option>
-                  <option value="-1">All</option>
-              </select>
-        </label>
-          </div>
-          </div>
-    
-          <div class="col-sm-2">
-              <div id="tableExample3_filter" class="dataTables_filter">
-                    <app-search (search)="onSearch($event)"></app-search>
-              </div>
+      <div class="row">
+        <div class="col-lg-12">
+            <div class="view-header">
+                <div class="pull-right " style="line-height: 14px">
+                    <label>Par Nom
+                        <app-search (search)="onSearch($event)"></app-search>
+                    </label>
+                </div>
+                <div class="header-icon">
+            
+                </div>
+                <div class="header-title">
+                    <div class="dataTables_length" id="tableExample3_length">
+                        <label for="">voir
+                            <select  #numbers (change)="onSelected(numbers.value)" name="tableExample3_length" aria-controls="tableExample3" class="form-control form-control-sm">
+                                <option value="10">10</option>
+                                <option value="25">25</option>
+                                <option value="50">50</option>
+                                <option value="500">All</option>
+                            </select>
+                        </label>
+                        </div>
+                </div>
             </div>
+        </div>
     </div>
+    
 <div class="row">
     <div class="col-md-12">
         <div class="panel panel-filled">
             <div class="panel-heading">
-                <div class="panel-tools">
-                    <a class="panel-toggle"><i class="fa fa-chevron-up"></i></a>
-                    <a class="panel-close"><i class="fa fa-times"></i></a>
-                </div>
               
             </div>
             <div class="panel-body">
@@ -68,28 +71,28 @@
                         <th>Telephone</th>
                         <th>Proffesion</th>
                      
-                        <th>Options</th>
+                        <th>Actions</th>
                     </tr>
                     </thead>
-                    <tbody *ngFor="let user of arrayUser ">
-                    <tr *ngIf="searchText === '' || user.nom.toLowerCase().includes(searchText)" >
-                        <td >{{user.nom}}</td>
-                        <td>{{user.email}}</td>
-                        <td>{{user.telephone}}</td>
-                        <td>{{user.profession}}</td>
+                    <tbody >
+                    <tr *ngFor="let user of arrayUser ">
+                        <td  *ngIf="searchText === '' || user.nom.toLowerCase().includes(searchText)" >{{user.nom}}</td>
+                        <td  *ngIf="searchText === '' || user.nom.toLowerCase().includes(searchText)" >{{user.email}}</td>
+                        <td  *ngIf="searchText === '' || user.nom.toLowerCase().includes(searchText)"> {{user.telephone}}</td>
+                        <td  *ngIf="searchText === '' || user.nom.toLowerCase().includes(searchText)" >{{user.profession}}</td>
                       
-                        <td>
+                        <td  *ngIf="searchText === '' || user.nom.toLowerCase().includes(searchText)">
                             <div class="row">
                                <div class="font-example-box col-lg-2 col-md-3 col-sm-6 col-xs-6 col px-3">
-                                   <span class="pe-7s-note2" style=" font-size:25px" data-toggle="modal" data-target="#table_abonnement_historique" (click)="getAbonnementHistorique(user)"></span>
+                                   <span class="pe-7s-note2" style=" font-size:25px" data-toggle="modal" data-target="#table_abonnement_historique" (click)="getAbonnementHistorique(user)" title="l'historique des abonnements"></span>
                                    <span class="icon-example-name"> </span>
                                </div>
                                <div class="font-example-box col-lg-2 col-md-3 col-sm-6 col-xs-6 col">
-                                   <span class="pe-7s-trash" style=" font-size:25px" (click)="getUserReponseel(user)" data-toggle="modal" data-target="#table_user_reponseelt"></span>
+                                   <span class="pe-7s-settings" style=" font-size:25px" (click)="getUserReponseel(user)" data-toggle="modal" data-target="#table_user_reponseelt" title="user reponseel"></span>
                                  <span class="icon-example-name"> </span>
                                </div>
                                <div class="font-example-box col-lg-2 col-md-3 col-sm-6 col-xs-6 px-3">
-                                   <span class="pe-7s-news-paper" style="font-size:25px" data-toggle="modal" data-target="#allUsers" (click)="check(user)" ></span>
+                                   <span class="pe-7s-more" style="font-size:25px" data-toggle="modal" data-target="#allUsers" (click)="check(user)" title="voir toute les informations de l'utilisateur"></span>
                                    <span class="icon-example-name"> </span>
                
                                </div>
@@ -99,72 +102,78 @@
 
                 <!--modal for look all informations of user-->
         <div class="modal fade" id="allUsers" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header text-center">
-                        <h4 class="modal-title">VIEW ALL INFORMATIONS USERS</h4>
+                        <h4 class="modal-title">TOUTE LES INFORMATIONS</h4>
                         <small> </small>
                     </div>
                     <div class="modal-body">
                         <div class=" ">
-                            <div class="col-md-12">
+                        <div class="row">
+                            <div class="col">
                                 <h4 class="stat-label">Nom</h4>
                                 <div class="input-group mb-3 mt-2">
                                     <P>{{nom}}</P>
                                 </div>
                             </div>
-                            <div class="col-md-12 ">
+                            <div class="col">
                                 <h4 class="stat-label">Email</h4>
                                 <div class="input-group mb-3 mt-2">
                                     <P>{{email}}</P>
                                 </div>
                             </div>
-                            <div class="col-md-12">
+                            <div class="col">
                                 <h4 class="stat-label">Password</h4>
                                 <div class="input-group mb-3 mt-2 td">
                                   <p>{{password}}</p>
                                 </div>
                             </div>
-                            <div class="col-md-12">
+                        </div>
+                           <div class="row">
+                            <div class="col">
                                 <h4 class="stat-label">Telephone</h4>
                                 <div class="input-group mb-3 mt-2">
                                     {{telephone}}
                                 </div>
                             </div>
-                            <div class="col-md-12">
+                            <div class="col">
                                 <h4 class="stat-label">Proffesion</h4>
                                 <div class="input-group mb-3 mt-2">
                                     {{profession}}
                                 </div>
                             </div>
-                            <div class="col-md-12">
+                            <div class="col">
                                 <h4 class="stat-label">Profile</h4>
                                 <div class="input-group mb-3 mt-2">
                                     {{profile}}
                                 </div>
                             </div>
-                            <div class="col-md-12">
-                                <h4 class="stat-label">Isconnecter</h4>
+                           </div>
+                           <div class="row">
+                            <div class="col">
+                                <h4 class="stat-label">Est connecté</h4>
                                 <div class="input-group mb-3 mt-2">
                                     {{isconnecter}}
                                 </div>
                             </div>
-                            <div class="col-md-12">
+                            <div class="col">
                                 <h4 class="stat-label">Crée le</h4>
                                 <div class="input-group mb-3 mt-2">
                                     {{created_at | date}}
                                 </div>
                             </div>
-                            <div class="col-md-12">
+                            <div class="col">
                                 <h4 class="stat-label">Mise a jour le</h4>
                                 <div class="input-group mb-3 mt-2">
                                     {{updated_at | date}}
                                 </div>
                             </div>
+                           </div>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default " data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-default " data-dismiss="modal">Fermer</button>
                     </div>
                 </div>
             </div>
@@ -173,7 +182,7 @@
                              
         <!--modale for lor information in abonnement historique-->
         <div class="modal fade" id="table_abonnement_historique" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header text-center">
                         <h4 class="modal-title">ABONNEMENT HISTORIQUE</h4>
@@ -208,7 +217,7 @@
                        <!--end table-->
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default " data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-default " data-dismiss="modal">Fermer</button>
                     </div>
                 </div>
             </div>
@@ -216,11 +225,11 @@
         <!--en modale -->
 
          <!--modal for user reponseelt-->
-         <div class="modal fade" id="table_user_reponseelt" tabindex="-1" role="dialog" aria-hidden="true">
-            <div class="modal-dialog">
+         <div class="modal fade " id="table_user_reponseelt" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header text-center">
-                        <h4 class="modal-title">USER REPONSEELT</h4>
+                        <h4 class="modal-title">UTILISATEUR REPONSEELT</h4>
                         <small> </small>
                     </div>
                     <div class="modal-body">
@@ -231,27 +240,32 @@
                             <thead>
                                 <tr>
                                     <th>Etat</th>
-                                    <th>Created_at</th>
-                                    <th>Update_at</th>
+                                    <th>Crée le</th>
+                                    <th>Mise a jour le</th>
                                     <th>Intitule</th>
+                                    <th>reponse</th>
                                 </tr>
                             </thead>
                                
                             <tbody >
-                                <tr *ngFor="let userreponse of arryUserReponseelt">
-                                    <td>{{userreponse.etat}}</td>
-                                    <td>{{userreponse.created_at | date }}</td>
-                                    <td>{{userreponse.updated_at | date }}</td>
-                                    <td>{{userreponse.intitule }}</td>
+                                <tr *ngFor="let userreponse of arryUserReponseelt ; let i = index">
+                                    <td *ngIf="userreponse.etat !==undefined && userreponse.intitule !==undefined && userreponse.response !==undefined">{{userreponse.etat}}</td>
+                                    <td *ngIf="userreponse.etat !==undefined && userreponse.intitule !==undefined && userreponse.response !==undefined">{{userreponse.created_at | date }}</td>
+                                    <td *ngIf="userreponse.etat !==undefined && userreponse.intitule !==undefined && userreponse.response !==undefined">{{userreponse.updated_at | date }}</td>
+                                    <td *ngIf="userreponse.etat !==undefined && userreponse.intitule !==undefined && userreponse.response !==undefined">{{userreponse.questions[i].intitule }}</td>
+                                    <td *ngIf="userreponse.etat !==undefined && userreponse.intitule !==undefined && userreponse.response !==undefined">{{userreponse.questions[i].response}}</td>
                                 </tr>
                             </tbody>
 
                         </table>
+                 
                        </div>
+                   
                        <!--end table-->
                     </div>
+                    
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-default " data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-default " data-dismiss="modal">Fermer</button>
                     </div>
                 </div>
             </div>
@@ -260,20 +274,34 @@
                     </tbody>
                 </table>
             </div>
+                         <!--pagination-->
+                         <div class="row">
+                            <div class="col-lg-12">
+                                <div class="view-header">
+                                    <div class="pull-right text-right" style="line-height: 14px">
+                                        <ul class="pagination">
+                                            <li *ngFor="let item of [].constructor(this.totalPages);let i=index;" class="paginate_button page-item ">
+                                                <a (click)="gotoPage(i)"  aria-controls="tableExample3" data-dt-idx="3" tabindex="0" class="page-link">{{i}}</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="header-icon">
+                                        
+                                    </div>
+                                    <div class="header-title">
+                                    
+                                    </div>
+                                </div>
+                            
+                            </div>
+                        </div>
+                        <!--end pagination-->
         </div>
+        
     </div>
 
 </div>
 <!--pagination-->
-<div class="dataTables_paginate paging_simple_numbers" id="tableExample3_paginate">
-    <ul class="pagination">
-        <li class="paginate_button page-item previous disabled" id="tableExample3_previous">
-        <a href="#" aria-controls="tableExample3" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li>
-        <li class="paginate_button page-item active"><a href="#" aria-controls="tableExample3" data-dt-idx="1" tabindex="0" class="page-link">1</a></li>
-        <li class="paginate_button page-item "><a href="#" aria-controls="tableExample3" data-dt-idx="2" tabindex="0" class="page-link">2</a></li>
-        <li class="paginate_button page-item "><a href="#" aria-controls="tableExample3" data-dt-idx="3" tabindex="0" class="page-link">3</a></li>
-        <li class="paginate_button page-item next" id="tableExample3_next"><a href="#" aria-controls="tableExample3" data-dt-idx="4" tabindex="0" class="page-link">Next</a>
-        </li>
-    </ul>
-</div>
+
+
 </section>
