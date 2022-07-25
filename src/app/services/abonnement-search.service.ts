@@ -42,7 +42,7 @@ export class AbonnementSearchService {
    }
 
 
-   sendAbonnement(item:IabonnementSend){
+   sendAbonnement(item:any){
     return new Promise((resolve, reject) => {
       return this.http.post<IabonnementSend>(`${environment.host}abonnement_users/search`,item)
       .subscribe({

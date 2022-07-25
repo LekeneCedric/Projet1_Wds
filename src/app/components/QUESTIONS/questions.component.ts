@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { of } from 'rxjs/internal/observable/of';
-import PageQuestion from 'src/app/models/modelsPages/pageQuestions.models';
 import IQuestion from 'src/app/models/question.models';
-import ITypequestion from 'src/app/models/typequestion.models';
-import { QuestionsService } from 'src/app/services/questions.service';
-import { TypeQuestionsService } from 'src/app/services/type-questions.service';
+import PageQuestion from '../../../app/models/modelsPages/pageQuestions.models';
+import ITypequestion from '../../../app/models/typequestion.models';
+import { QuestionsService } from '../../../app/services/questions.service';
+import { TypeQuestionsService } from '../../../app/services/type-questions.service';
 
 @Component({
   selector: 'app-questions',

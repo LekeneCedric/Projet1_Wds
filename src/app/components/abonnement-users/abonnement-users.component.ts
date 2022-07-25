@@ -53,9 +53,9 @@ export class AbonnementUsersComponent implements OnInit {
     datefin: new Date,
     montant: 0,
     etat: 0,
+    utilisateurs: [],
     created_at: null,
-    updated_at: null,
-    utilisateurs: [] 
+    updated_at: null
   }
 
   arrayAbonnement:number[] = [];
