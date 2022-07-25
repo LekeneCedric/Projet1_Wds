@@ -1,0 +1,197 @@
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+
+    
+    <div class="col-lg-12">
+      <div class="view-header">
+          <div class="pull-right text-right" style="line-height: 14px">
+            <div title="Ajouter ici" class="header-icon mx-2">
+              <span class="pe-7s-plus" data-toggle="modal" data-target="#exampleModal"></span>
+          </div>
+          </div>
+          <div class="header-icon">
+              <i class="pe page-header-icon pe-7s-note2"></i>
+          </div>
+          <div class="header-title">
+              <h3>Point De Vigilance</h3>
+          </div>
+      </div>
+      <hr>
+  </div>
+    
+    <div class="col-md-12">
+                <div class="panel panel-filled">
+                    <div class="panel-body">
+                        <div id="tableExample3_wrapper" class="dataTables_wrapper container-fluid dt-bootstrap4 no-footer">
+                            <div class="row"><div class="col-sm-10">
+                                <div class="dataTables_length" id="tableExample3_length">
+                                    <label>Show 
+                                        <select #numbers (change)="onSelected(numbers.value)" name="tableExample3_length" aria-controls="tableExample3" class="form-control form-control-sm">
+                                            <option value="5">5</option>
+                                            <option value="10">10</option>
+                                            <option value="25">25</option>
+                                            <option value="50">50</option>
+                                            <option value="100">100</option>
+                                            <option value="500">All</option>
+                                        </select> entries</label>
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-2">
+                                    <div id="tableExample3_filter" class="dataTables_filter">
+                                        <form
+                                        #f="ngForm"
+                                        (ngSubmit)="onSearch(f.value)"
+                                      class="d-flex">
+                                        <input
+                                          ngModel
+                                          name="keyword"
+                                          class="form-control me-2"
+                                          type="search"
+                                          placeholder="EX: construction"
+                                          aria-label="Search">
+                                        <button title="Rechercher ici" class="btn btn-sm" type="submit">
+                                          <span class="fa fa-search"></span>
+                                        </button>
+                                      </form>
+                                    </div></div></div>
+                                    <div class="table-responsive">
+                                      <table id="tableExample3" class="table table-striped table-hover table-responsive-sm dataTable no-footer" role="grid">
+                                          
+                              <thead>
+                              <tr role="row">
+                                <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" >Titre</th>
+                                <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" >But</th>
+                                <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" >Moment</th>
+                                <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" >Qui</th>
+                                <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" >Conseil</th>
+                                <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" >Document</th>
+                                <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" >Etat</th>
+                                <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" >Actions</th>
+                              </tr>
+                                  
+  
+                              </thead>
+                              <tbody style="display: content;">
+                                  <tr role="row" class="even" *ngFor="let item of vigilances">
+                                      <td [innerHTML]="item.titre"></td>
+                                      <td [innerHTML]= "item.but"></td>
+                                      <td [innerHTML]= "item.moment_faire"></td>
+                                      <td [innerHTML]= "item.qui_faire"></td>
+                                      <td [innerHTML]="item.conseil"></td>
+                                      <td [innerHTML]= "item.document"></td>
+                                      <td [innerHTML]= "item.etat"></td>
+                                      <td style="display: content;" class="d-flex">
+                                        <button 
+                                        (click)="onEditEquipement(item)"
+                                        
+                                        data-toggle="modal" data-target="#exampleModal2" class="btn btn-sm" title="Modifier ici">
+                                        <span class="pe-7s-pen"></span>  
+                                      </button>
+                                        <button (click)="onDeleteVigilance(item)" class="btn btn-sm" title="Supprimer ici">
+                                          <span class="pe-7s-trash"></span>
+                                        </button>
+                                    </td>
+  
+                                  </tr>
+                                
+                          </tbody>
+                          </table>
+                                    </div>
+                        
+                        <div class="dataTables_paginate paging_simple_numbers" id="tableExample3_paginate">
+                            <ul class="pagination">
+                                <li *ngFor="let item of [].constructor(this.totalPages);let i=index;" class="paginate_button page-item ">
+                                    <a (click)="gotoPage(i)"  aria-controls="tableExample3" data-dt-idx="3" tabindex="0" class="page-link">{{i}}</a>
+                                </li>
+                            </ul>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+           <!-- Modal -->
+           <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Ajouter Nouvelle Vigilance</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="formGroup" (ngSubmit)="onAddVigilance()">
+                        <div class="form-group"><label for="exampleInputName">Titre</label> <input type="text" formControlName="titre"  class="form-control" id="exampleInputName" placeholder="Titre"></div>
+                        <div class="form-group"><label for="exampleInputEmail1">But</label> <input type="text" formControlName="but"  class="form-control" id="exampleInputEmail1" placeholder="But"></div>
+                        <div class="form-group"><label for="exampleInputPassword1">Moment</label> <input type="text" formControlName="moment_faire"  class="form-control" id="exampleInputPassword1" placeholder="Moment"></div>
+                        <div class="form-group"><label for="exampleInputPassword1">Qui</label> <input type="text" formControlName="qui_faire" class="form-control" id="exampleInputPassword1" placeholder="Qui"></div>
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Conseil</label>
+                          <div style="background: #fff;">
+                            <div [ngxSummernote]="config" formControlName="conseil" class="form-control"></div>
+                          </div>
+                          </div> 
+                        <div class="form-group"><label for="exampleInputPassword1">Document</label> <input type="text" formControlName="document"  class="form-control" id="exampleInputPassword1" placeholder="Document"></div>
+                        <div class="form-group">
+                          <label for="exampleInputPassword1">Etat</label> 
+                          <select class="select2_demo_2 form-control" formControlName="etat" style="width: 100%">
+                            <option value="construction">construction</option>
+                            <option value="exploitation">exploitation</option>
+                        </select>
+                        </div>
+
+                        <button type="submit" data-dismiss="modal" (click)="onAddVigilance()" class="btn btn-default">Submit</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Modifier Vigilance</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                    <form [formGroup]="formGroup2" (ngSubmit)="onEdit()">
+                        <div class="form-group"><label for="exampleInputName">Titre</label> <input type="text" formControlName="titre"  class="form-control" id="exampleInputName" placeholder="Titre"></div>
+                        <div class="form-group"><label for="exampleInputEmail1">But</label> <input type="text" formControlName="but"  class="form-control" id="exampleInputEmail1" placeholder="But"></div>
+                        <div class="form-group"><label for="exampleInputPassword1">Moment</label> <input type="text" formControlName="moment_faire"  class="form-control" id="exampleInputPassword1" placeholder="Moment_Faire"></div>
+                        <div class="form-group"><label for="exampleInputPassword1">Qui</label> <input type="text" formControlName="qui_faire" class="form-control" id="exampleInputPassword1" placeholder="Qui_Faire"></div>
+                        <div class="form-group"><label for="exampleInputPassword1">Conseil</label> 
+                          <div style="background: #fff;">
+                            <div [ngxSummernote]="config" formControlName="conseil" class="form-control"></div>
+                          </div>  
+                        </div>
+                        <div class="form-group"><label for="exampleInputPassword1">Document</label> <input type="text" formControlName="document"  class="form-control" id="exampleInputPassword1" placeholder="Document"></div>
+                        <div class="form-group"><label for="exampleInputPassword1">Etat</label>
+                          <select class="select2_demo_2 form-control" formControlName="etat" style="width: 100%">
+                            <option value="construction">construction</option>
+                            <option value="exploitation">exploitation</option>
+                        </select>
+                           <!-- <input type="text" formControlName="etat" class="form-control" id="exampleInputPassword1" placeholder="Etat"> -->
+                          </div>
+
+                        <button type="submit" data-dismiss="modal" (click)="onEdit()" class="btn btn-primarydefault">Submit</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div>                         
