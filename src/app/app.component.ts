@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,14 +7,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-   
-  ngOnInit(): void {
+   ngOnInit(): void {
    }
-
-
-   constructor(
-
-   ){
+   constructor(){
     
    }
 }

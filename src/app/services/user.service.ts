@@ -16,7 +16,7 @@ export class UserService {
 
   getAllUsers() {
     return new Promise((resolve, reject) => {
-      return this.http.get<Iuser[]>(`${environment.host}/users`)
+      return this.http.get<Iuser[]>(`${environment.host}users`)
       .subscribe({
         next: res => {
           resolve(res);
