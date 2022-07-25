@@ -15,7 +15,6 @@ export class AbonnementSearchService {
 
   getAllUserAbonnementSearch(){
     return new Promise((resolve, reject) => {
-<<<<<<< HEAD
      return this.http.get<IabonnementSearch[]>(`${environment.host}abonnement_users`)
      .subscribe({
        next: res => {
@@ -31,9 +30,6 @@ export class AbonnementSearchService {
    getOnUserAbonnement(id:number){
     return new Promise((resolve, reject) => {
      return this.http.get<IabonnementSearch>(`${environment.host}abonnement_users/${id}`)
-=======
-     return this.http.get<IabonnementSearch[]>(`${environment.host}/abonnement_users/search`)
->>>>>>> 9bcb49e18f121e459b62134dbfa1287fe4c17e1d
      .subscribe({
        next: res => {
          resolve(res);

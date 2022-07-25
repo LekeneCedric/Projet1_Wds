@@ -22,7 +22,7 @@ export class AbonnementComponent implements OnInit {
     created_at: null,
     updated_at: null
   };
- //for update
+
   periode:number | undefined ;
   frequence:string | undefined;
   montant:number | undefined;

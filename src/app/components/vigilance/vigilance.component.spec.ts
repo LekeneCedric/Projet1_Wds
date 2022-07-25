@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { VigilanceStateComponent } from './vigilance-state.component';
+import { VigilanceComponent } from './vigilance.component';
 
-describe('VigilanceStateComponent', () => {
-  let component: VigilanceStateComponent;
-  let fixture: ComponentFixture<VigilanceStateComponent>;
+describe('VigilanceComponent', () => {
+  let component: VigilanceComponent;
+  let fixture: ComponentFixture<VigilanceComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ VigilanceStateComponent ]
+      declarations: [ VigilanceComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(VigilanceStateComponent);
+    fixture = TestBed.createComponent(VigilanceComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -3,7 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  host:"http://backend.pharmcogroup.net/api",
+  host:"http://backend.pharmcogroup.net/api/",
   production: false
 };
 

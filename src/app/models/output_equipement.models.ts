@@ -1,4 +1,4 @@
-export default interface IOutputEquipement{
+export default interface IOutputEqupement{
 
     id?:number,
     type: string,
