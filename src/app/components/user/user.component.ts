@@ -6,8 +6,7 @@ import Iuser from '../../models/users.models';
 import Iabonnement_historique from '../../models/abonnement_historique';
 import Iuser_reponseelt from '../../models/user_reonseelt_historique';
 import { Observable, of } from 'rxjs';
-import PageUser from 'src/app/models/pages/Page.Utilisateur.model';
-
+import PageUser from '../../models/pages/Page.Utilisateur.model';
 
 @Component({
   selector: 'app-user',
