@@ -178,7 +178,13 @@
                           </div>  
                         </div>
                         <div class="form-group"><label for="exampleInputPassword1">Document</label> <input type="text" formControlName="document"  class="form-control" id="exampleInputPassword1" placeholder="Document"></div>
-                        <div class="form-group"><label for="exampleInputPassword1">Etat</label> <input type="text" formControlName="etat" class="form-control" id="exampleInputPassword1" placeholder="Etat"></div>
+                        <div class="form-group"><label for="exampleInputPassword1">Etat</label>
+                          <select class="select2_demo_2 form-control" formControlName="etat" style="width: 100%">
+                            <option value="construction">construction</option>
+                            <option value="exploitation">exploitation</option>
+                        </select>
+                           <!-- <input type="text" formControlName="etat" class="form-control" id="exampleInputPassword1" placeholder="Etat"> -->
+                          </div>
 
                         <button type="submit" data-dismiss="modal" (click)="onEdit()" class="btn btn-primarydefault">Submit</button>
                     </form>
