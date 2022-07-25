@@ -11,7 +11,7 @@ export class SidemenuComponent implements OnInit {
   constructor(private route:Router) { }
   
   ngOnInit(): void {
-    document.getElementById(`habitations`)?.classList.add('active');
+    // document.getElementById(`habitations`)?.classList.add('active');
   }
 
   /*Dans cette fonction , nous recuperons le path(url) actuelle en fontion de la quelle 
