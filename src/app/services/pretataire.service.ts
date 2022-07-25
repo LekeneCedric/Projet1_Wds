@@ -16,7 +16,7 @@ export class PretataireService {
 
   getAllPrestatires(){
     return new Promise((resolve, reject) => {
-     return this.http.get<Iprestataire[]>(`${environment.host}relation`)
+     return this.http.get<Iprestataire[]>(`${environment.host}/relation`)
      .subscribe({
        next: res => {
          resolve(res);

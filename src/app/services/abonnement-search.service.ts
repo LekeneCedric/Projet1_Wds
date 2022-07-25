@@ -15,7 +15,7 @@ export class AbonnementSearchService {
 
   getAllUserAbonnementSearch(){
     return new Promise((resolve, reject) => {
-     return this.http.get<IabonnementSearch[]>(`${environment.host}abonnement_users`)
+     return this.http.get<IabonnementSearch[]>(`${environment.host}/abonnement_users`)
      .subscribe({
        next: res => {
          resolve(res);
@@ -29,7 +29,7 @@ export class AbonnementSearchService {
 
    getOnUserAbonnement(id:number){
     return new Promise((resolve, reject) => {
-     return this.http.get<IabonnementSearch>(`${environment.host}abonnement_users/${id}`)
+     return this.http.get<IabonnementSearch>(`${environment.host}/abonnement_users/${id}`)
      .subscribe({
        next: res => {
          resolve(res);
@@ -44,7 +44,7 @@ export class AbonnementSearchService {
 
    sendAbonnement(item:any){
     return new Promise((resolve, reject) => {
-      return this.http.post<IabonnementSend>(`${environment.host}abonnement_users/search`,item)
+      return this.http.post<IabonnementSend>(`${environment.host}/abonnement_users/search`,item)
       .subscribe({
         next: res => {
           resolve(res);

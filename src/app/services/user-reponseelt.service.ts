@@ -16,7 +16,7 @@ export class UserReponseeltService {
 
   getAllUserReponseelt(id:number){
     return new Promise((resolve, reject) => {
-     return this.http.get<Iuser_reponseelt[]>(`${environment.host}user_reponseelt/historiques/${id}`)
+     return this.http.get<Iuser_reponseelt[]>(`${environment.host}/user_reponseelt/historiques/${id}`)
      .subscribe({
        next: res => {
          resolve(res);

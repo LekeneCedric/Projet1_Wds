@@ -6,7 +6,6 @@ import {environment} from '../../environments/environment';
 import ICategorie from '../models/categorie.models';
 import IEquipement from '../models/equipement.models';
 import IProposition from '../models/proposition.models';
-import ITypeEquipement from '../models/typeequipement.models';
 import IQuestion from '../models/question.models';
 import IVigilance from '../models/vigilance.models';
 import IFormation from '../models/formations.models';
@@ -74,12 +73,6 @@ export class ApiService {
 
   // HTTP REQUEST FOR EQUIPEMENT AND TYPE
 
-  getEquipements():Observable<IEquipement[]>{
-    return this.http.get<IEquipement[]>(`${environment.host}/questionselt/equipement`);
-  }
-  getTypeEquipement():Observable<ITypeEquipement[]>{
-    return this.http.get<ITypeEquipement[]>(`${environment.host}/questionselt/equipement/search`);
-  }
   // postEquipement(item:IEquipement):Observable<IEquipement>{
   //  return this.http.post<IEquipement>(`${environment.host}/categories`, item);
   // }
