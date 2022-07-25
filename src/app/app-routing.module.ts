@@ -12,6 +12,14 @@ import { UserComponent } from './components/user/user.component';
 import { AbonnementUsersComponent } from './components/abonnement-users/abonnement-users.component';
 import {  AbonnementComponent } from './components/abonnement/abonnement.component';
 import { PrestataireComponent } from './components/prestataire/prestataire.component';
+import { EntrepriseComponent } from './components/entreprise/entreprise.component';
+import { EnvironnementComponent } from './components/environnement/environnement.component';
+import { EquipementComponent } from './components/equipement/equipement.component';
+import { FormationComponent } from './components/formation/formation.component';
+import { OutputComponent } from './components/output/output.component';
+import { VigilanceComponent } from './components/vigilance/vigilance.component';
+import { VigilanceStateComponent } from './components/vigilance-state/vigilance-state.component';
+import { OutputEquipementLieComponent } from './components/output-equipement-lie/output-equipement-lie.component';
 
 const routes: Routes = [
  
@@ -28,6 +36,14 @@ const routes: Routes = [
   {path:'categories',component:CATEGORIESComponent},
   {path:'propositions',component:PropositionsService},
   {path:'equipements',component:EQUIPEMENTSComponent},
+  {path:'vigilance' , component:VigilanceComponent },
+  {path:'formations' , component:FormationComponent },
+  {path:'entreprises_formation' , component:EntrepriseComponent },
+  {path:'outputs' , component:OutputComponent },
+  {path:'output_equipement' , component:EquipementComponent },
+  {path:'output_environnement' , component:EnvironnementComponent },
+  {path:'propositionselt/getvigilance/:etat' , component:VigilanceStateComponent },
+  {path:'outputequipementlie/:id' , component:OutputEquipementLieComponent },
 
 
 ]
