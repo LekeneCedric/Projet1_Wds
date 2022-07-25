@@ -2,8 +2,6 @@ export default interface Iprestataire{
     id: number;
     idutilisateur: number;
     typeelement: string;
-    idhabitation: number,
-    idelement: string,
     typeutilisateur: string;
     nom: string;
     telephone: string;

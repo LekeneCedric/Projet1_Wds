@@ -78,7 +78,7 @@ export class VigilanceComponent implements OnInit {
     this.vigilanceService.getAllVigilance()
     .subscribe(
       (data)=>{
-        this.vigilances = data.reverse();
+        this.vigilances = data;
         this.onGetPageVigilance();
       }
     )
@@ -105,8 +105,7 @@ export class VigilanceComponent implements OnInit {
     this.vigilanceService.addVigilance(this.formGroup.value)
     .subscribe(
       (data)=>{
-        // alert('Add Success');
-        this.onGetAllVigilance();
+        alert('Add Success');
       },(err)=> console.log('error',err)
     )
       
@@ -138,6 +137,10 @@ export class VigilanceComponent implements OnInit {
       this.vigilanceService.getVigilanceById(item.id)
       .subscribe(
         (data)=> {
+
+          
+          
+          console.log('moi data',data);
           this.currentId = item.id;
           this.formGroup2 = this.fb.group({
             
@@ -175,7 +178,7 @@ export class VigilanceComponent implements OnInit {
     this.vigilanceService.updateVigilance(this.currentId,this.formGroup2.value)
     .subscribe(
       (data)=>{
-        this.onGetAllVigilance();
+        alert('Update Succes');
       },err=> console.log('error',err)
     )
 }
@@ -183,23 +186,6 @@ export class VigilanceComponent implements OnInit {
   gotoPage(i:number){
     this.currentPage = i;
     this.onGetAllVigilance();
-  }
-
-  //config for summer note
-  config:any = {
-    placeholder: '',
-    tabsize: 2,
-    height: 200,
-  
-    toolbar: [
-        ['misc', ['codeview', 'undo', 'redo']],
-        ['style', ['bold', 'italic', 'underline', 'clear']],
-        ['font', ['bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'clear']],
-        ['fontsize', ['fontname', 'fontsize', 'color']],
-        ['para', ['style', 'ul', 'ol', 'paragraph', 'height']],
-        ['insert', ['table', 'picture', 'link', 'video', 'hr']]
-    ],
-    fontNames: ['Helvetica', 'Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Roboto', 'Times']
   }
 
 }

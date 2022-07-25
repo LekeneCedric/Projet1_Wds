@@ -4,7 +4,8 @@
  */
 
 $(document).ready(function () {
-
+        $('.dataTables_length').addClass('bs-select');
+    
 
 
     // Handle minimalize left menu

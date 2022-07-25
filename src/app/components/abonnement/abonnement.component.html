@@ -6,18 +6,15 @@
             <div class="col-lg-12">
                 <div class="view-header">
                     <div class="pull-right text-right" style="line-height: 14px">
-                        <div title="Ajouter ici" class="header-icon mx-2">
-                          <span class="pe-7s-plus" data-toggle="modal" data-target="#myModal"  (click)=" clear()"></span>
-                       </div>
-                   </div>
-
+                        <small>Table design<br>General<br> <span class="c-white">Table styles</span></small>
+                    </div>
                     <div class="header-icon">
                         <i class="pe page-header-icon pe-7s-menu"></i>
                     </div>
                     <div class="header-title">
                         <h3> Abonnements</h3>
                         <small>
-                            page regroupant les abonnements
+                            Examples of various designs of tables.
                         </small>
                     </div>
                 </div>
@@ -26,41 +23,51 @@
         </div>
     
         <!--search component-->
-    
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="view-header">
-                    <div class="pull-right " style="line-height: 14px">
-                        <label>Par Intitulé
-                            <app-search (search)="onSearch($event)"></app-search>
-                        </label>
-                    </div>
-                    <div class="header-icon">
-                
-                    </div>
-                    <div class="header-title">
-                        <div class="dataTables_length" id="tableExample3_length">
-                            <label for="">voir
-                                <select  #numbers (change)="onSelected(numbers.value)" name="tableExample3_length" aria-controls="tableExample3" class="form-control form-control-sm">
-                                    <option value="10">10</option>
-                                    <option value="25">25</option>
-                                    <option value="50">50</option>
-                                    <option value="500">All</option>
-                                </select>
-                            </label>
-                            </div>
-                    </div>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="add_and_search">
+                <div class="add">
+                    <button  class="btn btn-w-md btn-accent" data-toggle="modal" data-target="#myModal" (click)=" clear()">Add Abonnement</button>
                 </div>
             </div>
+            <div class="input-group mb-3 mt-2 w-25">
+             <!--  <app-search (search)="on($event)"></app-search> -->
+            </div>
         </div>
-        
+    </div>
+</div>
+
+<div class="row"><div class="col-sm-10">
+    <div class="dataTables_length" id="tableExample3_length">
+      <label>Show 
+          <select name="tableExample3_length" aria-controls="tableExample3" class="form-control form-control-sm">
+              <option value="10">10</option>
+              <option value="25">25</option>
+              <option value="50">50</option>
+              <option value="-1">All</option>
+          </select>
+    </label>
+      </div>
+      </div>
+
+      <div class="col-sm-2">
+          <div id="tableExample3_filter" class="dataTables_filter">
+                <app-search (search)="onSearch($event)"></app-search>
+          </div>
+        </div>
+</div>
 
 <!--begin table-->
   <div class="row">
                 <div class="col-md-12">
                     <div class="panel panel-filled">
                         <div class="panel-heading">
-                            
+                            <div class="panel-tools">
+                                <a class="panel-toggle"><i class="fa fa-chevron-up"></i></a>
+                                <a class="panel-close"><i class="fa fa-times"></i></a>
+                            </div>
+                           
                         </div>
                         <div class="panel-body">
                           
@@ -71,30 +78,30 @@
                                 <thead>
                                 <tr>
                                     <th>Periode</th>
-                                    <th>Frequence</th>
-                                    <th>Montant</th>
                                     <th>Intitule</th>
-                                    <th>Actions</th>
+                                    <th>Montant</th>
+                                    <th>Frequence</th>
+                                    <th>Options</th>
                                 </tr>
                                 </thead>
-                                <tbody >
-                                <tr *ngFor="let abonnement of arrayAbonnements ">
-                                    <td *ngIf="searchText === '' || abonnement.intitule.toLowerCase().includes(searchText)">{{abonnement.periode}}</td>
-                                    <td *ngIf="searchText === '' || abonnement.intitule.toLowerCase().includes(searchText)">{{abonnement.frequence}}</td>
-                                    <td *ngIf="searchText === '' || abonnement.intitule.toLowerCase().includes(searchText)">{{abonnement.montant}}</td>
-                                    <td *ngIf="searchText === '' || abonnement.intitule.toLowerCase().includes(searchText)">{{abonnement.intitule}}</td>
-                                    <td *ngIf="searchText === '' || abonnement.intitule.toLowerCase().includes(searchText)">
+                                <tbody *ngFor="let abonnement of arrayAbonnements ">
+                                <tr *ngIf="searchText === '' || abonnement.intitule.toLowerCase().includes(searchText)">
+                                    <td >{{abonnement.periode}}</td>
+                                    <td>{{abonnement.intitule}}</td>
+                                    <td>{{abonnement.montant}}</td>
+                                    <td>{{abonnement.frequence}}</td>
+                                    <td>
                                         <div class="row">
                                            <div class="font-example-box col-lg-2 col-md-3 col-sm-6 col-xs-6 col px-3">
-                                               <span class="pe-7s-pen"  style=" font-size:25px" data-toggle="modal" data-target="#myModalUpdate" (click)="checkUpdate(abonnement)" title="mise a jour"></span>
+                                               <span class="pe-7s-note2" style=" font-size:25px" data-toggle="modal" data-target="#myModalUpdate" (click)="checkUpdate(abonnement)"></span>
                                                <span class="icon-example-name"> </span>
                                            </div>
                                            <div class="font-example-box col-lg-2 col-md-3 col-sm-6 col-xs-6 col">
-                                               <span class="pe-7s-trash" style=" font-size:25px" (click)=" deleteAbonnement(abonnement)"  title="delete" title="supprimer"></span>
+                                               <span class="pe-7s-trash" style=" font-size:25px" (click)=" deleteAbonnement(abonnement)"></span>
                                                <span class="icon-example-name"> </span>
                                            </div>
                                            <div class="font-example-box col-lg-2 col-md-3 col-sm-6 col-xs-6 px-3">
-                                               <span class="pe-7s-more" style="font-size:25px" data-toggle="modal" data-target="#allConseils" (click)="check(abonnement)" title="voir toute les informations" ></span>
+                                               <span class="pe-7s-news-paper" style="font-size:25px" data-toggle="modal" data-target="#allConseils" (click)="check(abonnement)" ></span>
                                                <span class="icon-example-name"> </span>
                            
                                            </div>
@@ -102,10 +109,10 @@
                                        </td>
                                    <!--modal for update -->                           
                                    <div class="modal fade" id="myModalUpdate" tabindex="-1" role="dialog" aria-hidden="true">
-                                    <div class="modal-dialog modal-lg">
+                                    <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header text-center">
-                                                <h4 class="modal-title">MISE A JOUR D'UN ABONNEMENT</h4>
+                                                <h4 class="modal-title">UPDATE AN ABONNEMENT</h4>
                                                 <small> </small>
                                             </div>
                                             <div class="modal-body">
@@ -124,8 +131,8 @@
                                                     </div>
                                                     <div class="col-md-12">
                                                         <small class="stat-label">Description</small>
-                                                        <div class="summer" style="background-color:white">
-                                                            <div [ngxSummernote]="config" [(ngModel)]="description"></div>
+                                                        <div class="input-group mb-3">
+                                                            <input type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" [(ngModel)]="description" ngDefaultControl>
                                                         </div>
                                                     </div>
                                                     <div class="col-md-12">
@@ -144,8 +151,8 @@
                                               
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-                                                <button type="button" class="btn btn-accent"  data-dismiss="modal" (click)="updateAbonnement(abonnement)">Enregistrer</button>
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                <button type="button" class="btn btn-accent" (click)="updateAbonnement(abonnement)">Save changes</button>
                                             </div>
                                         </div>
                                     </div>
@@ -154,64 +161,60 @@
                             
                      <!--modale for look all Advice of user-->   
                 <div class="modal fade" id="allConseils" tabindex="-1" role="dialog" aria-hidden="true">
-                    <div class="modal-dialog modal-lg">
+                    <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header text-center">
-                                <h4 class="modal-title">TOUT LES INFORMATIONS</h4>
+                                <h4 class="modal-title">VIEW ALL ABONNEMENT</h4>
                                 <small> </small>
                             </div>
                             <div class="modal-body">
                                 <div class=" ">
-                                  <div class="row">
-                                    <div class="col">
+                                    <div class="col-md-12">
                                         <h4 class="stat-label">Periode</h4>
                                         <div class="input-group mb-3 mt-2">
                                             <P>{{periode}}</P>
                                         </div>
                                     </div>
-                                    <div class="col">
+                                    <div class="col-md-12 ">
                                         <h4 class="stat-label">Frequence</h4>
                                         <div class="input-group mb-3 mt-2">
                                             <P>{{frequence}}</P>
                                         </div>
                                     </div>
-                                    <div class="col">
-                                        <h4 class="stat-label">Mise a jour le</h4>
-                                        <div class="input-group mb-3 mt-2">
-                                            <p>{{updated_at | date }}</p>
-                                        </div>
-                                    </div>
-                                  </div>
-                                    <div class="row">
-                                        <div class="col">
-                                            <h4 class="stat-label">Montant</h4>
-                                            <div class="input-group mb-3 mt-2">
-                                                <p>{{montant}}</p>
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <h4 class="stat-label">Intitule</h4>
-                                            <div class="input-group mb-3 mt-2">
-                                                <p>{{intitule}}</p>
-                                            </div>
-                                        </div>
-                                        <div class="col">
-                                            <h4 class="stat-label">Crée le</h4>
-                                            <div class="input-group mb-3 mt-2">
-                                                <p>{{created_at | date }}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col">
+                                    <div class="col-md-12">
                                         <h4 class="stat-label">Description</h4>
                                         <div class="input-group mb-3 mt-2">
                                             <div [ngxSummernoteView]="descriptionContent"></div>
                                         </div>
                                     </div>
+                                    <div class="col-md-12">
+                                        <h4 class="stat-label">Montant</h4>
+                                        <div class="input-group mb-3 mt-2">
+                                            <p>{{montant}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <h4 class="stat-label">Intitule</h4>
+                                        <div class="input-group mb-3 mt-2">
+                                            <p>{{intitule}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <h4 class="stat-label">Created_at</h4>
+                                        <div class="input-group mb-3 mt-2">
+                                            <p>{{created_at | date }}</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <h4 class="stat-label">Update_at</h4>
+                                        <div class="input-group mb-3 mt-2">
+                                            <p>{{updated_at | date }}</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-default " data-dismiss="modal">Fermer</button>
+                                <button type="button" class="btn btn-default " data-dismiss="modal">Close</button>
                             </div>
                         </div>
                     </div>
@@ -220,37 +223,14 @@
             </tr>
                                 </tbody>
                             </table>
-                            
                         </div>
-                                     <!--pagination-->
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="view-header">
-                                <div class="pull-right text-right" style="line-height: 14px">
-                                    <ul class="pagination">
-                                        <li *ngFor="let item of [].constructor(this.totalPages);let i=index;" class="paginate_button page-item ">
-                                            <a (click)="gotoPage(i)"  aria-controls="tableExample3" data-dt-idx="3" tabindex="0" class="page-link">{{i}}</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="header-icon">
-                                    
-                                </div>
-                                <div class="header-title">
-                                
-                                </div>
-                            </div>
-                        
-                        </div>
-                    </div>
-                    <!--end pagination-->
                     </div>
                 </div>
 
             </div>
             <!--modale for add Advice-->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
+    <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header text-center">
                 <h4 class="modal-title">ADD AN ADVICE</h4>
@@ -284,24 +264,23 @@
                     </div>
                     <div class="col-md-12">
                         <small class="stat-label">Description</small>
-                        <div class="summer" style="background-color:white">
-                            <div [ngxSummernote]="config" [(ngModel)]="description"></div>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1"  [(ngModel)]="description" ngDefaultControl>
                         </div>
                     </div>
                 </div>
               
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
-                <button type="button" class="btn btn-accent" data-dismiss="modal" (click)="addAbonnement()">Ajouter</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-accent" (click)="addAbonnement()">Save changes</button>
             </div>
         </div>
     </div>
 </div>
-</div>
 <!--end modale-->
-<!--pagination-->
 
+    </div>
 </section>
 
 

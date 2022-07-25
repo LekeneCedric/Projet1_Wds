@@ -67,23 +67,18 @@ linkOutputToEquipement(){
     }
   )
   console.log(idArr);
-  if(idArr.length > 0){
+  this.outputsService.linkToEquipement(this.currentId,idArr)
+  .subscribe(
+    (data)=>{
+      alert(data.message);
+      console.log(data);
+      this.equipementsALies.forEach(
+        (equip,index)=>{
 
-    this.outputsService.linkToEquipement(this.currentId,idArr)
-    .subscribe(
-      (data)=>{
-        alert(data.message);
-        console.log(data);
-        this.equipementsALies.forEach(
-          (equip,index)=>{
-  
-          }
-        )
-      },(err)=> console.log('error',err)
-    )
-  } else {
-    alert('Veuillez Selectionner des items');
-  }
+        }
+      )
+    },(err)=> console.log('error',err)
+  )
 }
 
 }

@@ -2,27 +2,11 @@
     <div class="container-fluid">
         
         <div class="row">
-            <div class="col-lg-12">
-                <div class="view-header">
-                    <div class="pull-right text-right" style="line-height: 14px">
-                      <div title="Ajouter ici" class="header-icon mx-2">
-                        <span class="pe-7s-plus" data-toggle="modal" data-target="#exampleModal"></span>
-                    </div>
-                    </div>
-                    <div class="header-icon">
-                        <i class="pe page-header-icon pe-7s-note2"></i>
-                    </div>
-                    <div class="header-title">
-                        <h3>Formations</h3>
-                    </div>
-                </div>
-                <hr>
-            </div>
             <div class="col-md-12">
                 <div class="panel panel-filled">
-                    <!-- <div class="panel-heading">
+                    <div class="panel-heading">
                             Formations
-                    </div> -->
+                    </div>
                     <div class="panel-body">
                         
                           
@@ -31,42 +15,26 @@
                             <div class="modal-dialog modal-lg" role="document">
                               <div class="modal-content">
                                 <div class="modal-header">
-                                  <h5 class="modal-title" id="exampleModalLabel">Ajouter Nouvelle Formation</h5>
+                                  <h5 class="modal-title" id="exampleModalLabel">Add Formation</h5>
                                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                   </button>
                                 </div>
                                 <div class="modal-body">
                                     <form [formGroup]="formGroup" (ngSubmit)="onAddFormation()">
-                                        <div class="form-group"><label for="exampleInputName">Equipement</label> <input type="text" formControlName="equipement"  class="form-control" id="exampleInputName" placeholder="Equipement"></div>
-                                        <div class="form-group"><label for="exampleInputEmail1">Beneficiare</label> 
-                                            <div style="background: #fff;">
-                                                <div [ngxSummernote]="config" formControlName="beneficiaire" class="form-control"></div>
-                                              </div>
-                                        </div>
-                                        <div class="form-group"><label for="exampleInputPassword1">Contenu</label> 
-                                            <div style="background: #fff;">
-                                                <div [ngxSummernote]="config" formControlName="contenu" class="form-control"></div>
-                                              </div>
-                                        </div>
-                                        <div class="form-group"><label for="exampleInputPassword1">Document</label> 
-                                            <div style="background: #fff;">
-                                                <div [ngxSummernote]="config" formControlName="document" class="form-control"></div>
-                                              </div>
-                                        </div>
+                                        <div class="form-group"><label for="exampleInputName">Equipement</label> <input type="text" formControlName="equipement"  class="form-control" id="exampleInputName" placeholder="Titre"></div>
+                                        <div class="form-group"><label for="exampleInputEmail1">Beneficiare</label> <input type="text" formControlName="beneficiaire"  class="form-control" id="exampleInputEmail1" placeholder="But"></div>
+                                        <div class="form-group"><label for="exampleInputPassword1">Contenu</label> <input type="text" formControlName="contenu" class="form-control" id="exampleInputPassword1" placeholder="Moment_Faire"></div>
+                                        <div class="form-group"><label for="exampleInputPassword1">Document</label> <input type="text" formControlName="document" class="form-control" id="exampleInputPassword1" placeholder="Qui_Faire"></div>
                                         <div class="form-group"><label for="exampleInputPassword1">Formateur</label> 
-                                            <div style="background: #fff;">
-                                                <div [ngxSummernote]="config" formControlName="formateur" class="form-control"></div>
-                                              </div>
+                                            <input type="text" formControlName="formateur" class="form-control" id="exampleInputPassword1" placeholder="Qui_Faire">
                                         </div>
                                         <div class="form-group"><label for="exampleInputPassword1">Reference</label> 
-                                                <div style="background: #fff;">
-                                                    <div [ngxSummernote]="config" formControlName="reference" class="form-control"></div>
-                                                  </div>
+                                            <input type="text" formControlName="reference" class="form-control" id="exampleInputPassword1" placeholder="Referencce">
                                         </div>
                                         <div><label> <input type="checkbox" formControlName="isconstruction"> En Construction </label></div>
                                         <div><label> <input type="checkbox" formControlName="isexploitation"> En Exploitation </label></div>
-                                        <button type="submit" data-dismiss="modal" (click)="onAddFormation()" class="btn btn-default">Submit</button>
+                                        <button type="submit" class="btn btn-default">Submit</button>
                                     </form>
                                 </div>
                                 <div class="modal-footer">
@@ -81,7 +49,7 @@
                             <div class="modal-dialog modal-lg" role="document">
                               <div class="modal-content">
                                 <div class="modal-header">
-                                  <h5 class="modal-title" id="exampleModalLabel">Modifier Formation</h5>
+                                  <h5 class="modal-title" id="exampleModalLabel">Update Formation</h5>
                                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                   </button>
@@ -89,39 +57,23 @@
                                 <div class="modal-body">
                                     <form [formGroup]="formGroup2" (ngSubmit)="onEdit()">
                                         <div class="form-group"><label for="exampleInputName">Equipement</label> <input type="text" formControlName="equipement"  class="form-control" id="exampleInputName" placeholder="Titre"></div>
-                                        <div class="form-group"><label for="exampleInputEmail1">Beneficiare</label> 
-                                            <div style="background: #fff;">
-                                                <div [ngxSummernote]="config" formControlName="beneficiaire" class="form-control"></div>
-                                              </div>
-                                        </div>
-                                        <div class="form-group"><label for="exampleInputPassword1">Contenu</label> 
-                                            <div style="background: #fff;">
-                                                <div [ngxSummernote]="config" formControlName="contenu" class="form-control"></div>
-                                              </div>
-                                        </div>
-                                        <div class="form-group"><label for="exampleInputPassword1">Document</label> 
-                                            <div style="background: #fff;">
-                                                <div [ngxSummernote]="config" formControlName="document" class="form-control"></div>
-                                              </div>
-                                        </div>
+                                        <div class="form-group"><label for="exampleInputEmail1">Beneficiare</label> <input type="text" formControlName="beneficiaire"  class="form-control" id="exampleInputEmail1" placeholder="But"></div>
+                                        <div class="form-group"><label for="exampleInputPassword1">Contenu</label> <input type="text" formControlName="contenu" class="form-control" id="exampleInputPassword1" placeholder="Moment_Faire"></div>
+                                        <div class="form-group"><label for="exampleInputPassword1">Document</label> <input type="text" formControlName="document" class="form-control" id="exampleInputPassword1" placeholder="Qui_Faire"></div>
                                         <div class="form-group"><label for="exampleInputPassword1">Formateur</label> 
-                                            <div style="background: #fff;">
-                                                <div [ngxSummernote]="config" formControlName="formateur" class="form-control"></div>
-                                              </div>
+                                            <input type="text" formControlName="formateur" class="form-control" id="exampleInputPassword1" placeholder="Qui_Faire">
                                         </div>
                                         <div class="form-group"><label for="exampleInputPassword1">Reference</label> 
-                                                <div style="background: #fff;">
-                                                    <div [ngxSummernote]="config" formControlName="reference" class="form-control"></div>
-                                                  </div>
+                                            <input type="text" formControlName="reference" class="form-control" id="exampleInputPassword1" placeholder="Referencce">
                                         </div>
                                         <div><label> <input type="checkbox" formControlName="isconstruction"> En Construction </label></div>
                                         <div><label> <input type="checkbox" formControlName="isexploitation"> En Exploitation </label></div>
                                         
-                                        <button type="submit" data-dismiss="modal" class="btn btn-default">Submit</button>
+                                        <button type="submit" class="btn btn-default">Submit</button>
                                     </form>
                                 </div>
                                 <div class="modal-footer">
-                                  <button type="button" class="btn btn-secondary" (click)="onEdit()" data-dismiss="modal">Close</button>
+                                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                 </div>
                               </div>
                             </div>
@@ -153,17 +105,19 @@
                                 <table id="tableExample3" class="table table-striped table-hover table-responsive-sm dataTable no-footer" role="grid">          
                                     <thead>
                                     <tr role="row">
+                                        <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" >
+                                            <button title="Ajouter ici" type="button" class="btn btn-default btn-sm " data-toggle="modal" data-target="#exampleModal">
+                                                <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                                              </button>
+                                        </th>
                                         <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Position: activate to sort column ascending" >Equipement</th>
                                         <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Office: activate to sort column ascending" >Beneficiaire</th>
                                         <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Age: activate to sort column ascending" >Contenu</th>
                                         <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" >Document</th>
-                                        <!-- <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" >Formateur</th>
+                                        <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" >Formateur</th>
                                         <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" >Reference</th>
                                         <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" >En Construction</th>
-                                        <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" >En Exploitation</th> -->
-                                        <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" >
-                                           Actions
-                                        </th>
+                                        <th class="sorting" tabindex="0" aria-controls="tableExample3" rowspan="1" colspan="1" aria-label="Start date: activate to sort column ascending" >En Exploitation</th>
                                         
                                         
                                     </tr>
@@ -172,29 +126,25 @@
                                     </thead>
                                     <tbody style="display: content;">
                                         <tr role="row" class="even" *ngFor="let item of formations">
-                                            <td [innerHTML]="item.equipement"></td>
-                                            <td [innerHTML]="item.beneficiaire"></td>
-                                            <td [innerHTML]="item.contenu"></td>
-                                            <td [innerHTML]="item.document"></td>
-                                            <!-- <td [innerHTML]="item.formateur"></td>
-                                            <td [innerHTML]="item.reference"></td>
-                                            <td [innerHTML]="item.isconstruction"></td>
-                                            <td [innerHTML]="item.isexploitation"></td> -->
-                                            <td style="display: content;" class="d-flex">
+                                            <td style="display: content;">
                                                 <button 
                                                 (click)="onEditFormation(item)"
                                                 
                                                 data-toggle="modal" data-target="#exampleModal2" class="btn btn-sm" title="Modifier ici">
-                                                <span class="pe-7s-pen"></span>
-                                            </button>
-                                                <button (click)="onDeleteFormation(item)" class="btn btn-sm" title="Supprimer ici">
-                                                    <span class="pe-7s-trash"></span>
+                                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                                 </button>
-                                                <button title="details ici" (click)="showInModal(item)"
-                                                data-toggle="modal" data-target="#exampleModal3" class="btn btn-sm">
-                                                <span class="pe-7s-more"></span>
+                                                <button (click)="onDeleteFormation(item)" class="btn btn-sm" title="Supprimer ici">
+                                                    <i class="fa fa-trash-o" aria-hidden="true"></i>
                                                 </button>
                                             </td>
+                                            <td [innerHTML]="item.equipement"></td>
+                                            <td [innerHTML]="item.beneficiaire"></td>
+                                            <td [innerHTML]="item.contenu"></td>
+                                            <td [innerHTML]="item.document"></td>
+                                            <td [innerHTML]="item.formateur"></td>
+                                            <td [innerHTML]="item.reference"></td>
+                                            <td [innerHTML]="item.isconstruction"></td>
+                                            <td [innerHTML]="item.isexploitation"></td>
                                         </tr>
                                       
                                 </tbody>
@@ -216,46 +166,3 @@
     </div>
 </section>
                                 
-
-<div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header text-center">
-                <h4 class="modal-title">Details Formation</h4>
-                <small> </small>
-            </div>
-            <div class="modal-body">
-                <div class=" ">
-                    <div class="col-md-12">
-                        <h4 class="stat-label">Formateur</h4>
-                        <div class="input-group mb-3 mt-2">
-                            <P [innerHTML]="formateurVal"></P>
-                        </div>
-                    </div>
-                    <div class="col-md-12 ">
-                        <h4 class="stat-label">Reference</h4>
-                        <div class="input-group mb-3 mt-2">
-                            <P [innerHTML]="referenceVal"></P>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <h4 class="stat-label">En Construction</h4>
-                        <div class="input-group mb-3 mt-2">
-                            <div [innerHTML]="constructionVal"></div>
-                        </div>
-                    </div>
-                    <div class="col-md-12">
-                        <h4 class="stat-label">En Exploitation</h4>
-                        <div class="input-group mb-3 mt-2">
-                            <div [innerHTML]="exploitationVal"></div>
-                        </div>
-                    </div>
-                
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default " data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>

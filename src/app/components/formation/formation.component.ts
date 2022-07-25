@@ -22,13 +22,6 @@ export class FormationComponent implements OnInit {
   pageSize:number = 5;
   totalPages:number = 0;
   selected:number = 10;
-  formateurVal: string = '';
-  referenceVal: string = '';
-  constructionVal: boolean = false;
-  exploitationVal: boolean = false;
-
-
-
 
   constructor(
     private formationsService:FormationsService,
@@ -88,7 +81,7 @@ export class FormationComponent implements OnInit {
     this.formationsService.getAllFormation()
     .subscribe(
       (data)=>{
-        this.formations = data.reverse();
+        this.formations = data;
         this.onGetPageFormation();
       }
     )
@@ -113,6 +106,7 @@ export class FormationComponent implements OnInit {
     this.formationsService.addFormation(this.formGroup.value)
     .subscribe(
       (data)=>{
+        alert('Add Success');
         this.onGetAllFormation();
       },(err)=> console.log('error',err)
     )
@@ -183,6 +177,7 @@ export class FormationComponent implements OnInit {
     this.formationsService.updateFormation(this.currentId,this.formGroup2.value)
     .subscribe(
       (data)=>{
+        alert('Update Succes');
         this.onGetAllFormation();
       },err=> console.log('error',err)
     )
@@ -192,29 +187,5 @@ gotoPage(i:number){
   this.currentPage = i;
   this.onGetAllFormation();
 }
-
-showInModal(item:IFormation){
-  this.formateurVal = item.formateur;
-  this.referenceVal = item.reference;
-  this.constructionVal = item.isconstruction;
-  this.exploitationVal = item.isexploitation;
-}
-
-  //config for summer note
-  config:any = {
-    placeholder: '',
-    tabsize: 2,
-    height: 200,
-  
-    toolbar: [
-        ['misc', ['codeview', 'undo', 'redo']],
-        ['style', ['bold', 'italic', 'underline', 'clear']],
-        ['font', ['bold', 'italic', 'underline', 'strikethrough', 'superscript', 'subscript', 'clear']],
-        ['fontsize', ['fontname', 'fontsize', 'color']],
-        ['para', ['style', 'ul', 'ol', 'paragraph', 'height']],
-        ['insert', ['table', 'picture', 'link', 'video', 'hr']]
-    ],
-    fontNames: ['Helvetica', 'Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Roboto', 'Times']
-  }
 
 }
