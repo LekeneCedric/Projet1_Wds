@@ -16,7 +16,7 @@ export class AbonnementHistoriqueService {
 
   getAllAbonnement_Historique(id:number){
     return new Promise((resolve, reject) => {
-     return this.http.get<Iabonnement_historique[]>(`${environment.host}/abonnements/historique/${id}`)
+     return this.http.get<Iabonnement_historique[]>(`${environment.host}abonnements/historique/${id}`)
      .subscribe({
        next: res => {
          resolve(res);
