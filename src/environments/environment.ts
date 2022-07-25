@@ -4,6 +4,7 @@
 
 export const environment = {
   host:"http://backend.pharmcogroup.net/api",
+  images:"http://backend.pharmcogroup.net/images/",
   production: false
 };
 
