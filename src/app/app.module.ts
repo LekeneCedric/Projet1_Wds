@@ -1,12 +1,10 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {HttpClientModule} from '@angular/common/http';
 import { NgSelectModule } from "@ng-select/ng-select";
 
 import { HabitationsComponent } from './components/HABITATION/habitations/habitations.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { TypesQuestionsComponent } from './components/TYPES-QUESTIONS/types-questions.component';
 import { QUESTIONSComponent } from './components/QUESTIONS/questions.component';
@@ -26,6 +24,16 @@ import { SearchComponent } from './components/search/search.component';
 import { UserComponent } from './components/user/user.component';
 
 import { NgxSummernoteModule } from 'ngx-summernote';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { EntrepriseComponent } from './components/entreprise/entreprise.component';
+import { EnvironnementComponent } from './components/environnement/environnement.component';
+import { EquipementComponent } from './components/equipement/equipement.component';
+import { FormationComponent } from './components/formation/formation.component';
+import { OutputEquipementLieComponent } from './components/output-equipement-lie/output-equipement-lie.component';
+import { OutputComponent } from './components/output/output.component';
+import { VigilanceStateComponent } from './components/vigilance-state/vigilance-state.component';
+import { VigilanceComponent } from './components/vigilance/vigilance.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,7 +55,16 @@ import { NgxSummernoteModule } from 'ngx-summernote';
     UserComponent,
     AbonnementUsersComponent,
     AbonnementComponent,
-    PrestataireComponent
+    PrestataireComponent,
+    VigilanceComponent,
+    OutputEquipementLieComponent,
+    FormationComponent,
+    EntrepriseComponent,
+    OutputComponent,
+    EquipementComponent,
+    EnvironnementComponent,
+    VigilanceStateComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -55,9 +72,10 @@ import { NgxSummernoteModule } from 'ngx-summernote';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    FormsModule,
     NgSelectModule,
-    NgxSummernoteModule  ],
+    NgxSummernoteModule ,
+    ReactiveFormsModule,
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
