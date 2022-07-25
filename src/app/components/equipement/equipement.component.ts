@@ -4,6 +4,8 @@ import { Observable, of } from 'rxjs';
 import IOutputEquipement from 'src/app/models/output_equipement.models';
 import PageEquipement from 'src/app/models/modelsPages/pageEquipement.models';
 import { EquipementService } from 'src/app/services/equipement.service';
+import { QuestionsService } from 'src/app/services/questions.service';
+import { CategoriesService } from 'src/app/services/categories.service';
 
 @Component({
   selector: 'app-equipement',
@@ -23,7 +25,8 @@ export class EquipementComponent implements OnInit {
   totalPages:number = 0;
   selected:number = 10;
   constructor(
-    private equipementService : EquipementService,
+    private equipementService : EquipementService,private qserv:QuestionsService,
+    private catServ:CategoriesService,
     private fb: FormBuilder,
     
   ) { }

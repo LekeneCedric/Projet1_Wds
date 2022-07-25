@@ -18,6 +18,7 @@
     "@angular/platform-browser": "^14.0.0",
     "@angular/platform-browser-dynamic": "^14.0.0",
     "@angular/router": "^14.0.0",
+    "@ng-select/ng-select": "^9.0.2",
     "jquery": "^3.6.0",
     "ng2-search-filter": "^0.5.1",
     "ngx-summernote": "^0.8.8",
